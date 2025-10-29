@@ -13,7 +13,7 @@ public class Habitacion {
     private ArrayList<ObjetoCasa> objetos;
     private Integer idHabitacion;
 
-
+    //---------- CONSTRUCTORES ----------
     public Habitacion(String nombre, Integer idHabitacion) {
         this.nombre = nombre;
         this.idHabitacion = idHabitacion;
@@ -21,6 +21,87 @@ public class Habitacion {
         this.objetos = new ArrayList<>();
     }
 
+    public Habitacion() {
+        this.nombre = "";
+        this.idHabitacion = 0;
+        this.pistas = new ArrayList<>();
+        this.objetos = new ArrayList<>();
+    }
+
+    //---------- GETTERS y SETTERS ----------
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public ArrayList<PistaTexto> getPistas() {
+        return pistas;
+    }
+
+    public void setPistas(ArrayList<PistaTexto> pistas) {
+        this.pistas = pistas;
+    }
+
+    public ArrayList<ObjetoCasa> getObjetos() {
+        return objetos;
+    }
+
+    public void setObjetos(ArrayList<ObjetoCasa> objetos) {
+        this.objetos = objetos;
+    }
+
+    public Integer getIdHabitacion() {
+        return idHabitacion;
+    }
+
+    public void setIdHabitacion(Integer idHabitacion) {
+        this.idHabitacion = idHabitacion;
+    }
+
+    //---------- EQUALS, HASHCODE y TOSTRING ----------
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Habitacion that = (Habitacion) o;
+        return Objects.equals(idHabitacion, that.idHabitacion);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(idHabitacion);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Habitación [ID: ").append(idHabitacion).append("]\n");
+        sb.append("  Nombre: ").append(nombre).append("\n");
+
+        sb.append("  Pistas:\n");
+        if (pistas != null && !pistas.isEmpty()) {
+            for (PistaTexto p : pistas) {
+                sb.append("    - ").append(p).append("\n");
+            }
+        } else {
+            sb.append("    (Sin pistas)\n");
+        }
+
+        sb.append("  Objetos:\n");
+        if (objetos != null && !objetos.isEmpty()) {
+            for (ObjetoCasa o : objetos) {
+                sb.append("    - ").append(o).append("\n");
+            }
+        } else {
+            sb.append("    (Sin objetos)\n");
+        }
+
+        return sb.toString();
+    }
+
+    //---------- METODOS ----------
     public boolean agregarPista(PistaTexto pista) throws ElementoNuloException {
         if (pista == null){
             throw new ElementoNuloException("La pista ingresada no puede ser nula");
@@ -108,15 +189,4 @@ public class Habitacion {
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Habitacion that = (Habitacion) o;
-        return Objects.equals(idHabitacion, that.idHabitacion);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(idHabitacion);
-    }
 }
