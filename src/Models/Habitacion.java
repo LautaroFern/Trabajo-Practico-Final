@@ -38,8 +38,27 @@ public class Habitacion {
 
     public boolean eliminarPista(String nombrePista) throws ElementoNuloException, ElementoNoEncontradoException {
         if (nombrePista == null){
-            throw new ElementoNuloException("");
+            throw new ElementoNuloException("La pista ingresada no puede ser nula");
         }
-        return true;
+        for (PistaTexto p : pistas){
+            if (p.equals(nombrePista)){
+                pistas.remove(p);
+                return true;
+            }
+        }
+        throw new ElementoNoEncontradoException("La pista no existe en la lista");
+    }
+
+    public boolean eliminarObjeto(String nombreObjeto) throws ElementoNuloException, ElementoNoEncontradoException{
+        if (nombreObjeto == null){
+            throw new ElementoNuloException("El objeto ingresado no puede ser nulo");
+        }
+        for (ObjetoCasa o : objetos){
+            if (o.equals(nombreObjeto)){
+                objetos.remove(o);
+                return true;
+            }
+        }
+        throw new ElementoNoEncontradoException("El objeto no existe en la lista");
     }
 }
