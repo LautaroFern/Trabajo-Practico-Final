@@ -51,4 +51,12 @@ public class Inventario<T> {
         }
         throw new ElementoNoEncontradoException("Elemento no encontrado en la lista");
     }
+
+    public String mostrarInventario(){
+        StringBuilder sb = new StringBuilder();
+        for (T elemento : listaElemento){
+            sb.append(elemento.toString()).append("\n");
+        }
+        return sb.toString();
+    }
 }
