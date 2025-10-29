@@ -1,8 +1,11 @@
 package Enums;
 
 public enum RolPersonaje {
-    SEBA,
-    GARCHADITO,
-    A,
-    DEDITO
+    Hijo,
+    Padre,
+    Madre,
+    Hija,
+    Mayordomo,
+    ServicioDeLimpieza,
+    Vecino
 }
