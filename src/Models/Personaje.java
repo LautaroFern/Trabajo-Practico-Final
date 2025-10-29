@@ -48,6 +48,41 @@ public class Personaje {
         return rolPersonaje;
     }
 
+    public boolean agregarRasgo(String rasgo) {
+        if (!rasgos.contains(rasgo)) {
+            rasgos.add(rasgo);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean eliminarRasgo(String rasgo) {
+        return rasgos.remove(rasgo);
+    }
+
+    public String modificarRasgo(String viejo, String nuevo) {
+        if (rasgos.contains(viejo)) {
+            rasgos.remove(viejo);
+            rasgos.add(nuevo);
+            return "Se cambió '" + viejo + "' por '" + nuevo + "'";
+        } else {
+            return "No se encontró el rasgo: " + viejo;
+        }
+    }
+
+    public String detallesRasgos() {
+
+        StringBuilder sb = new StringBuilder("Rasgos de " + nombre + ":\n");
+
+        if (rasgos.isEmpty()) {
+            return "El personaje no tiene rasgos asignados.";
+        }
+        for (String r : rasgos) {
+            sb.append("- ").append(r).append("\n");
+        }
+        return sb.toString();
+    }
+
 
     @Override
     public String toString() {
