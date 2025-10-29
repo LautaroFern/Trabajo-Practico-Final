@@ -2,6 +2,7 @@ package Models;
 
 import Exceptions.ElementoExistenteException;
 import Exceptions.ElementoNuloException;
+import Exceptions.ListaVaciaException;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -53,10 +54,21 @@ public class Casa {
 
     //---------- METODOS ----------
     public boolean agregarPersonaje(Personaje p) throws ElementoNuloException, ElementoExistenteException {
-        if (listaPersonajes.contains(p)){
+        if (listaPersonajes.contains(p)) {
             throw new ElementoExistenteException("El personaje que quiere ingresar a la casa ya existe");
         } else if (p == null) {
             throw new ElementoNuloException("No puede ingresar un personaje nulo a la casa");
-        }else return listaPersonajes.add(p);
+        } else return listaPersonajes.add(p);
+    }
+
+    public boolean eliminarPersonaje(Personaje p) throws ListaVaciaException {
+        if (!listaPersonajes.isEmpty()) {
+            for (Personaje personaje : listaPersonajes) {
+                if (personaje.equals(p)) {
+                    return listaPersonajes.remove(p);
+                }
+            }
+        }
+        throw new ListaVaciaException("No se puede eliminar un personaje de la lista vacía");
     }
 }
