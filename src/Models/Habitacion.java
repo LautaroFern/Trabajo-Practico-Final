@@ -4,6 +4,7 @@ import Exceptions.ElementoNoEncontradoException;
 import Exceptions.ElementoNuloException;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Habitacion {
     private String nombre;
@@ -60,5 +61,17 @@ public class Habitacion {
             }
         }
         throw new ElementoNoEncontradoException("El objeto no existe en la lista");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Habitacion that = (Habitacion) o;
+        return Objects.equals(idHabitacion, that.idHabitacion);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(idHabitacion);
     }
 }
