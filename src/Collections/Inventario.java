@@ -44,7 +44,7 @@ public class Inventario<T> {
         }
         for (T e : listaElemento) {
             if(e instanceof IReconocerNombre aux){
-                if(((IReconocerNombre) e).getNombre().equals(elementoNombre)){
+                if(aux.getNombre().equals(elementoNombre)){
                     return e;
                 }
             }
