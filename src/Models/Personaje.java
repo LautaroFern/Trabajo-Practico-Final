@@ -11,7 +11,7 @@ public class Personaje {
     private String nombre;
     private int edad;
     private TipoGenero genero;
-    private ArrayList <String>rasgos;
+    private ArrayList<String> rasgos;
     private int idPersonaje;
     private RolPersonaje rolPersonaje;
 
