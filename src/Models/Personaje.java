@@ -2,6 +2,9 @@ package Models;
 
 import Enums.RolPersonaje;
 import Enums.TipoGenero;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -123,6 +126,24 @@ public class Personaje {
         }
         return sb.toString();
     }
+//
+//    public JSONObject toJSON(){
+//        JSONObject jsonObject = new JSONObject();
+//        try {
+//            jsonObject.put("Nombre",nombre);
+//            jsonObject.put("Edad",edad);
+//            jsonObject.put("Genero",genero);
+//            jsonObject.put("IdPersonaje",idPersonaje);
+//            jsonObject.put("RolPersonaje",rolPersonaje);
+//            JSONArray array = new JSONArray();
+//            for (String s : rasgos){
+//                array.put(s.)
+//            }
+//        }catch (JSONException e){
+//            e.printStackTrace();
+//        }
+//        return jsonObject;
+//    }
 
 
 
