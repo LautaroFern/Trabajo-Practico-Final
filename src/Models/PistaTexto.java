@@ -43,4 +43,10 @@ public class PistaTexto {
     public int hashCode() {
         return Objects.hashCode(nombre);
     }
+
+    @Override
+    public String toString() {
+        return  "\nNombre: " + this.nombre +
+                "\nDescripcion: " + this.descripcion;
+    }
 }
