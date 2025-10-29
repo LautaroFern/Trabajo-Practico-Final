@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Habitacion {
+    //---------- ATRIBUTOS ----------
     private String nombre;
     private ArrayList<PistaTexto> pistas;
     private ArrayList<ObjetoCasa> objetos;
     private Integer idHabitacion;
+
 
     public Habitacion(String nombre, Integer idHabitacion) {
         this.nombre = nombre;
