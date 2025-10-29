@@ -2,6 +2,7 @@ package Collections;
 
 import Exceptions.ElementoNoEncontradoException;
 import Exceptions.ElementoNuloException;
+import Interfaces.IReconocerNombre;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -42,8 +43,10 @@ public class Inventario<T> {
             throw new ElementoNuloException("Elemento nulo");
         }
         for (T e : listaElemento) {
-            if (e.equals(elementoNombre)) {
-                return e;
+            if(e instanceof IReconocerNombre aux){
+                if(((IReconocerNombre) e).getNombre().equals(elementoNombre)){
+                    return e;
+                }
             }
         }
         throw new ElementoNoEncontradoException("Elemento no encontrado en la lista");
