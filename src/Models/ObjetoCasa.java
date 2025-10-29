@@ -1,8 +1,10 @@
 package Models;
 
+import Interfaces.IReconocerNombre;
+
 import java.util.Objects;
 
-public class ObjetoCasa {
+public class ObjetoCasa implements IReconocerNombre {
     private String nombre;
     private String descripcion;
 
