@@ -2,6 +2,9 @@ package Models;
 
 import Enums.RolPersonaje;
 import Enums.TipoGenero;
+import Exceptions.ListaVaciaException;
+import Exceptions.RasgoInvalidoException;
+import Exceptions.RasgoNoEncontadoException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -91,41 +94,53 @@ public class Personaje {
     }
 
 
-    //---------- METODOS ----------
-    public boolean agregarRasgo(String rasgo) {
+    //---------- MÉTODOS CON EXCEPCIONES PERSONALIZADAS ----------
+    public boolean agregarRasgo(String rasgo) throws RasgoInvalidoException {
+        if (rasgo == null || rasgo.isEmpty()) {
+            throw new RasgoInvalidoException("El rasgo no puede estar vacío.");
+        }
+        if (rasgos.contains(rasgo)) {
+            throw new RasgoInvalidoException("El rasgo '" + rasgo + "' ya existe.");
+        }
+        rasgos.add(rasgo);
+        return true;
+    }
+
+    public boolean eliminarRasgo(String rasgo) throws RasgoNoEncontadoException {
         if (!rasgos.contains(rasgo)) {
-            rasgos.add(rasgo);
-            return true;
+            throw new RasgoNoEncontadoException("No se encontró el rasgo '" + rasgo + "'.");
         }
-        return false;
+        rasgos.remove(rasgo);
+        return true;
     }
 
-    public boolean eliminarRasgo(String rasgo) {
-        return rasgos.remove(rasgo);
-    }
+    public String modificarRasgo(String viejo, String nuevo) throws RasgoNoEncontadoException, RasgoInvalidoException {
 
-    public String modificarRasgo(String viejo, String nuevo) {
-        if (rasgos.contains(viejo)) {
-            rasgos.remove(viejo);
-            rasgos.add(nuevo);
-            return "Se cambió '" + viejo + "' por '" + nuevo + "'";
-        } else {
-            return "No se encontró el rasgo: " + viejo;
+        if (nuevo == null || nuevo.isEmpty()) {
+            throw new RasgoInvalidoException("El nuevo rasgo no puede estar vacío.");
         }
+
+        int index = rasgos.indexOf(viejo);
+        if (index == -1) {
+            throw new RasgoNoEncontadoException("El rasgo '" + viejo + "' no existe y no puede modificarse.");
+        }
+
+        rasgos.set(index, nuevo);
+        return "Rasgo modificado: '" + viejo + "' → '" + nuevo + "'";
     }
 
-    public String detallesRasgos() {
+    public String detallesRasgos() throws ListaVaciaException {
+        if (rasgos.isEmpty()) {
+            throw new ListaVaciaException("El personaje no tiene rasgos asignados.");
+        }
 
         StringBuilder sb = new StringBuilder("Rasgos de " + nombre + ":\n");
-
-        if (rasgos.isEmpty()) {
-            return "El personaje no tiene rasgos asignados.";
-        }
         for (String r : rasgos) {
             sb.append("- ").append(r).append("\n");
         }
         return sb.toString();
     }
+
 //
 //    public JSONObject toJSON(){
 //        JSONObject jsonObject = new JSONObject();
