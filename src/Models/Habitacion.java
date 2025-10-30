@@ -12,11 +12,13 @@ public class Habitacion {
     private ArrayList<PistaTexto> pistas;
     private ArrayList<ObjetoCasa> objetos;
     private Integer idHabitacion;
+    private static Integer idIncremental = 0;
 
     //---------- CONSTRUCTORES ----------
-    public Habitacion(String nombre, Integer idHabitacion) {
+    public Habitacion(String nombre) {
         this.nombre = nombre;
-        this.idHabitacion = idHabitacion;
+        idIncremental++;
+        this.idHabitacion = idIncremental;
         this.pistas = new ArrayList<>();
         this.objetos = new ArrayList<>();
     }
@@ -55,10 +57,6 @@ public class Habitacion {
 
     public Integer getIdHabitacion() {
         return idHabitacion;
-    }
-
-    public void setIdHabitacion(Integer idHabitacion) {
-        this.idHabitacion = idHabitacion;
     }
 
     //---------- EQUALS, HASHCODE y TOSTRING ----------
@@ -103,7 +101,7 @@ public class Habitacion {
 
     //---------- METODOS ----------
     public boolean agregarPista(PistaTexto pista) throws ElementoNuloException {
-        if (pista == null){
+        if (pista == null) {
             throw new ElementoNuloException("La pista ingresada no puede ser nula");
         } else {
             pistas.add(pista);
@@ -112,7 +110,7 @@ public class Habitacion {
     }
 
     public boolean agregarObjeto(ObjetoCasa objetoCasa) throws ElementoNuloException {
-        if (objetoCasa == null){
+        if (objetoCasa == null) {
             throw new ElementoNuloException("El objeto ingresado no puede ser nulo");
         } else {
             objetos.add(objetoCasa);
@@ -121,11 +119,11 @@ public class Habitacion {
     }
 
     public boolean eliminarPista(String nombrePista) throws ElementoNuloException, ElementoNoEncontradoException {
-        if (nombrePista == null){
+        if (nombrePista == null) {
             throw new ElementoNuloException("La pista ingresada no puede ser nula");
         }
-        for (PistaTexto p : pistas){
-            if (p.equals(nombrePista)){
+        for (PistaTexto p : pistas) {
+            if (p.equals(nombrePista)) {
                 pistas.remove(p);
                 return true;
             }
@@ -133,12 +131,12 @@ public class Habitacion {
         throw new ElementoNoEncontradoException("La pista no existe en la lista");
     }
 
-    public boolean eliminarObjeto(String nombreObjeto) throws ElementoNuloException, ElementoNoEncontradoException{
-        if (nombreObjeto == null){
+    public boolean eliminarObjeto(String nombreObjeto) throws ElementoNuloException, ElementoNoEncontradoException {
+        if (nombreObjeto == null) {
             throw new ElementoNuloException("El objeto ingresado no puede ser nulo");
         }
-        for (ObjetoCasa o : objetos){
-            if (o.equals(nombreObjeto)){
+        for (ObjetoCasa o : objetos) {
+            if (o.equals(nombreObjeto)) {
                 objetos.remove(o);
                 return true;
             }
@@ -146,42 +144,42 @@ public class Habitacion {
         throw new ElementoNoEncontradoException("El objeto no existe en la lista");
     }
 
-    public ObjetoCasa buscarObjeto(String nombreObjeto) throws ElementoNuloException, ElementoNoEncontradoException{
-        if (nombreObjeto == null){
+    public ObjetoCasa buscarObjeto(String nombreObjeto) throws ElementoNuloException, ElementoNoEncontradoException {
+        if (nombreObjeto == null) {
             throw new ElementoNuloException("El nombre del objeto ingresado no puede ser nulo");
         }
-        for (ObjetoCasa o : objetos){
-            if (o.equals(nombreObjeto)){
+        for (ObjetoCasa o : objetos) {
+            if (o.equals(nombreObjeto)) {
                 return o;
             }
         }
         throw new ElementoNoEncontradoException("El objeto no existe en la lista");
     }
 
-    public PistaTexto buscarPista(String nombrePista) throws ElementoNuloException, ElementoNoEncontradoException{
-        if (nombrePista == null){
+    public PistaTexto buscarPista(String nombrePista) throws ElementoNuloException, ElementoNoEncontradoException {
+        if (nombrePista == null) {
             throw new ElementoNuloException("El nombre de la pista ingresada no puede ser nulo");
         }
-        for (PistaTexto p : pistas){
-            if (p.equals(nombrePista)){
+        for (PistaTexto p : pistas) {
+            if (p.equals(nombrePista)) {
                 return p;
             }
         }
         throw new ElementoNoEncontradoException("La pista no existe en la lista");
     }
 
-    public String listarPistas(){
+    public String listarPistas() {
         StringBuilder sb = new StringBuilder();
-        for (PistaTexto p : pistas){
+        for (PistaTexto p : pistas) {
             sb.append(p.toString());
             sb.append("\n");
         }
         return sb.toString();
     }
 
-    public String listarObjetos(){
+    public String listarObjetos() {
         StringBuilder sb = new StringBuilder();
-        for (ObjetoCasa o : objetos){
+        for (ObjetoCasa o : objetos) {
             sb.append(o.toString());
             sb.append("\n");
         }

@@ -20,13 +20,15 @@ public class Personaje {
     private ArrayList<String> rasgos;
     private int idPersonaje;
     private RolPersonaje rolPersonaje;
+    private static Integer idIncremental = 0;
 
     //---------- CONSTRUCTORES ----------
-    public Personaje(String nombre, int edad, TipoGenero genero, int idPersonaje, RolPersonaje rolPersonaje) {
+    public Personaje(String nombre, int edad, TipoGenero genero, RolPersonaje rolPersonaje) {
         this.nombre = nombre;
         this.edad = edad;
         this.genero = genero;
-        this.idPersonaje = idPersonaje;
+        idIncremental++;
+        this.idPersonaje = idIncremental;
         this.rolPersonaje = rolPersonaje;
         this.rasgos = new ArrayList<>();
     }
@@ -35,7 +37,8 @@ public class Personaje {
         this.nombre = "";
         this.edad = 0;
         this.genero = null;
-        this.idPersonaje = 0;
+        idIncremental++;
+        this.idPersonaje = idIncremental;
         this.rolPersonaje = null;
         this.rasgos = new ArrayList<>();
     }
@@ -43,10 +46,6 @@ public class Personaje {
     //---------- GETTERS y SETTERS ----------
     public int getIdPersonaje() {
         return idPersonaje;
-    }
-
-    public void setIdPersonaje(int idPersonaje) {
-        this.idPersonaje = idPersonaje;
     }
 
     public String getNombre() {
