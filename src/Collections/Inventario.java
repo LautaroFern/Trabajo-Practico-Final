@@ -34,7 +34,6 @@ public class Inventario<T> {
                 return true;
             }
         }
-
         throw new ElementoNoEncontradoException("Elemento no encontrado en la lista");
     }
 
@@ -43,8 +42,8 @@ public class Inventario<T> {
             throw new ElementoNuloException("Elemento nulo");
         }
         for (T e : listaElemento) {
-            if(e instanceof IReconocerNombre aux){
-                if(aux.getNombre().equals(elementoNombre)){
+            if (e instanceof IReconocerNombre aux) {
+                if (aux.getNombre().equals(elementoNombre)) {
                     return e;
                 }
             }
@@ -52,9 +51,9 @@ public class Inventario<T> {
         throw new ElementoNoEncontradoException("Elemento no encontrado en la lista");
     }
 
-    public String mostrarInventario(){
+    public String mostrarInventario() {
         StringBuilder sb = new StringBuilder();
-        for (T elemento : listaElemento){
+        for (T elemento : listaElemento) {
             sb.append(elemento.toString()).append("\n");
         }
         return sb.toString();

@@ -124,7 +124,4 @@ public class Personaje {
         return sb.toString();
     }
 
-
-
-
 }
