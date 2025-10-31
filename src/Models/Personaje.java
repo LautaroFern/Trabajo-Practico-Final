@@ -43,6 +43,43 @@ public class Personaje {
         this.rasgos = new ArrayList<>();
     }
 
+    //----------De persona a JSON----------
+
+    public JSONObject toJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("Nombre", nombre);
+            jsonObject.put("Edad", edad);
+            jsonObject.put("Genero", genero);
+            jsonObject.put("IdPersonaje", idPersonaje);
+            jsonObject.put("RolPersonaje", rolPersonaje);
+            jsonObject.put("Rasgos", new JSONArray(rasgos));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
+    public static Personaje toObject(JSONObject jsonObject) {
+        Personaje personaje = new Personaje();
+        try {
+            personaje.setNombre(jsonObject.getString("Nombre"));
+            personaje.setEdad(jsonObject.getInt("Edad"));
+            personaje.setGenero(TipoGenero.valueOf(jsonObject.getString("Genero")));
+            personaje.setIdPersonaje(jsonObject.getInt("IdPersonaje"));
+            personaje.setRolPersonaje(RolPersonaje.valueOf(jsonObject.getString("RolPersonaje")));
+            JSONArray array = new JSONArray();
+            ArrayList<String> aux = new ArrayList<>();
+            for ( int i = 0; i<array.length(); i++){
+                aux.add(array.getString(i));
+            }
+            personaje.setRasgos(aux);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return personaje;
+    }
+
     //---------- GETTERS y SETTERS ----------
     public Integer getIdPersonaje() {
         return idPersonaje;
@@ -62,6 +99,30 @@ public class Personaje {
 
     public RolPersonaje getRolPersonaje() {
         return rolPersonaje;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public void setGenero(TipoGenero genero) {
+        this.genero = genero;
+    }
+
+    public void setRasgos(ArrayList<String> rasgos) {
+        this.rasgos = rasgos;
+    }
+
+    public void setIdPersonaje(Integer idPersonaje) {
+        this.idPersonaje = idPersonaje;
+    }
+
+    public void setRolPersonaje(RolPersonaje rolPersonaje) {
+        this.rolPersonaje = rolPersonaje;
     }
 
     //---------- EQUALS, HASHCODE y TOSTRING ----------
