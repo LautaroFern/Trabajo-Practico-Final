@@ -4,7 +4,7 @@ import Interfaces.IReconocerId;
 
 import java.util.Objects;
 
-public class PistaTexto {
+public class PistaTexto implements IReconocerId {
     //---------- ATRIBUTOS ----------
     private String nombre;
     private String descripcion;
@@ -28,6 +28,7 @@ public class PistaTexto {
     }
 
     //---------- GETTERS y SETTERS ----------
+
     public String getNombre() {
         return nombre;
     }
@@ -47,6 +48,8 @@ public class PistaTexto {
     public Integer getId() {
         return id;
     }
+
+
 
     //---------- EQUALS, HASHCODE y TOSTRING ----------
     @Override
