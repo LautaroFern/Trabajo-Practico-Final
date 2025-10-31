@@ -56,8 +56,6 @@ public class ObjetoCasa implements IReconocerId {
         return Objects.hashCode(nombre);
     }
 
-
-
     @Override
     public String toString() {
         return  "\nNombre: " + this.nombre +

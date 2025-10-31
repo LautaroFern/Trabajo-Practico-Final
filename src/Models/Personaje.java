@@ -194,6 +194,4 @@ public class Personaje implements IReconocerId {
         }
         return personaje;
     }
-
-
 }

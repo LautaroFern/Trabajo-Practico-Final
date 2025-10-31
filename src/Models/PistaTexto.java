@@ -72,5 +72,4 @@ public class PistaTexto implements IReconocerId {
         sb.append("  Descripción: ").append(descripcion);
         return sb.toString();
     }
-
 }
