@@ -1,12 +1,15 @@
 package Models;
 
+import Exceptions.ElementoExistenteException;
 import Exceptions.ElementoNoEncontradoException;
 import Exceptions.ElementoNuloException;
+import Exceptions.ListaVaciaException;
+import Interfaces.IReconocerId;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Habitacion {
+public class Habitacion implements IReconocerId {
     //---------- ATRIBUTOS ----------
     private String nombre;
     private ArrayList<PistaTexto> pistas;
@@ -55,8 +58,9 @@ public class Habitacion {
         this.objetos = objetos;
     }
 
-    public Integer getIdHabitacion() {
-        return idHabitacion;
+    @Override
+    public Integer getId() {
+        return this.idHabitacion;
     }
 
     //---------- EQUALS, HASHCODE y TOSTRING ----------
@@ -100,72 +104,72 @@ public class Habitacion {
     }
 
     //---------- MÉTODOS CON EXCEPCIONES PERSONALIZADAS ----------
-    public boolean agregarPista(PistaTexto pista) throws ElementoNuloException {
+    public boolean agregarPista(PistaTexto pista) throws ElementoNuloException, ElementoExistenteException {
         if (pista == null) {
             throw new ElementoNuloException("La pista ingresada no puede ser nula");
-        } else {
-            pistas.add(pista);
-            return true;
-        }
+        } else if (pistas.contains(pista)) {
+            throw new ElementoExistenteException("La pista ya existe en la habitación");
+        } else return pistas.add(pista);
     }
 
-    public boolean agregarObjeto(ObjetoCasa objetoCasa) throws ElementoNuloException {
+    public boolean agregarObjeto(ObjetoCasa objetoCasa) throws ElementoNuloException, ElementoExistenteException {
         if (objetoCasa == null) {
             throw new ElementoNuloException("El objeto ingresado no puede ser nulo");
-        } else {
-            objetos.add(objetoCasa);
-            return true;
-        }
+        } else if (objetos.contains(objetoCasa)) {
+            throw new ElementoExistenteException("El objeto ya existe en la habitación");
+        } else return objetos.add(objetoCasa);
     }
 
-    public boolean eliminarPista(String nombrePista) throws ElementoNuloException, ElementoNoEncontradoException {
+    public boolean eliminarPista(String nombrePista) throws ElementoNuloException, ElementoNoEncontradoException, ListaVaciaException {
         if (nombrePista == null) {
             throw new ElementoNuloException("La pista ingresada no puede ser nula");
-        }
-        for (PistaTexto p : pistas) {
-            if (p.equals(nombrePista)) {
-                pistas.remove(p);
-                return true;
+        } else if (!pistas.isEmpty()) {
+            for (PistaTexto p : pistas) {
+                if (p.getNombre().equals(nombrePista)) {
+                    return pistas.remove(p);
+                }
             }
-        }
-        throw new ElementoNoEncontradoException("La pista no existe en la lista");
+            throw new ElementoNoEncontradoException("La pista no se encuentra en la habitacón");
+        } else throw new ListaVaciaException("No se puede eliminar la pista de la lista vacía");
     }
 
-    public boolean eliminarObjeto(String nombreObjeto) throws ElementoNuloException, ElementoNoEncontradoException {
+    public boolean eliminarObjeto(String nombreObjeto) throws ElementoNuloException, ElementoNoEncontradoException, ListaVaciaException {
         if (nombreObjeto == null) {
             throw new ElementoNuloException("El objeto ingresado no puede ser nulo");
-        }
-        for (ObjetoCasa o : objetos) {
-            if (o.equals(nombreObjeto)) {
-                objetos.remove(o);
-                return true;
+        } else if (!objetos.isEmpty()) {
+            for (ObjetoCasa o : objetos) {
+                if (o.getNombre().equals(nombreObjeto)) {
+                    return objetos.remove(o);
+                }
             }
-        }
-        throw new ElementoNoEncontradoException("El objeto no existe en la lista");
+            throw new ElementoNoEncontradoException("El objeto no se encuentra en la habitación");
+        }else throw new ListaVaciaException("El objeto no existe en la lista");
     }
 
-    public ObjetoCasa buscarObjeto(String nombreObjeto) throws ElementoNuloException, ElementoNoEncontradoException {
+    public ObjetoCasa buscarObjeto(String nombreObjeto) throws ElementoNuloException, ElementoNoEncontradoException, ListaVaciaException {
         if (nombreObjeto == null) {
             throw new ElementoNuloException("El nombre del objeto ingresado no puede ser nulo");
-        }
-        for (ObjetoCasa o : objetos) {
-            if (o.equals(nombreObjeto)) {
-                return o;
+        } else if (!objetos.isEmpty()) {
+            for (ObjetoCasa o : objetos) {
+                if (o.getNombre().equals(nombreObjeto)) {
+                    return o;
+                }
             }
-        }
-        throw new ElementoNoEncontradoException("El objeto no existe en la lista");
+            throw new ElementoNoEncontradoException("El objeto no se encuntra en la habitación");
+        }else throw new ListaVaciaException("El objeto no existe en la lista");
     }
 
-    public PistaTexto buscarPista(String nombrePista) throws ElementoNuloException, ElementoNoEncontradoException {
+    public PistaTexto buscarPista(String nombrePista) throws ElementoNuloException, ElementoNoEncontradoException, ListaVaciaException {
         if (nombrePista == null) {
             throw new ElementoNuloException("El nombre de la pista ingresada no puede ser nulo");
-        }
-        for (PistaTexto p : pistas) {
-            if (p.equals(nombrePista)) {
-                return p;
+        } else if (!pistas.isEmpty()) {
+            for (PistaTexto p : pistas) {
+                if (p.getNombre().equals(nombrePista)) {
+                    return p;
+                }
             }
-        }
-        throw new ElementoNoEncontradoException("La pista no existe en la lista");
+            throw new ElementoNoEncontradoException("La pista no se encuentra en la habitación");
+        }else throw new ListaVaciaException("La pista no existe en la lista");
     }
 
     public String listarPistas() {

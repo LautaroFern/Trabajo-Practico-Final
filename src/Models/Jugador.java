@@ -20,6 +20,14 @@ public class Jugador {
         this.progreso = progreso;
     }
 
+    public Jugador(){
+        this.nombre = "";
+        this.usuario = "";
+        this.contrasena = 0;
+        this.inventario = null;
+        this.progreso = 0.0;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -66,12 +74,14 @@ public class Jugador {
 
     @Override
     public String toString() {
-        return "Jugador: \n" +
-                "Nombre= " + nombre + '\'' +
-                "Usuario='" + usuario + '\'' +
-                "Contrasena=" + contrasena + '\'' +
-                "Inventario=" + inventario + '\'' +
-                "Progreso=" + progreso +
-                '\n';
+        StringBuilder sb = new StringBuilder();
+        sb.append("Jugador:\n");
+        sb.append("  Nombre: ").append(nombre).append("\n");
+        sb.append("  Usuario: ").append(usuario).append("\n");
+        sb.append("  Contraseña: ").append(contrasena).append("\n");
+        sb.append("  Progreso: ").append(progreso).append("%\n");
+        sb.append("  Inventario:\n").append(inventario != null ? inventario.toString() : "    (Vacío)").append("\n");
+        return sb.toString();
     }
+
 }

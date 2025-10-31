@@ -17,7 +17,6 @@ public class PistaTexto implements IReconocerId {
         this.descripcion = descripcion;
         idIncremental++;
         this.id = idIncremental;
-
     }
 
     public PistaTexto() {
@@ -28,7 +27,6 @@ public class PistaTexto implements IReconocerId {
     }
 
     //---------- GETTERS y SETTERS ----------
-
     public String getNombre() {
         return nombre;
     }
@@ -49,7 +47,9 @@ public class PistaTexto implements IReconocerId {
         return id;
     }
 
-
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     //---------- EQUALS, HASHCODE y TOSTRING ----------
     @Override
@@ -63,8 +63,6 @@ public class PistaTexto implements IReconocerId {
     public int hashCode() {
         return Objects.hashCode(id);
     }
-
-
 
     @Override
     public String toString() {

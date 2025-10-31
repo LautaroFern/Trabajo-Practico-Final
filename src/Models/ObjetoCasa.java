@@ -4,7 +4,7 @@ import Interfaces.IReconocerId;
 
 import java.util.Objects;
 
-public class ObjetoCasa implements IReconocerId   {
+public class ObjetoCasa implements IReconocerId {
     private String nombre;
     private String descripcion;
     private Integer idIncremental = 0;
