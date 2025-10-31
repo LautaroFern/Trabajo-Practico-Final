@@ -5,7 +5,6 @@ import Exceptions.ElementoNoEncontradoException;
 import Exceptions.ElementoNuloException;
 import Exceptions.ListaVaciaException;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Casa {
@@ -77,7 +76,7 @@ public class Casa {
     public Personaje buscarPersonaje(Integer id) throws ListaVaciaException, ElementoNoEncontradoException {
         if (!listaPersonajes.isEmpty()) {
             for (Personaje p : listaPersonajes) {
-                if (p.getIdPersonaje() == id) {
+                if (p.getIdPersonaje().equals(id)) {
                     return p;
                 }
             }
@@ -109,7 +108,7 @@ public class Casa {
     public Habitacion buscarHabitacion(Integer id) throws ListaVaciaException, ElementoNoEncontradoException {
         if (!listaHabitaciones.isEmpty()) {
             for (Habitacion h : listaHabitaciones) {
-                if (h.getIdHabitacion() == id) {
+                if (h.getIdHabitacion().equals(id)) {
                     return h;
                 }
             }

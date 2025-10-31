@@ -18,7 +18,7 @@ public class Personaje {
     private int edad;
     private TipoGenero genero;
     private ArrayList<String> rasgos;
-    private int idPersonaje;
+    private Integer idPersonaje;
     private RolPersonaje rolPersonaje;
     private static Integer idIncremental = 0;
 
@@ -44,7 +44,7 @@ public class Personaje {
     }
 
     //---------- GETTERS y SETTERS ----------
-    public int getIdPersonaje() {
+    public Integer getIdPersonaje() {
         return idPersonaje;
     }
 
@@ -69,7 +69,7 @@ public class Personaje {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Personaje personaje = (Personaje) o;
-        return idPersonaje == personaje.idPersonaje;
+        return Objects.equals(idPersonaje, personaje.idPersonaje);
     }
 
     @Override
@@ -91,7 +91,6 @@ public class Personaje {
         }
         return sb.toString();
     }
-
 
     //---------- MÉTODOS CON EXCEPCIONES PERSONALIZADAS ----------
     public boolean agregarRasgo(String rasgo) throws RasgoInvalidoException {
@@ -118,12 +117,10 @@ public class Personaje {
         if (nuevo == null || nuevo.isEmpty()) {
             throw new RasgoInvalidoException("El nuevo rasgo no puede estar vacío.");
         }
-
         int index = rasgos.indexOf(viejo);
         if (index == -1) {
             throw new RasgoNoEncontadoException("El rasgo '" + viejo + "' no existe y no puede modificarse.");
         }
-
         rasgos.set(index, nuevo);
         return "Rasgo modificado: '" + viejo + "' → '" + nuevo + "'";
     }

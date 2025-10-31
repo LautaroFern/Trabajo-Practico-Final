@@ -5,9 +5,11 @@ import Interfaces.IReconocerNombre;
 import java.util.Objects;
 
 public class PistaTexto implements IReconocerNombre {
+    //---------- ATRIBUTOS ----------
     private String nombre;
     private String descripcion;
 
+    //---------- CONSTRUCTORES ----------
     public PistaTexto(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
