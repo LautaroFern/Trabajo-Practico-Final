@@ -1,61 +1,74 @@
 package Collections;
 
+import Exceptions.ElementoExistenteException;
 import Exceptions.ElementoNoEncontradoException;
 import Exceptions.ElementoNuloException;
-import Interfaces.IReconocerNombre;
+import Exceptions.ListaVaciaException;
+import Interfaces.IGestora;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashSet;
 
-public class Inventario<T> {
-    private ArrayList<T> listaElemento;
+
+public class Inventario<T> implements IGestora<T> {
+    private HashSet<T> listaElemento;
 
     public Inventario() {
-        this.listaElemento = new ArrayList<>();
+        this.listaElemento = new HashSet<>();
     }
 
-    public boolean agregarElemento(T elemento) throws ElementoNuloException {
-        if (elemento == null) {
-            throw new ElementoNuloException("Elemento nulo");
+    @Override
+    public boolean agregarElemento(T t) throws ElementoNuloException, ElementoExistenteException {
+        if (t == null) {
+            throw new ElementoNuloException("El elemento que se intenta agregar es nulo");
         }
-        listaElemento.add(elemento);
+        if (listaElemento.contains(t)) {
+            throw new ElementoExistenteException("El elemento ya existe en el inventario");
+        }
+        listaElemento.add(t);
         return true;
     }
 
-    public boolean eliminarElemento(T elemento) throws ElementoNuloException, ElementoNoEncontradoException {
-        if (elemento == null) {
-            throw new ElementoNuloException("Elemento nulo");
-        }
-        Iterator<T> it = listaElemento.iterator();
-        while (it.hasNext()) {
-            T actual = it.next();
-            if (actual.equals(elemento)) {
-                it.remove();
-                return true;
-            }
-        }
-        throw new ElementoNoEncontradoException("Elemento no encontrado en la lista");
-    }
+    @Override
+    public boolean eliminarElemento(T t) throws ListaVaciaException, ElementoNoEncontradoException, ElementoNuloException {
 
-    public T buscarElemento(String elementoNombre) throws ElementoNuloException, ElementoNoEncontradoException {
-        if (elementoNombre == null) {
-            throw new ElementoNuloException("Elemento nulo");
-        }
-        for (T e : listaElemento) {
-            if (e instanceof IReconocerNombre aux) {
-                if (aux.getNombre().equals(elementoNombre)) {
-                    return e;
+
+        if (!listaElemento.isEmpty()) {
+            for (T t1 : listaElemento) {
+                if (t1.equals(t)) {
+                    return listaElemento.remove(t);
                 }
             }
+            throw new ElementoNoEncontradoException("El elemento que no se quiere eliminar no fue encontrado");
+        } else if (t == null) {
+            throw new ElementoNuloException("El elemento ingresado es nulo");
         }
-        throw new ElementoNoEncontradoException("Elemento no encontrado en la lista");
+
+        throw new ListaVaciaException("La lista esta vacia");
+
     }
 
-    public String mostrarInventario() {
-        StringBuilder sb = new StringBuilder();
-        for (T elemento : listaElemento) {
-            sb.append(elemento.toString()).append("\n");
-        }
-        return sb.toString();
+    @Override
+    public T buscarElemento(Integer id) throws ListaVaciaException, ElementoNoEncontradoException {
+        return null;
+//        if (id <= 0) {
+//            throw new ElementoNuloException("Elemento invalido");
+//        }
+//        for (T e : listaElemento) {
+//            if (e instanceof IReconocerNombre aux) {
+//                if (aux.getNombre().equals(elementoNombre)) {
+//                    return e;
+//                }
+//            }
+//        }
+//        throw new ElementoNoEncontradoException("Elemento no encontrado en la lista");
+//    }
+
+//    public String mostrarInventario() {
+//        StringBuilder sb = new StringBuilder();
+//        for (T elemento : listaElemento) {
+//            sb.append(elemento.toString()).append("\n");
+//        }
+//        return sb.toString();
+//    }
     }
 }

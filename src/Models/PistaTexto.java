@@ -1,10 +1,10 @@
 package Models;
 
-import Interfaces.IReconocerNombre;
+import Interfaces.IReconocerId;
 
 import java.util.Objects;
 
-public class PistaTexto implements IReconocerNombre {
+public class PistaTexto {
     //---------- ATRIBUTOS ----------
     private String nombre;
     private String descripcion;
@@ -49,6 +49,8 @@ public class PistaTexto implements IReconocerNombre {
     public int hashCode() {
         return Objects.hashCode(nombre);
     }
+
+
 
     @Override
     public String toString() {
