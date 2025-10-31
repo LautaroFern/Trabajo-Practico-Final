@@ -20,6 +20,7 @@ public class PistaTexto implements IReconocerNombre {
         this.descripcion = "";
     }
 
+    //---------- GETTERS y SETTERS ----------
     public String getNombre() {
         return nombre;
     }
@@ -36,6 +37,7 @@ public class PistaTexto implements IReconocerNombre {
         this.descripcion = descripcion;
     }
 
+    //---------- EQUALS, HASHCODE y TOSTRING ----------
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

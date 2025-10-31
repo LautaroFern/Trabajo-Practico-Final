@@ -52,7 +52,7 @@ public class Casa {
         return sb.toString();
     }
 
-    //---------- METODOS ----------
+    //---------- MÉTODOS CON EXCEPCIONES PERSONALIZADAS ----------
     public boolean agregarPersonaje(Personaje p) throws ElementoNuloException, ElementoExistenteException {
         if (listaPersonajes.contains(p)) {
             throw new ElementoExistenteException("El personaje que quiere ingresar a la casa ya existe");

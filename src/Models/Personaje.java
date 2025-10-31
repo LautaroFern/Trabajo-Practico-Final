@@ -43,43 +43,6 @@ public class Personaje {
         this.rasgos = new ArrayList<>();
     }
 
-    //----------De persona a JSON----------
-
-    public JSONObject toJSON() {
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("Nombre", nombre);
-            jsonObject.put("Edad", edad);
-            jsonObject.put("Genero", genero);
-            jsonObject.put("IdPersonaje", idPersonaje);
-            jsonObject.put("RolPersonaje", rolPersonaje);
-            jsonObject.put("Rasgos", new JSONArray(rasgos));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return jsonObject;
-    }
-
-    public static Personaje toObject(JSONObject jsonObject) {
-        Personaje personaje = new Personaje();
-        try {
-            personaje.setNombre(jsonObject.getString("Nombre"));
-            personaje.setEdad(jsonObject.getInt("Edad"));
-            personaje.setGenero(TipoGenero.valueOf(jsonObject.getString("Genero")));
-            personaje.setIdPersonaje(jsonObject.getInt("IdPersonaje"));
-            personaje.setRolPersonaje(RolPersonaje.valueOf(jsonObject.getString("RolPersonaje")));
-            JSONArray array = new JSONArray();
-            ArrayList<String> aux = new ArrayList<>();
-            for ( int i = 0; i<array.length(); i++){
-                aux.add(array.getString(i));
-            }
-            personaje.setRasgos(aux);
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-        return personaje;
-    }
-
     //---------- GETTERS y SETTERS ----------
     public Integer getIdPersonaje() {
         return idPersonaje;
@@ -161,8 +124,7 @@ public class Personaje {
         if (rasgos.contains(rasgo)) {
             throw new RasgoInvalidoException("El rasgo '" + rasgo + "' ya existe.");
         }
-        rasgos.add(rasgo);
-        return true;
+        return rasgos.add(rasgo);
     }
 
     public boolean eliminarRasgo(String rasgo) throws RasgoNoEncontadoException {
@@ -198,23 +160,40 @@ public class Personaje {
         return sb.toString();
     }
 
-//
-//    public JSONObject toJSON(){
-//        JSONObject jsonObject = new JSONObject();
-//        try {
-//            jsonObject.put("Nombre",nombre);
-//            jsonObject.put("Edad",edad);
-//            jsonObject.put("Genero",genero);
-//            jsonObject.put("IdPersonaje",idPersonaje);
-//            jsonObject.put("RolPersonaje",rolPersonaje);
-//            JSONArray array = new JSONArray();
-//            for (String s : rasgos){
-//                array.put(s.)
-//            }
-//        }catch (JSONException e){
-//            e.printStackTrace();
-//        }
-//        return jsonObject;
-//    }
+    public JSONObject toJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("Nombre", nombre);
+            jsonObject.put("Edad", edad);
+            jsonObject.put("Genero", genero);
+            jsonObject.put("IdPersonaje", idPersonaje);
+            jsonObject.put("RolPersonaje", rolPersonaje);
+            jsonObject.put("Rasgos", new JSONArray(rasgos));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
+    public static Personaje toObject(JSONObject jsonObject) {
+        Personaje personaje = new Personaje();
+        try {
+            personaje.setNombre(jsonObject.getString("Nombre"));
+            personaje.setEdad(jsonObject.getInt("Edad"));
+            personaje.setGenero(TipoGenero.valueOf(jsonObject.getString("Genero")));
+            personaje.setIdPersonaje(jsonObject.getInt("IdPersonaje"));
+            personaje.setRolPersonaje(RolPersonaje.valueOf(jsonObject.getString("RolPersonaje")));
+            JSONArray array = new JSONArray();
+            ArrayList<String> aux = new ArrayList<>();
+            for ( int i = 0; i<array.length(); i++){
+                aux.add(array.getString(i));
+            }
+            personaje.setRasgos(aux);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return personaje;
+    }
+
 
 }

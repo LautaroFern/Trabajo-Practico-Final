@@ -99,7 +99,7 @@ public class Habitacion {
         return sb.toString();
     }
 
-    //---------- METODOS ----------
+    //---------- MÉTODOS CON EXCEPCIONES PERSONALIZADAS ----------
     public boolean agregarPista(PistaTexto pista) throws ElementoNuloException {
         if (pista == null) {
             throw new ElementoNuloException("La pista ingresada no puede ser nula");
