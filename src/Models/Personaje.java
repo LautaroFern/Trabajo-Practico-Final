@@ -2,9 +2,9 @@ package Models;
 
 import Enums.RolPersonaje;
 import Enums.TipoGenero;
+import Exceptions.ElementoNoEncontradoException;
 import Exceptions.ListaVaciaException;
 import Exceptions.RasgoInvalidoException;
-import Exceptions.RasgoNoEncontadoException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -127,22 +127,22 @@ public class Personaje {
         return rasgos.add(rasgo);
     }
 
-    public boolean eliminarRasgo(String rasgo) throws RasgoNoEncontadoException {
+    public boolean eliminarRasgo(String rasgo) throws ElementoNoEncontradoException {
         if (!rasgos.contains(rasgo)) {
-            throw new RasgoNoEncontadoException("No se encontró el rasgo '" + rasgo + "'.");
+            throw new ElementoNoEncontradoException("No se encontró el rasgo '" + rasgo + "'.");
         }
         rasgos.remove(rasgo);
         return true;
     }
 
-    public String modificarRasgo(String viejo, String nuevo) throws RasgoNoEncontadoException, RasgoInvalidoException {
+    public String modificarRasgo(String viejo, String nuevo) throws ElementoNoEncontradoException, RasgoInvalidoException {
 
         if (nuevo == null || nuevo.isEmpty()) {
             throw new RasgoInvalidoException("El nuevo rasgo no puede estar vacío.");
         }
         int index = rasgos.indexOf(viejo);
         if (index == -1) {
-            throw new RasgoNoEncontadoException("El rasgo '" + viejo + "' no existe y no puede modificarse.");
+            throw new ElementoNoEncontradoException("El rasgo '" + viejo + "' no existe y no puede modificarse.");
         }
         rasgos.set(index, nuevo);
         return "Rasgo modificado: '" + viejo + "' → '" + nuevo + "'";
