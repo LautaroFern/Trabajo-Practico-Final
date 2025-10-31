@@ -1,5 +1,7 @@
 package Interfaces;
 
-public interface IRecolectable {
+import Models.Jugador;
 
+public interface IRecolectable {
+    void agarrar (Jugador jugador);
 }
