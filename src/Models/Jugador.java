@@ -2,10 +2,10 @@ package Models;
 
 import Collections.Inventario;
 import Exceptions.ContrasenaNoCoincideExeption;
-
+import Interfaces.IRecolectable;
 import java.util.Objects;
 
-public class Jugador {
+public class Jugador implements IRecolectable {
     private String nombre;
     private String usuario;
     private Integer contrasena;
@@ -84,4 +84,8 @@ public class Jugador {
         return sb.toString();
     }
 
+    @Override
+    public String agarrar(Pista pista) {
+        return "Agarraste "+pista.getNombre();
+    }
 }

@@ -4,61 +4,46 @@ import Interfaces.IReconocerId;
 
 import java.util.Objects;
 
-public class ObjetoCasa implements IReconocerId {
-    private String nombre;
-    private String descripcion;
-    private Integer idIncremental = 0;
+public class ObjetoCasa extends Pista implements IReconocerId {
+    //---------- ATRIBUTOS ----------
+    private static Integer idIncremental = 0;
     private Integer id;
 
+    //---------- CONSTRUCTOR ----------
     public ObjetoCasa(String nombre, String descripcion) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
+        super(nombre, descripcion);
         idIncremental++;
         this.id = idIncremental;
     }
 
     public ObjetoCasa() {
-        this.nombre = "";
-        this.descripcion = "";
         idIncremental++;
         this.id = idIncremental;
     }
 
+    //---------- GETTERS y SETTERS ----------
     public Integer getId() {
         return id;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
+    //---------- EQUALS, HASHCODE y TOSTRING ----------
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         ObjetoCasa that = (ObjetoCasa) o;
-        return Objects.equals(nombre, that.nombre);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(nombre);
+        return Objects.hashCode(id);
     }
 
-    @Override
+   @Override
     public String toString() {
-        return  "\nNombre: " + this.nombre +
-                "\nDescripcion: " + this.descripcion;
+        return "Datos del Objeto:\n" +
+                "  ID: " + this.id + "\n" +
+                "  Nombre: " + this.nombre + "\n" +
+                "  Descripción: " + this.descripcion + "\n";
     }
 }

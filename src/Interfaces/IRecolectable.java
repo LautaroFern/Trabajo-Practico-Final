@@ -1,7 +1,7 @@
 package Interfaces;
 
-import Models.Jugador;
+import Models.Pista;
 
 public interface IRecolectable {
-    void agarrar (Jugador jugador);
+    String agarrar (Pista pista);
 }

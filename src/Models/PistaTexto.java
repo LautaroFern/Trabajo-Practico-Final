@@ -4,51 +4,26 @@ import Interfaces.IReconocerId;
 
 import java.util.Objects;
 
-public class PistaTexto implements IReconocerId {
+public class PistaTexto extends Pista implements IReconocerId {
     //---------- ATRIBUTOS ----------
-    private String nombre;
-    private String descripcion;
-    private Integer idIncremental = 0;
+    private static Integer idIncremental = 0;
     private Integer id;
 
     //---------- CONSTRUCTORES ----------
     public PistaTexto(String nombre, String descripcion) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
+        super(nombre, descripcion);
         idIncremental++;
         this.id = idIncremental;
     }
 
     public PistaTexto() {
-        this.nombre = "";
-        this.descripcion = "";
         idIncremental++;
         this.id = idIncremental;
     }
 
     //---------- GETTERS y SETTERS ----------
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     //---------- EQUALS, HASHCODE y TOSTRING ----------
@@ -66,10 +41,9 @@ public class PistaTexto implements IReconocerId {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Pista [ID: ").append(id).append("]\n");
-        sb.append("  Nombre: ").append(nombre).append("\n");
-        sb.append("  Descripción: ").append(descripcion);
-        return sb.toString();
+        return "Datos de Pista Texto:\n" +
+                "  ID: " + this.id + "\n" +
+                "  Nombre: " + this.nombre + "\n" +
+                "  Descripción: " + this.descripcion + "\n";
     }
 }
