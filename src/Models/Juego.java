@@ -41,17 +41,4 @@ public class Juego {
         sb.append(jugador != null ? jugador.toString() : "  (sin jugador asignado)\n");
         return sb.toString();
     }
-
-    //---------- METODOS ----------
-    public void iniciar(){
-
-    }
-
-    public void mostrarMenu(){
-
-    }
-
-    public void finalizar(){
-
-    }
 }
