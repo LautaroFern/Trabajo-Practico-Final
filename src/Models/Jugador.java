@@ -9,23 +9,22 @@ public class Jugador implements IRecolectable {
     //---------- ATRIBUTOS ----------
     private String nombre;
     private String usuario;
-    private Integer contrasena;
+    private String contrasena;
     private Inventario inventario;
     private double progreso;
 
     //---------- CONSTRUCTORES ----------
-    public Jugador(String nombre, String usuario, Integer contrasena, Inventario inventario, double progreso) {
+    public Jugador(String nombre, String usuario, String contrasena) {
         this.nombre = nombre;
         this.usuario = usuario;
         this.contrasena = contrasena;
-        this.inventario = inventario;
-        this.progreso = progreso;
+        this.progreso = 0.0;
     }
 
     public Jugador() {
         this.nombre = "";
         this.usuario = "";
-        this.contrasena = 0;
+        this.contrasena = "";
         this.inventario = null;
         this.progreso = 0.0;
     }
@@ -39,11 +38,11 @@ public class Jugador implements IRecolectable {
         return usuario;
     }
 
-    public Integer getContrasena() {
+    public String getContrasena() {
         return contrasena;
     }
 
-    public void setContrasena(Integer contrasena) {
+    public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
 
@@ -85,7 +84,7 @@ public class Jugador implements IRecolectable {
     }
 
     //---------- MÉTODOS CON EXCEPCIONES PERSONALIZADAS ----------
-    public boolean cambiarContrasena(Integer contrasenaActual, Integer nuevaContrasena) throws ContrasenaNoCoincideExeption {
+    public boolean cambiarContrasena(String contrasenaActual, String nuevaContrasena) throws ContrasenaNoCoincideExeption {
         if (this.contrasena.equals(contrasenaActual)) {
             this.contrasena = nuevaContrasena;
             return true;
