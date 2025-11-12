@@ -22,6 +22,7 @@ public class Personaje implements IReconocerId {
     private Integer idPersonaje;
     private RolPersonaje rolPersonaje;
     private static Integer idIncremental = 0;
+    private String confesion;
 
     //---------- CONSTRUCTORES ----------
     public Personaje(String nombre, int edad, TipoGenero genero, RolPersonaje rolPersonaje) {
@@ -32,6 +33,7 @@ public class Personaje implements IReconocerId {
         this.idPersonaje = idIncremental;
         this.rolPersonaje = rolPersonaje;
         this.rasgos = new ArrayList<>();
+        this.confesion = "";
     }
 
     public Personaje() {
@@ -42,6 +44,7 @@ public class Personaje implements IReconocerId {
         this.idPersonaje = idIncremental;
         this.rolPersonaje = null;
         this.rasgos = new ArrayList<>();
+        this.confesion = "";
     }
 
     //---------- GETTERS y SETTERS ----------
@@ -90,6 +93,14 @@ public class Personaje implements IReconocerId {
         this.rolPersonaje = rolPersonaje;
     }
 
+    public String getConfesion() {
+        return confesion;
+    }
+
+    public void setConfesion(String confesion) {
+        this.confesion = confesion;
+    }
+
     //---------- EQUALS, HASHCODE y TOSTRING ----------
     @Override
     public boolean equals(Object o) {
@@ -115,6 +126,7 @@ public class Personaje implements IReconocerId {
         for (String r : rasgos) {
             sb.append("    - ").append(r).append("\n");
         }
+        sb.append("  Confesion: ").append(confesion).append("\n");
         return sb.toString();
     }
 
@@ -169,6 +181,7 @@ public class Personaje implements IReconocerId {
             jsonObject.put("Id Personaje", idPersonaje);
             jsonObject.put("Rol Personaje", rolPersonaje);
             jsonObject.put("Rasgos", new JSONArray(rasgos));
+            jsonObject.put("Confesion", confesion);
         } catch (JSONException e) {
             System.out.println("Error al cargar el JSON: " + e.getMessage());
         }
@@ -183,6 +196,7 @@ public class Personaje implements IReconocerId {
             personaje.setGenero(TipoGenero.valueOf(jsonObject.getString("Genero")));
             personaje.setIdPersonaje(jsonObject.getInt("Id Personaje"));
             personaje.setRolPersonaje(RolPersonaje.valueOf(jsonObject.getString("Rol Personaje")));
+            personaje.setConfesion(jsonObject.getString("Confesion"));
             JSONArray array = new JSONArray();
             ArrayList<String> aux = new ArrayList<>();
             for ( int i = 0; i<array.length(); i++){
