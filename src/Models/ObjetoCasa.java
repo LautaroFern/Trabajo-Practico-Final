@@ -1,6 +1,7 @@
 package Models;
 
 import Interfaces.IReconocerId;
+import org.json.JSONObject;
 
 import java.util.Objects;
 
@@ -45,5 +46,10 @@ public class ObjetoCasa extends Pista implements IReconocerId {
                 "  ID: " + this.id + "\n" +
                 "  Nombre: " + this.nombre + "\n" +
                 "  Descripción: " + this.descripcion + "\n";
+    }
+    //---------- METODOS ----------
+    public JSONObject toJson(){
+        JSONObject jsonObject = new JSONObject();
+        return jsonObject;
     }
 }

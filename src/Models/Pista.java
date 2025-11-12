@@ -1,5 +1,8 @@
 package Models;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public abstract class Pista {
     //---------- ATRIBUTOS ----------
     protected String nombre;
@@ -31,6 +34,18 @@ public abstract class Pista {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    //---------- METODOS ----------
+    public  JSONObject toJson(){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("Nombre",nombre);
+            jsonObject.put("Descripcion",descripcion);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
 

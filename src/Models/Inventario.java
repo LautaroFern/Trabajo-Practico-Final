@@ -1,6 +1,10 @@
 package Models;
 import Exceptions.*;
 import Interfaces.IReconocerId;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashSet;
 
 
@@ -81,5 +85,20 @@ public class Inventario {
         }
         return sb.toString();
     }
+
+    public JSONObject toJson(){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            JSONArray array = new JSONArray();
+            for (Pista pista : listaElementos){
+                array.put(pista.toJson());
+            }
+            jsonObject.put("Inventario",array);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
 }
 

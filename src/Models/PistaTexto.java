@@ -1,6 +1,8 @@
 package Models;
 
 import Interfaces.IReconocerId;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Objects;
 
@@ -46,4 +48,7 @@ public class PistaTexto extends Pista implements IReconocerId {
                 "  Nombre: " + this.nombre + "\n" +
                 "  Descripción: " + this.descripcion + "\n";
     }
+    //---------- METODOS ----------
+
+
 }
