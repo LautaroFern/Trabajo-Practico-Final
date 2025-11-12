@@ -1,12 +1,11 @@
 package Models;
 
-import Interfaces.IReconocerId;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Objects;
 
-public class PistaTexto extends Pista implements IReconocerId {
+public class PistaTexto extends Pista {
     //---------- ATRIBUTOS ----------
     private static Integer idIncremental = 0;
     private Integer id;

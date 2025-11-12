@@ -60,22 +60,24 @@ public class Casa<T> implements IGestora<T> {
             throw new ElementoNoEncontradoException("El elemento que desea eliminar no se encuentra en la casa");
         } else if (t == null) {
             throw new ElementoNuloException("El elemento que desea borrar no puede ser nulo");
-        }else throw new ListaVaciaException("No se puede eliminar un elemento si la lista está vacía");
+        } else throw new ListaVaciaException("No se puede eliminar un elemento si la lista está vacía");
     }
 
     @Override
-    public T buscarElemento(Integer id) throws ListaVaciaException, ElementoNoEncontradoException, ParametroInvalidoException {
+    public T buscarElemento(Integer pos) throws ListaVaciaException, ElementoNoEncontradoException, ParametroInvalidoException {
+        Integer p = 0;
+
         if (!listaElementos.isEmpty()) {
             for (T item : listaElementos) {
-                if (item instanceof IReconocerId aux) {
-                    if (aux.getId().equals(id)) {
-                        return item;
-                    }
+                if (p == pos) {
+                    return item;
+                } else {
+                    pos++;
                 }
             }
             throw new ElementoNoEncontradoException("El personaje que desea buscar no se encuentra en la casa");
-        } else if (id <= 0) {
+        } else if (pos <= 0) {
             throw new ParametroInvalidoException("El ID no puede ser menor o igual a 0");
-        }else throw new ListaVaciaException("No se puede buscar un personaje de la lista vacía");
+        } else throw new ListaVaciaException("No se puede buscar un personaje de la lista vacía");
     }
 }

@@ -1,11 +1,11 @@
 package Models;
 
-import Interfaces.IReconocerId;
+
 import org.json.JSONObject;
 
 import java.util.Objects;
 
-public class ObjetoCasa extends Pista implements IReconocerId {
+public class ObjetoCasa extends Pista {
     //---------- ATRIBUTOS ----------
     private static Integer idIncremental = 0;
     private Integer id;
