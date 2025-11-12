@@ -1,7 +1,6 @@
-package Collections;
+package Models;
 import Exceptions.*;
 import Interfaces.IReconocerId;
-import Models.Pista;
 import java.util.HashSet;
 
 

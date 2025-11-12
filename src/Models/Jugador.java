@@ -1,6 +1,5 @@
 package Models;
 
-import Collections.Inventario;
 import Exceptions.ContrasenaNoCoincideExeption;
 import Interfaces.IRecolectable;
 import java.util.Objects;

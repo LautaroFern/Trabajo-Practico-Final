@@ -2,15 +2,17 @@ package Models;
 
 import Collections.Casa;
 
+import java.util.ArrayList;
+
 public class Juego {
     //---------- ATRIBUTOS ----------
     private Casa casa;
-    private Jugador jugador;
+    private ArrayList<Jugador> jugadores;
 
     //---------- CONSTRUCTOR ----------
-    public Juego(Casa casa, Jugador jugador) {
+    public Juego(Casa casa) {
         this.casa = casa;
-        this.jugador = jugador;
+        this.jugadores = new ArrayList<>();
     }
 
     //---------- GETTERS y SETTERS ----------
@@ -22,36 +24,25 @@ public class Juego {
         this.casa = casa;
     }
 
-    public Jugador getJugador() {
-        return jugador;
+    public ArrayList<Jugador> getJugadores() {
+        return jugadores;
     }
 
-    public void setJugador(Jugador jugador) {
-        this.jugador = jugador;
+    public void setJugadores(ArrayList<Jugador> jugadores) {
+        this.jugadores = jugadores;
     }
 
     //---------- TOSTRING ----------
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("=== Detalles de la Partida ===\n");
-        sb.append("Casa:\n");
-        sb.append(casa != null ? casa.toString() : "  (sin casa asignada)\n");
-        sb.append("\nJugador:\n");
-        sb.append(jugador != null ? jugador.toString() : "  (sin jugador asignado)\n");
-        return sb.toString();
+        return "Juego{" +
+                "casa=" + casa +
+                ", jugadores=" + jugadores +
+                '}';
     }
 
     //---------- METODOS ----------
-    public void iniciar(){
 
-    }
 
-    public void mostrarMenu(){
 
-    }
-
-    public void finalizar(){
-
-    }
 }
