@@ -1,7 +1,8 @@
 package Exceptions;
 
-public class ParametroInvalidoException extends RuntimeException {
+public class ParametroInvalidoException extends Exception {
     public ParametroInvalidoException(String message) {
         super(message);
     }
+
 }
