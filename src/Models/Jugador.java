@@ -2,15 +2,18 @@ package Models;
 
 import Exceptions.ContrasenaNoCoincideExeption;
 import Interfaces.IRecolectable;
+
 import java.util.Objects;
 
 public class Jugador implements IRecolectable {
+    //---------- ATRIBUTOS ----------
     private String nombre;
     private String usuario;
     private Integer contrasena;
     private Inventario inventario;
     private double progreso;
 
+    //---------- CONSTRUCTORES ----------
     public Jugador(String nombre, String usuario, Integer contrasena, Inventario inventario, double progreso) {
         this.nombre = nombre;
         this.usuario = usuario;
@@ -19,7 +22,7 @@ public class Jugador implements IRecolectable {
         this.progreso = progreso;
     }
 
-    public Jugador(){
+    public Jugador() {
         this.nombre = "";
         this.usuario = "";
         this.contrasena = 0;
@@ -27,6 +30,7 @@ public class Jugador implements IRecolectable {
         this.progreso = 0.0;
     }
 
+    //---------- GETTERS y SETTERS ----------
     public String getNombre() {
         return nombre;
     }
@@ -51,15 +55,7 @@ public class Jugador implements IRecolectable {
         return progreso;
     }
 
-
-    public boolean cambiarContrasena(Integer contrasenaActual, Integer nuevaContrasena) throws ContrasenaNoCoincideExeption {
-        if (this.contrasena.equals(contrasenaActual)) {
-            this.contrasena = nuevaContrasena;
-            return true;
-        }
-        throw new ContrasenaNoCoincideExeption("La contraseña no coincide");
-    }
-
+    //---------- EQUALS, HASHCODE y TOSTRING ----------
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Jugador jugador)) return false;
@@ -85,6 +81,15 @@ public class Jugador implements IRecolectable {
 
     @Override
     public String agarrar(Pista pista) {
-        return "Agarraste "+pista.getNombre();
+        return "Agarraste " + pista.getNombre();
+    }
+
+    //---------- MÉTODOS CON EXCEPCIONES PERSONALIZADAS ----------
+    public boolean cambiarContrasena(Integer contrasenaActual, Integer nuevaContrasena) throws ContrasenaNoCoincideExeption {
+        if (this.contrasena.equals(contrasenaActual)) {
+            this.contrasena = nuevaContrasena;
+            return true;
+        }
+        throw new ContrasenaNoCoincideExeption("La contraseña no coincide");
     }
 }
