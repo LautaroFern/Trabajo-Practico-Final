@@ -91,4 +91,6 @@ public class Jugador implements IRecolectable {
         }
         throw new ContrasenaNoCoincideExeption("La contraseña no coincide");
     }
+
+
 }

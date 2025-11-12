@@ -32,4 +32,6 @@ public abstract class Pista {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+
 }
