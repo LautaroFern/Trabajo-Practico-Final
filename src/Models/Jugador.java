@@ -119,7 +119,7 @@ public class Jugador implements IRecolectable {
             jsonObject.put("Usuario", usuario);
             jsonObject.put("Contraseña", contrasena);
             jsonObject.put("Progreso", progreso);
-            jsonObject.put("Inventario", inventario);
+            jsonObject.put("Inventario", inventario.toJson());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -133,7 +133,8 @@ public class Jugador implements IRecolectable {
             jugador.setUsuario(jsonObject.getString("Usuario"));
             jugador.setContrasena(jsonObject.getString("Contraseña"));
             jugador.setProgreso(jsonObject.getDouble("Progreso"));
-            jugador.setInventario((Inventario) jsonObject.get("Inventario"));
+            JSONObject inv = jsonObject.getJSONObject("Inventario");
+            jugador.setInventario(Inventario.toObject(inv));
         } catch (JSONException e) {
             e.printStackTrace();
         }

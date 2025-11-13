@@ -5,5 +5,5 @@ void main() {
     menu.iniciar();
 
     /// COSAS QUE FALTAN
-    /// HACER JSON Y TO OBJECT DE INVENTARIO, JUGADOR y CASA
+    /// HACER JSON Y TO OBJECT DE CASA y el menu
 }
