@@ -2,6 +2,8 @@ package Models;
 
 import Exceptions.ContrasenaNoCoincideExeption;
 import Interfaces.IRecolectable;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Objects;
 
@@ -30,12 +32,22 @@ public class Jugador implements IRecolectable {
     }
 
     //---------- GETTERS y SETTERS ----------
+
+
     public String getNombre() {
         return nombre;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public String getUsuario() {
         return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getContrasena() {
@@ -50,8 +62,16 @@ public class Jugador implements IRecolectable {
         return inventario;
     }
 
+    public void setInventario(Inventario inventario) {
+        this.inventario = inventario;
+    }
+
     public double getProgreso() {
         return progreso;
+    }
+
+    public void setProgreso(double progreso) {
+        this.progreso = progreso;
     }
 
     //---------- EQUALS, HASHCODE y TOSTRING ----------
@@ -90,6 +110,34 @@ public class Jugador implements IRecolectable {
             return true;
         }
         throw new ContrasenaNoCoincideExeption("La contraseña no coincide");
+    }
+
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("Nombre", nombre);
+            jsonObject.put("Usuario", usuario);
+            jsonObject.put("Contraseña", contrasena);
+            jsonObject.put("Progreso", progreso);
+            jsonObject.put("Inventario", inventario);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
+    public static Jugador toObject(JSONObject jsonObject) {
+        Jugador jugador = new Jugador();
+        try {
+            jugador.setNombre(jsonObject.getString("Nombre"));
+            jugador.setUsuario(jsonObject.getString("Usuario"));
+            jugador.setContrasena(jsonObject.getString("Contraseña"));
+            jugador.setProgreso(jsonObject.getDouble("Progreso"));
+            jugador.setInventario((Inventario) jsonObject.get("Inventario"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jugador;
     }
 
 
