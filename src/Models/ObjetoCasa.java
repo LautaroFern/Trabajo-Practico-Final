@@ -1,6 +1,7 @@
 package Models;
 
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Objects;
@@ -27,6 +28,10 @@ public class ObjetoCasa extends Pista {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     //---------- EQUALS, HASHCODE y TOSTRING ----------
     @Override
     public boolean equals(Object o) {
@@ -48,8 +53,28 @@ public class ObjetoCasa extends Pista {
                 "  Descripción: " + this.descripcion + "\n";
     }
     //---------- METODOS ----------
+
+    public static ObjetoCasa toObject(JSONObject jsonObject){
+        ObjetoCasa objetoCasa = new ObjetoCasa();
+        try {
+            objetoCasa.setId(jsonObject.getInt("Id"));
+            objetoCasa.setNombre(jsonObject.getString("Nombre"));
+            objetoCasa.setDescripcion(jsonObject.getString("Descripcion"));
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return objetoCasa;
+    }
+    @Override
     public JSONObject toJson(){
         JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("Id",id);
+            jsonObject.put("Nombre",nombre);
+            jsonObject.put("Descripcion",descripcion);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
         return jsonObject;
     }
 }

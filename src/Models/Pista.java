@@ -37,16 +37,6 @@ public abstract class Pista {
     }
 
     //---------- METODOS ----------
-    public  JSONObject toJson(){
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("Nombre",nombre);
-            jsonObject.put("Descripcion",descripcion);
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-        return jsonObject;
-    }
-
+    public abstract JSONObject toJson();
 
 }

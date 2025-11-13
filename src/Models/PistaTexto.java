@@ -27,6 +27,10 @@ public class PistaTexto extends Pista {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     //---------- EQUALS, HASHCODE y TOSTRING ----------
     @Override
     public boolean equals(Object o) {
@@ -50,4 +54,27 @@ public class PistaTexto extends Pista {
     //---------- METODOS ----------
 
 
+    public static PistaTexto toObject(JSONObject jsonObject){
+        PistaTexto pistaTexto = new PistaTexto();
+        try {
+            pistaTexto.setId(jsonObject.getInt("Id"));
+            pistaTexto.setNombre(jsonObject.getString("Nombre"));
+            pistaTexto.setDescripcion(jsonObject.getString("Descripcion"));
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return pistaTexto;
+    }
+    @Override
+    public JSONObject toJson(){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("Id",id);
+            jsonObject.put("Nombre",nombre);
+            jsonObject.put("Descripcion",descripcion);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
 }
