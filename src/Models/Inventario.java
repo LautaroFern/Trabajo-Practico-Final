@@ -91,7 +91,11 @@ public class Inventario {
         try {
             JSONArray array = new JSONArray();
             for (Pista pista : listaElementos) {
-                array.put(pista.toJson());
+                if (pista instanceof PistaTexto p) {
+                    array.put(p.toJson());
+                } else if (pista instanceof ObjetoCasa o) {
+                    array.put(o.toJson());
+                }
             }
             jsonObject.put("Inventario", array);
         } catch (JSONException e) {
@@ -99,6 +103,31 @@ public class Inventario {
         }
         return jsonObject;
     }
+
+    public static Inventario toObject(JSONObject jsonObject) {
+        Inventario inventario = new Inventario();
+        try {
+            JSONArray array = jsonObject.getJSONArray("Inventario");
+            HashSet<Pista> lista = new HashSet<>();
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject aux = array.getJSONObject(i);
+                Pista pista = null;
+                String tipo = aux.getString("Tipo");
+
+                if (tipo.equalsIgnoreCase("Pista Texto")){
+                    pista = PistaTexto.toObject(aux);
+                } else if (tipo.equalsIgnoreCase("Objeto Casa")) {
+                    pista = ObjetoCasa.toObject(aux);
+                }
+                lista.add(pista);
+            }
+            inventario.setListaElemento(lista);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return inventario;
+    }
+
 
 }
 

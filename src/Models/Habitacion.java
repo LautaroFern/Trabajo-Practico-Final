@@ -5,6 +5,9 @@ import Exceptions.ElementoNoEncontradoException;
 import Exceptions.ElementoNuloException;
 import Exceptions.ListaVaciaException;
 import Interfaces.IReconocerId;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -121,5 +124,50 @@ public class Habitacion implements IReconocerId {
             }
             throw new ElementoNoEncontradoException("La pista no se encuentra en la habitación");
         } else throw new ListaVaciaException("La pista no existe en la lista");
+    }
+
+    public JSONObject toJson(){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("ID", this.idHabitacion);
+            jsonObject.put("Nombre habitacin", this.nombre);
+            JSONArray array = new JSONArray();
+            for (Pista pista : pistas){
+                if (pista instanceof PistaTexto p){
+                    array.put(p.toJson());
+                } else if (pista instanceof  ObjetoCasa o) {
+                    array.put(o.toJson());
+                }
+            }
+            jsonObject.put("Pistas", array);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
+    public static Habitacion toObject(JSONObject jsonObject){
+        Habitacion nueva = new Habitacion();
+        try {
+            nueva.setNombre(jsonObject.getString("Nombre habitacion"));
+            JSONArray array = jsonObject.getJSONArray("Pistas");
+            ArrayList<Pista> p = new ArrayList<>();
+            for (int i = 0; i < array.length(); i++){
+                JSONObject aux  = array.getJSONObject(i);
+                Pista pista = null;
+                String tipo = aux.getString("Tipo");
+
+                if (tipo.equalsIgnoreCase("Pista Texto")){
+                    pista = PistaTexto.toObject(aux);
+                } else if (tipo.equalsIgnoreCase("Objeto Casa")) {
+                    pista = ObjetoCasa.toObject(aux);
+                }
+                p.add(pista);
+            }
+            nueva.setPistas(p);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return nueva;
     }
 }

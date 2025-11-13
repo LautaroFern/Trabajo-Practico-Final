@@ -69,6 +69,7 @@ public class ObjetoCasa extends Pista {
     public JSONObject toJson(){
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("Tipo", "Objeto Casa");
             jsonObject.put("Id",id);
             jsonObject.put("Nombre",nombre);
             jsonObject.put("Descripcion",descripcion);

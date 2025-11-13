@@ -2,7 +2,6 @@ package Collections;
 
 import Exceptions.*;
 import Interfaces.IGestora;
-import Interfaces.IReconocerId;
 
 import java.util.HashSet;
 
@@ -66,7 +65,6 @@ public class Casa<T> implements IGestora<T> {
     @Override
     public T buscarElemento(Integer pos) throws ListaVaciaException, ElementoNoEncontradoException, ParametroInvalidoException {
         Integer p = 0;
-
         if (!listaElementos.isEmpty()) {
             for (T item : listaElementos) {
                 if (p == pos) {

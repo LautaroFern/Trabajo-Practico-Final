@@ -5,6 +5,5 @@ void main() {
     menu.iniciar();
 
     /// COSAS QUE FALTAN
-    /// HACER JSON Y TO OBJECT DE HABITACION, INVENTARIO, JUGADOR
-    /// PISTA, CASA
+    /// HACER JSON Y TO OBJECT DE INVENTARIO, JUGADOR y CASA
 }
