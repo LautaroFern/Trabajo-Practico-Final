@@ -1,19 +1,23 @@
 package Models;
 
 import Exceptions.ContrasenaNoCoincideExeption;
-import Interfaces.IRecolectable;
+import Interfaces.IDevolverString;
+import Interfaces.IReconocerId;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Objects;
 
-public class Jugador implements IRecolectable {
+public class Jugador implements IReconocerId, IDevolverString {
     //---------- ATRIBUTOS ----------
     private String nombre;
     private String usuario;
     private String contrasena;
     private Inventario inventario;
     private double progreso;
+    private Integer idJugador;
+    private static Integer idIncremental = 0;
+
 
     //---------- CONSTRUCTORES ----------
     public Jugador(String nombre, String usuario, String contrasena) {
@@ -21,6 +25,8 @@ public class Jugador implements IRecolectable {
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.progreso = 0.0;
+        idIncremental++;
+        this.idJugador = idIncremental;
     }
 
     public Jugador() {
@@ -29,6 +35,8 @@ public class Jugador implements IRecolectable {
         this.contrasena = "";
         this.inventario = null;
         this.progreso = 0.0;
+        idIncremental++;
+        this.idJugador = idIncremental;
     }
 
     //---------- GETTERS y SETTERS ----------
@@ -98,12 +106,17 @@ public class Jugador implements IRecolectable {
         return sb.toString();
     }
 
+    //---------- MÉTODOS CON EXCEPCIONES PERSONALIZADAS ----------
     @Override
-    public String agarrar(Pista pista) {
-        return "Agarraste " + pista.getNombre();
+    public Integer getId() {
+        return 0;
     }
 
-    //---------- MÉTODOS CON EXCEPCIONES PERSONALIZADAS ----------
+    @Override
+    public String devolverString(){
+        return this.nombre;
+    }
+
     public boolean cambiarContrasena(String contrasenaActual, String nuevaContrasena) throws ContrasenaNoCoincideExeption {
         if (this.contrasena.equals(contrasenaActual)) {
             this.contrasena = nuevaContrasena;
@@ -140,6 +153,8 @@ public class Jugador implements IRecolectable {
         }
         return jugador;
     }
+
+    //CLASE CASA = ZZZZZZ;
 
 
 }

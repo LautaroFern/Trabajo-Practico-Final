@@ -5,6 +5,7 @@ import Enums.TipoGenero;
 import Exceptions.ElementoNoEncontradoException;
 import Exceptions.ListaVaciaException;
 import Exceptions.RasgoInvalidoException;
+import Interfaces.IDevolverString;
 import Interfaces.IReconocerId;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,7 +14,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Personaje implements IReconocerId {
+public class Personaje implements IReconocerId, IDevolverString {
     //---------- ATRIBUTOS ----------
     private String nombre;
     private int edad;
@@ -131,6 +132,11 @@ public class Personaje implements IReconocerId {
     }
 
     //---------- MÉTODOS CON EXCEPCIONES PERSONALIZADAS ----------
+    @Override
+    public String devolverString() {
+        return this.nombre;
+    }
+
     public boolean agregarRasgo(String rasgo) throws RasgoInvalidoException {
         if (rasgo == null) {
             throw new RasgoInvalidoException("El rasgo no puede estar vacío.");
@@ -208,4 +214,6 @@ public class Personaje implements IReconocerId {
         }
         return personaje;
     }
+
+
 }

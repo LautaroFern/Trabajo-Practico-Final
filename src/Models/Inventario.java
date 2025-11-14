@@ -1,7 +1,7 @@
 package Models;
 
 import Exceptions.*;
-import Interfaces.IReconocerId;
+import Interfaces.IGestora;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import java.util.HashSet;
 
 
-public class Inventario {
+public class Inventario implements IGestora <Pista> {
     //---------- ATRIBUTOS ----------
     private HashSet<Pista> listaElementos;
 
@@ -43,6 +43,7 @@ public class Inventario {
     }
 
     //---------- METODOS CON EXCEPCIONES PERSONALIZADAS ----------
+    @Override
     public boolean agregarElemento(Pista t) throws ElementoNuloException, ElementoExistenteException {
         if (t == null) {
             throw new ElementoNuloException("El elemento que se intenta agregar es nulo");
@@ -51,6 +52,7 @@ public class Inventario {
         } else return listaElementos.add(t);
     }
 
+    @Override
     public boolean eliminarElemento(Pista t) throws ListaVaciaException, ElementoNoEncontradoException, ElementoNuloException {
         if (!listaElementos.isEmpty()) {
             for (Pista t1 : listaElementos) {
@@ -64,9 +66,11 @@ public class Inventario {
         } else throw new ListaVaciaException("La lista esta vacia");
     }
 
-    public Pista buscarElemento(String nombre) throws ListaVaciaException, ElementoNoEncontradoException, ParametroInvalidoException {
+
+    @Override
+    public Pista buscarElemento(String nombre) throws ListaVaciaException, ElementoNoEncontradoException, ElementoNuloException {
         if (nombre == null) {
-            throw new ParametroInvalidoException("El ID no puede ser menor o igual a 0");
+            throw new ElementoNuloException("El ID no puede ser menor o igual a 0");
         } else if (!listaElementos.isEmpty()) {
             for (Pista e : listaElementos) {
                 if (e.getNombre().equals(nombre)) {

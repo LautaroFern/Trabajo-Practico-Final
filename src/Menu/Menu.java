@@ -2,7 +2,7 @@ package Menu;
 
 import Exceptions.ElementoExistenteException;
 import Exceptions.ElementoNuloException;
-import Models.Juego;
+import Gestor.Juego;
 import Models.Jugador;
 
 import java.util.Scanner;
@@ -28,7 +28,7 @@ public class Menu {
         cargar();
         Jugador jugador = loginJugador();
         try {
-            juego.agregarJugador(jugador);
+            juego.agregarElemento(jugador);
         }catch (ElementoNuloException | ElementoExistenteException e){
             System.out.println(e.getMessage());
         }

@@ -1,18 +1,18 @@
 package Models;
 
-import Exceptions.ElementoExistenteException;
-import Exceptions.ElementoNoEncontradoException;
-import Exceptions.ElementoNuloException;
-import Exceptions.ListaVaciaException;
+import Exceptions.*;
+import Interfaces.IDevolverString;
+import Interfaces.IGestora;
 import Interfaces.IReconocerId;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.awt.font.TextHitInfo;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Habitacion implements IReconocerId {
+public class Habitacion implements IReconocerId, IGestora<Pista>, IDevolverString {
     //---------- ATRIBUTOS ----------
     private String nombre;
     private ArrayList<Pista> pistas;
@@ -92,28 +92,36 @@ public class Habitacion implements IReconocerId {
     }
 
     //---------- MÉTODOS CON EXCEPCIONES PERSONALIZADAS ----------
-    public boolean agregarPista(Pista pista) throws ElementoNuloException, ElementoExistenteException {
-        if (pista == null) {
-            throw new ElementoNuloException("La pista ingresada no puede ser nula");
-        } else if (pistas.contains(pista)) {
-            throw new ElementoExistenteException("La pista ya existe en la habitación");
-        } else return pistas.add(pista);
+    @Override
+    public String devolverString() {
+        return this.nombre;
     }
 
-    public boolean eliminarPista(String nombrePista) throws ElementoNuloException, ElementoNoEncontradoException, ListaVaciaException {
-        if (nombrePista == null) {
+    @Override
+    public boolean agregarElemento(Pista p) throws ElementoNuloException, ElementoExistenteException {
+        if (p == null) {
+            throw new ElementoNuloException("La pista ingresada no puede ser nula");
+        } else if (pistas.contains(p)) {
+            throw new ElementoExistenteException("La pista ya existe en la habitación");
+        } else return pistas.add(p);
+    }
+
+    @Override
+    public boolean eliminarElemento(Pista p) throws ListaVaciaException, ElementoNoEncontradoException, ElementoNuloException {
+        if (p == null) {
             throw new ElementoNuloException("La pista ingresada no puede ser nula");
         } else if (!pistas.isEmpty()) {
-            for (Pista p : pistas) {
-                if (p.getNombre().equals(nombrePista)) {
-                    return pistas.remove(p);
+            for (Pista pista : pistas) {
+                if (pista.getNombre().equals(pista)) {
+                    return pistas.remove(pista);
                 }
             }
             throw new ElementoNoEncontradoException("La pista no se encuentra en la habitacón");
         } else throw new ListaVaciaException("No se puede eliminar la pista de la lista vacía");
     }
 
-    public Pista buscarPista(String nombrePista) throws ElementoNuloException, ElementoNoEncontradoException, ListaVaciaException {
+    @Override
+    public Pista buscarElemento(String nombrePista) throws ListaVaciaException, ElementoNoEncontradoException, ElementoNuloException {
         if (nombrePista == null) {
             throw new ElementoNuloException("El nombre de la pista ingresada no puede ser nulo");
         } else if (!pistas.isEmpty()) {
@@ -126,38 +134,38 @@ public class Habitacion implements IReconocerId {
         } else throw new ListaVaciaException("La pista no existe en la lista");
     }
 
-    public JSONObject toJson(){
+    public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("ID", this.idHabitacion);
             jsonObject.put("Nombre habitacin", this.nombre);
             JSONArray array = new JSONArray();
-            for (Pista pista : pistas){
-                if (pista instanceof PistaTexto p){
+            for (Pista pista : pistas) {
+                if (pista instanceof PistaTexto p) {
                     array.put(p.toJson());
-                } else if (pista instanceof  ObjetoCasa o) {
+                } else if (pista instanceof ObjetoCasa o) {
                     array.put(o.toJson());
                 }
             }
             jsonObject.put("Pistas", array);
-        }catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return jsonObject;
     }
 
-    public static Habitacion toObject(JSONObject jsonObject){
+    public static Habitacion toObject(JSONObject jsonObject) {
         Habitacion nueva = new Habitacion();
         try {
             nueva.setNombre(jsonObject.getString("Nombre habitacion"));
             JSONArray array = jsonObject.getJSONArray("Pistas");
             ArrayList<Pista> p = new ArrayList<>();
-            for (int i = 0; i < array.length(); i++){
-                JSONObject aux  = array.getJSONObject(i);
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject aux = array.getJSONObject(i);
                 Pista pista = null;
                 String tipo = aux.getString("Tipo");
 
-                if (tipo.equalsIgnoreCase("Pista Texto")){
+                if (tipo.equalsIgnoreCase("Pista Texto")) {
                     pista = PistaTexto.toObject(aux);
                 } else if (tipo.equalsIgnoreCase("Objeto Casa")) {
                     pista = ObjetoCasa.toObject(aux);
@@ -165,9 +173,10 @@ public class Habitacion implements IReconocerId {
                 p.add(pista);
             }
             nueva.setPistas(p);
-        }catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return nueva;
     }
+
 }
