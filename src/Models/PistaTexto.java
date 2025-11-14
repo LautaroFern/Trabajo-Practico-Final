@@ -3,47 +3,16 @@ package Models;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Objects;
-
 public class PistaTexto extends Pista {
-    //---------- ATRIBUTOS ----------
-    private static Integer idIncremental = 0;
-    private Integer id;
-
     //---------- CONSTRUCTORES ----------
     public PistaTexto(String nombre, String descripcion) {
         super(nombre, descripcion);
-        idIncremental++;
-        this.id = idIncremental;
     }
 
     public PistaTexto() {
-        idIncremental++;
-        this.id = idIncremental;
     }
 
-    //---------- GETTERS y SETTERS ----------
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    //---------- EQUALS, HASHCODE y TOSTRING ----------
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        PistaTexto that = (PistaTexto) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
-
+    //---------- TOSTRING ----------
     @Override
     public String toString() {
         return "Datos de Pista Texto:\n" +
@@ -51,29 +20,28 @@ public class PistaTexto extends Pista {
                 "  Nombre: " + this.nombre + "\n" +
                 "  Descripción: " + this.descripcion + "\n";
     }
+
     //---------- METODOS ----------
-
-
-    public static PistaTexto toObject(JSONObject jsonObject){
+    public static PistaTexto toObject(JSONObject jsonObject) {
         PistaTexto pistaTexto = new PistaTexto();
         try {
-            pistaTexto.setId(jsonObject.getInt("Id"));
             pistaTexto.setNombre(jsonObject.getString("Nombre"));
             pistaTexto.setDescripcion(jsonObject.getString("Descripcion"));
-        }catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return pistaTexto;
     }
+
     @Override
-    public JSONObject toJson(){
+    public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("Tipo", "Pista Texto");
-            jsonObject.put("Id",id);
-            jsonObject.put("Nombre",nombre);
-            jsonObject.put("Descripcion",descripcion);
-        }catch (JSONException e){
+            jsonObject.put("Id", id);
+            jsonObject.put("Nombre", nombre);
+            jsonObject.put("Descripcion", descripcion);
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return jsonObject;

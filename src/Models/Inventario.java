@@ -1,6 +1,9 @@
 package Models;
 
-import Exceptions.*;
+import Exceptions.ElementoExistenteException;
+import Exceptions.ElementoNoEncontradoException;
+import Exceptions.ElementoNuloException;
+import Exceptions.ListaVaciaException;
 import Interfaces.IGestora;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,7 +12,7 @@ import org.json.JSONObject;
 import java.util.HashSet;
 
 
-public class Inventario implements IGestora <Pista> {
+public class Inventario implements IGestora<Pista> {
     //---------- ATRIBUTOS ----------
     private HashSet<Pista> listaElementos;
 
@@ -57,7 +60,7 @@ public class Inventario implements IGestora <Pista> {
         if (!listaElementos.isEmpty()) {
             for (Pista t1 : listaElementos) {
                 if (t1.equals(t)) {
-                    return listaElementos.remove(t);
+                    return listaElementos.remove(t1);
                 }
             }
             throw new ElementoNoEncontradoException("El elemento que no se quiere eliminar no fue encontrado");
@@ -66,14 +69,13 @@ public class Inventario implements IGestora <Pista> {
         } else throw new ListaVaciaException("La lista esta vacia");
     }
 
-
     @Override
-    public Pista buscarElemento(String nombre) throws ListaVaciaException, ElementoNoEncontradoException, ElementoNuloException {
-        if (nombre == null) {
+    public Pista buscarElemento(String nombrePista) throws ListaVaciaException, ElementoNoEncontradoException, ElementoNuloException {
+        if (nombrePista == null) {
             throw new ElementoNuloException("El ID no puede ser menor o igual a 0");
         } else if (!listaElementos.isEmpty()) {
             for (Pista e : listaElementos) {
-                if (e.getNombre().equals(nombre)) {
+                if (e.getNombre().equals(nombrePista)) {
                     return e;
                 }
             }
@@ -118,7 +120,7 @@ public class Inventario implements IGestora <Pista> {
                 Pista pista = null;
                 String tipo = aux.getString("Tipo");
 
-                if (tipo.equalsIgnoreCase("Pista Texto")){
+                if (tipo.equalsIgnoreCase("Pista Texto")) {
                     pista = PistaTexto.toObject(aux);
                 } else if (tipo.equalsIgnoreCase("Objeto Casa")) {
                     pista = ObjetoCasa.toObject(aux);
@@ -131,7 +133,4 @@ public class Inventario implements IGestora <Pista> {
         }
         return inventario;
     }
-
-
 }
-

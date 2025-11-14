@@ -15,9 +15,8 @@ public class Jugador implements IReconocerId, IDevolverString {
     private String contrasena;
     private Inventario inventario;
     private double progreso;
-    private Integer idJugador;
+    private final Integer idJugador;
     private static Integer idIncremental = 0;
-
 
     //---------- CONSTRUCTORES ----------
     public Jugador(String nombre, String usuario, String contrasena) {
@@ -40,8 +39,6 @@ public class Jugador implements IReconocerId, IDevolverString {
     }
 
     //---------- GETTERS y SETTERS ----------
-
-
     public String getNombre() {
         return nombre;
     }
@@ -82,6 +79,16 @@ public class Jugador implements IReconocerId, IDevolverString {
         this.progreso = progreso;
     }
 
+    @Override
+    public Integer getId() {
+        return 0;
+    }
+
+    @Override
+    public String devolverString() {
+        return this.nombre;
+    }
+
     //---------- EQUALS, HASHCODE y TOSTRING ----------
     @Override
     public boolean equals(Object o) {
@@ -96,27 +103,17 @@ public class Jugador implements IReconocerId, IDevolverString {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Jugador:\n");
-        sb.append("  Nombre: ").append(nombre).append("\n");
-        sb.append("  Usuario: ").append(usuario).append("\n");
-        sb.append("  Contraseña: ").append(contrasena).append("\n");
-        sb.append("  Progreso: ").append(progreso).append("%\n");
-        sb.append("  Inventario:\n").append(inventario != null ? inventario.toString() : "    (Vacío)").append("\n");
-        return sb.toString();
+        return "Jugador:\n" +
+                "  Nombre: " + nombre + "\n" +
+                "  Usuario: " + usuario + "\n" +
+                "  Contraseña: " + contrasena + "\n" +
+                "  Progreso: " + progreso + "%\n" +
+                "  Inventario:\n" +
+                (inventario != null ? inventario.toString() : "    (Vacío)") +
+                "\n";
     }
 
     //---------- MÉTODOS CON EXCEPCIONES PERSONALIZADAS ----------
-    @Override
-    public Integer getId() {
-        return 0;
-    }
-
-    @Override
-    public String devolverString(){
-        return this.nombre;
-    }
-
     public boolean cambiarContrasena(String contrasenaActual, String nuevaContrasena) throws ContrasenaNoCoincideExeption {
         if (this.contrasena.equals(contrasenaActual)) {
             this.contrasena = nuevaContrasena;
@@ -153,8 +150,4 @@ public class Jugador implements IReconocerId, IDevolverString {
         }
         return jugador;
     }
-
-    //CLASE CASA = ZZZZZZ;
-
-
 }

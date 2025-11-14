@@ -1,6 +1,9 @@
 package Models;
 
-import Exceptions.*;
+import Exceptions.ElementoExistenteException;
+import Exceptions.ElementoNoEncontradoException;
+import Exceptions.ElementoNuloException;
+import Exceptions.ListaVaciaException;
 import Interfaces.IDevolverString;
 import Interfaces.IGestora;
 import Interfaces.IReconocerId;
@@ -8,7 +11,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.awt.font.TextHitInfo;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -16,7 +18,7 @@ public class Habitacion implements IReconocerId, IGestora<Pista>, IDevolverStrin
     //---------- ATRIBUTOS ----------
     private String nombre;
     private ArrayList<Pista> pistas;
-    private Integer idHabitacion;
+    private final Integer idHabitacion;
     private static Integer idIncremental = 0;
 
     //---------- CONSTRUCTORES ----------
@@ -112,7 +114,7 @@ public class Habitacion implements IReconocerId, IGestora<Pista>, IDevolverStrin
             throw new ElementoNuloException("La pista ingresada no puede ser nula");
         } else if (!pistas.isEmpty()) {
             for (Pista pista : pistas) {
-                if (pista.getNombre().equals(pista)) {
+                if (pista.getId().equals(p.getId())) {
                     return pistas.remove(pista);
                 }
             }
@@ -134,7 +136,7 @@ public class Habitacion implements IReconocerId, IGestora<Pista>, IDevolverStrin
         } else throw new ListaVaciaException("La pista no existe en la lista");
     }
 
-    public JSONObject toJson() {
+    /*public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("ID", this.idHabitacion);
@@ -177,6 +179,5 @@ public class Habitacion implements IReconocerId, IGestora<Pista>, IDevolverStrin
             e.printStackTrace();
         }
         return nueva;
-    }
-
+    }*/
 }

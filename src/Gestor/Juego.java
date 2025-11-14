@@ -1,80 +1,77 @@
 package Gestor;
 
-import Exceptions.*;
+import Exceptions.ElementoExistenteException;
+import Exceptions.ElementoNoEncontradoException;
+import Exceptions.ElementoNuloException;
+import Exceptions.ListaVaciaException;
 import Interfaces.IDevolverString;
 import Interfaces.IGestora;
 import Interfaces.IReconocerId;
-import Models.Jugador;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Juego<T extends IReconocerId & IDevolverString> implements IGestora<T> {
     //---------- ATRIBUTOS ----------
-    private ArrayList<T> jugadores;
+    private HashSet<T> elementos;
 
     //---------- CONSTRUCTORES ----------
-
     public Juego() {
-        this.jugadores = new ArrayList<>();
+        this.elementos = new HashSet<>();
     }
 
     //---------- GETTERS y SETTERS ----------
-
-
-    public ArrayList<T> getJugadores() {
-        return jugadores;
+    public HashSet<T> getJugadores() {
+        return elementos;
     }
 
-    public void setJugadores(ArrayList<T> jugadores) {
-        this.jugadores = jugadores;
+    public void setJugadores(HashSet<T> jugadores) {
+        this.elementos = jugadores;
     }
 
     //---------- TOSTRING ----------
     @Override
     public String toString() {
         return "Juego:\n" +
-                "Jugadores: " + this.jugadores + "\n";
+                "Jugadores: " + this.elementos + "\n";
     }
 
     //---------- MÉTODOS CON EXCEPCIONES PERSONALIZADAS ----------
     @Override
-    public boolean agregarElemento(T elemnto) throws ElementoNuloException, ElementoExistenteException {
-        if (elemnto == null) {
+    public boolean agregarElemento(T elemento) throws ElementoNuloException, ElementoExistenteException {
+        if (elemento == null) {
             throw new ElementoNuloException("El jugador no puede ser nulo");
-        } else if (jugadores.contains(elemnto)) {
+        } else if (elementos.contains(elemento)) {
             throw new ElementoExistenteException("El jugador ya existe en el juego");
-        } else return jugadores.add(elemnto);
+        } else return elementos.add(elemento);
     }
 
     @Override
     public boolean eliminarElemento(T elemento) throws ListaVaciaException, ElementoNoEncontradoException, ElementoNuloException {
         if (elemento == null) {
-            throw new ElementoNuloException("El jugador no puede ser nulo");
-        } else if (!jugadores.isEmpty()) {
-            for (T item: jugadores) {
-                if (item.getId() == elemento.getId()) {
-                    return jugadores.remove(elemento);
+            throw new ElementoNuloException("El elemento no puede ser nulo");
+        } else if (!elementos.isEmpty()) {
+            for (T item : elementos) {
+                if (item.getId().equals(elemento.getId())) {
+                    return elementos.remove(item);
                 }
             }
-            throw new ElementoNoEncontradoException("El jugador no se encuentra registrado en el juego");
-        } else throw new ListaVaciaException("El juego no tiene jugadores registrados");
+            throw new ElementoNoEncontradoException("El elemento no se encuentra registrado en el juego");
+        } else throw new ListaVaciaException("No hay elementos registrados en el juego");
     }
 
     @Override
     public T buscarElemento(String elemento) throws ListaVaciaException, ElementoNoEncontradoException, ElementoNuloException {
         if (elemento == null) {
-            throw new ElementoNuloException("Debe ingresar un nombre de usuario valido");
-        } else if (!jugadores.isEmpty()) {
-            for  (T item : jugadores) {
+            throw new ElementoNuloException("Debe ingresar un nombre válido");
+        } else if (!elementos.isEmpty()) {
+            for (T item : elementos) {
                 if (item instanceof IDevolverString aux) {
                     if (aux.devolverString().equalsIgnoreCase(elemento)) {
                         return item;
                     }
                 }
             }
-            throw new ElementoNoEncontradoException("El jugador no se encuentra registrado en el juego");
-        } else throw new ListaVaciaException("No hay jugadores registrados en el juego");
+            throw new ElementoNoEncontradoException("El elemento no se encuentra registrado en el juego");
+        } else throw new ListaVaciaException("No hay elementos registrados en el juego");
     }
-
-
 }

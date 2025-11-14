@@ -1,5 +1,4 @@
 void main() {
 
-    /// COSAS QUE FALTAN
-    /// HACER JSON Y TO OBJECT DE CASA y el menu
+    //REVISAR SI LOS METODOS DE LOS RASGOS SIRVEN,
 }

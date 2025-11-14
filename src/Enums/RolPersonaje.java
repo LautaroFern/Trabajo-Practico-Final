@@ -6,6 +6,5 @@ public enum RolPersonaje {
     Madre,
     Hija,
     Mayordomo,
-    ServicioDeLimpieza,
     Vecino
 }

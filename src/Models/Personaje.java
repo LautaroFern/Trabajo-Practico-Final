@@ -142,11 +142,11 @@ public class Personaje implements IReconocerId, IDevolverString {
             throw new RasgoInvalidoException("El rasgo no puede estar vacío.");
         } else if (rasgos.contains(rasgo)) {
             throw new RasgoInvalidoException("El rasgo '" + rasgo + "' ya existe.");
-        }else return rasgos.add(rasgo);
+        } else return rasgos.add(rasgo);
     }
 
     public boolean eliminarRasgo(String rasgo) throws ElementoNoEncontradoException, ListaVaciaException {
-        if (!rasgos.isEmpty()){
+        if (!rasgos.isEmpty()) {
             if (!rasgos.contains(rasgo)) {
                 throw new ElementoNoEncontradoException("No se encontró el rasgo '" + rasgo + "'.");
             }
@@ -163,7 +163,7 @@ public class Personaje implements IReconocerId, IDevolverString {
             throw new ListaVaciaException("El personaje no tiene ningpún rasgo cargado");
         } else if (index == -1) {
             throw new ElementoNoEncontradoException("El rasgo '" + viejo + "' no existe y no puede modificarse");
-        }else rasgos.set(index, nuevo);
+        } else rasgos.set(index, nuevo);
         return "Rasgo modificado: '" + viejo + "' → '" + nuevo + "'";
     }
 
@@ -178,7 +178,7 @@ public class Personaje implements IReconocerId, IDevolverString {
         return sb.toString();
     }
 
-    public JSONObject toJSON() {
+    /*public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("Nombre", nombre);
@@ -205,15 +205,13 @@ public class Personaje implements IReconocerId, IDevolverString {
             personaje.setConfesion(jsonObject.getString("Confesion"));
             JSONArray array = new JSONArray();
             ArrayList<String> aux = new ArrayList<>();
-            for ( int i = 0; i<array.length(); i++){
+            for (int i = 0; i < array.length(); i++) {
                 aux.add(array.getString(i));
             }
             personaje.setRasgos(aux);
-        }catch (JSONException e){
+        } catch (JSONException e) {
             System.out.println("Error al cargar el objeto: " + e.getMessage());
         }
         return personaje;
-    }
-
-
+    }*/
 }
