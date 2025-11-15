@@ -3,6 +3,7 @@ package Menu;
 import Exceptions.ElementoExistenteException;
 import Exceptions.ElementoNuloException;
 import Gestor.Juego;
+import Models.Habitacion;
 import Models.Jugador;
 
 import java.util.Scanner;
@@ -25,7 +26,7 @@ public class Menu {
         System.out.println("Era una noche fría pero calma, la noche transcurría como cualquier otra, hasta que una llamada sacudió la calma de la familia y de la mansión. " + "\n" +
                 "El Dr Tobias Sanchez estaba sin vida en su dormitorio, la familia consternada y triste te está esperando para que comiences tu investigación");
 
-        cargar();
+
         Jugador jugador = loginJugador();
         try {
             juego.agregarElemento(jugador);
@@ -45,7 +46,7 @@ public class Menu {
         return new Jugador(nombre, usuario, contrasena);
     }
 
-    public void cargar(){
+    public void cargarHabitaciones(){
 
     }
 

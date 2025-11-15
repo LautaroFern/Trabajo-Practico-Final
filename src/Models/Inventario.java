@@ -1,9 +1,6 @@
 package Models;
 
-import Exceptions.ElementoExistenteException;
-import Exceptions.ElementoNoEncontradoException;
-import Exceptions.ElementoNuloException;
-import Exceptions.ListaVaciaException;
+import Exceptions.*;
 import Interfaces.IGestora;
 import org.json.JSONArray;
 import org.json.JSONException;
