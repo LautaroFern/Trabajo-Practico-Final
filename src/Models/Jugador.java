@@ -14,7 +14,7 @@ public class Jugador implements IReconocerId, IDevolverString {
     private String usuario;
     private String contrasena;
     private Inventario inventario;
-    private double progreso;
+    private int progreso;
     private final Integer idJugador;
     private static Integer idIncremental = 0;
 
@@ -23,7 +23,7 @@ public class Jugador implements IReconocerId, IDevolverString {
         this.nombre = nombre;
         this.usuario = usuario;
         this.contrasena = contrasena;
-        this.progreso = 0.0;
+        this.progreso = 0;
         idIncremental++;
         this.idJugador = idIncremental;
     }
@@ -33,7 +33,7 @@ public class Jugador implements IReconocerId, IDevolverString {
         this.usuario = "";
         this.contrasena = "";
         this.inventario = null;
-        this.progreso = 0.0;
+        this.progreso = 0;
         idIncremental++;
         this.idJugador = idIncremental;
     }
@@ -71,11 +71,11 @@ public class Jugador implements IReconocerId, IDevolverString {
         this.inventario = inventario;
     }
 
-    public double getProgreso() {
+    public int getProgreso() {
         return progreso;
     }
 
-    public void setProgreso(double progreso) {
+    public void setProgreso(int progreso) {
         this.progreso = progreso;
     }
 
@@ -144,7 +144,7 @@ public class Jugador implements IReconocerId, IDevolverString {
             jugador.setNombre(jsonObject.getString("Nombre"));
             jugador.setUsuario(jsonObject.getString("Usuario"));
             jugador.setContrasena(jsonObject.getString("Contraseña"));
-            jugador.setProgreso(jsonObject.getDouble("Progreso"));
+            jugador.setProgreso(jsonObject.getInt("Progreso"));
             JSONObject inv = jsonObject.getJSONObject("Inventario");
             jugador.setInventario(Inventario.toObject(inv));
         } catch (JSONException e) {

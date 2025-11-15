@@ -3,7 +3,9 @@ package Menu;
 import Enums.RolPersonaje;
 import Enums.TipoGenero;
 import Exceptions.ElementoExistenteException;
+import Exceptions.ElementoNoEncontradoException;
 import Exceptions.ElementoNuloException;
+import Exceptions.ListaVaciaException;
 import Gestor.Juego;
 import Models.Habitacion;
 import Models.Jugador;
@@ -17,6 +19,7 @@ public class Menu {
     private Juego<Personaje> personajes;
     private Juego<Habitacion> habitaciones;
     private Juego<Jugador> jugadores;
+    private Jugador jugadorActivo;
 
     //---------- CONSTRUCTOR ----------
     public Menu() {
@@ -55,6 +58,16 @@ public class Menu {
             System.out.println(e.getMessage());
         }
 
+        System.out.println("Ingrese su nombre:");
+        String nombre = teclado.nextLine();
+
+        try {
+            jugadorActivo = jugadores.buscarElemento(nombre);
+        } catch (ListaVaciaException | ElementoNuloException | ElementoNoEncontradoException e) {
+            System.out.println(e.getMessage());
+        }
+
+        iniciarJuego(jugadorActivo.getProgreso());
 
     }
 
@@ -123,5 +136,37 @@ public class Menu {
         return stringBuilder.toString();
     }
 
-
+    public void iniciarJuego(int progreso){
+        boolean continuar = true;
+        while (continuar){
+            switch (progreso){
+                case 0:
+                    jugadorActivo.setProgreso(20);
+                    progreso = 20;
+                    break;
+                case 20:
+                    jugadorActivo.setProgreso(40);
+                    progreso = 40;
+                    break;
+                case 40:
+                    jugadorActivo.setProgreso(60);
+                    progreso = 60;
+                    break;
+                case 60:
+                    jugadorActivo.setProgreso(80);
+                    progreso = 80;
+                    break;
+                case 80:
+                    jugadorActivo.setProgreso(100);
+                    progreso = 100;
+                    break;
+                case 100:
+                    continuar = false;
+                    break;
+                default:
+                    continuar = false;
+                    break;
+            }
+        }
+    }
 }
