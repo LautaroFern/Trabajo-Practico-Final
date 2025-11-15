@@ -71,7 +71,6 @@ public class Juego<T extends IReconocerId & IDevolverString> implements IGestora
             }
             throw new ElementoNoEncontradoException("El elemento no se encuentra registrado en el juego");
         } else throw new
-
                 ListaVaciaException("No hay elementos registrados en el juego");
     }
 }
