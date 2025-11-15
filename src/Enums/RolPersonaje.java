@@ -3,8 +3,9 @@ package Enums;
 public enum RolPersonaje {
     Hijo,
     Padre,
-    Madre,
-    Hija,
+    Nuera,
     Mayordomo,
-    Vecino
+    Vecino,
+    Nieto,
+    Nieta
 }
