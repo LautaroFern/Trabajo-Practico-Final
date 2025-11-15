@@ -66,5 +66,4 @@ public abstract class Pista {
 
     //---------- METODOS ----------
     public abstract JSONObject toJson();
-
 }
