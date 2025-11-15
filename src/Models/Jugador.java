@@ -81,7 +81,7 @@ public class Jugador implements IReconocerId, IDevolverString {
 
     @Override
     public Integer getId() {
-        return 0;
+        return this.idJugador;
     }
 
     @Override
@@ -92,13 +92,14 @@ public class Jugador implements IReconocerId, IDevolverString {
     //---------- EQUALS, HASHCODE y TOSTRING ----------
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Jugador jugador)) return false;
-        return Objects.equals(contrasena, jugador.contrasena);
+        if (o == null || getClass() != o.getClass()) return false;
+        Jugador jugador = (Jugador) o;
+        return Objects.equals(idJugador, jugador.idJugador);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(contrasena);
+        return Objects.hashCode(idJugador);
     }
 
     @Override
@@ -115,11 +116,12 @@ public class Jugador implements IReconocerId, IDevolverString {
 
     //---------- MÉTODOS CON EXCEPCIONES PERSONALIZADAS ----------
     public boolean cambiarContrasena(String contrasenaActual, String nuevaContrasena) throws ContrasenaNoCoincideExeption {
-        if (this.contrasena.equals(contrasenaActual)) {
+        if (nuevaContrasena == null || nuevaContrasena.trim().isEmpty()) {
+            throw new IllegalArgumentException("La nueva contraseña no puede estar vacía");
+        } else if (this.contrasena.equals(contrasenaActual)) {
             this.contrasena = nuevaContrasena;
             return true;
-        }
-        throw new ContrasenaNoCoincideExeption("La contraseña no coincide");
+        }else throw new ContrasenaNoCoincideExeption("La contraseña no coincide");
     }
 
     public JSONObject toJson() {

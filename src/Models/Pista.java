@@ -47,6 +47,10 @@ public abstract class Pista {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     //---------- EQUALS y HASHCODE ----------
     @Override
     public boolean equals(Object o) {

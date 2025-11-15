@@ -71,8 +71,8 @@ public class Inventario implements IGestora<Pista> {
 
     @Override
     public Pista buscarElemento(String nombrePista) throws ListaVaciaException, ElementoNoEncontradoException, ElementoNuloException {
-        if (nombrePista == null) {
-            throw new ElementoNuloException("El ID no puede ser menor o igual a 0");
+        if (nombrePista == null || nombrePista.trim().isEmpty()) {
+            throw new ElementoNuloException("El nombre de la pista no puede ser nulo o vacío");
         } else if (!listaElementos.isEmpty()) {
             for (Pista e : listaElementos) {
                 if (e.getNombre().equals(nombrePista)) {
@@ -82,14 +82,6 @@ public class Inventario implements IGestora<Pista> {
 
             throw new ElementoNoEncontradoException("Elemento no encontrado en la lista");
         } else throw new ListaVaciaException("La lista esta vacia");
-    }
-
-    public String mostrarInventario() {
-        StringBuilder sb = new StringBuilder();
-        for (Pista elemento : listaElementos) {
-            sb.append(elemento.toString()).append("\n");
-        }
-        return sb.toString();
     }
 
     public JSONObject toJson() {

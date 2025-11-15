@@ -177,41 +177,4 @@ public class Personaje implements IReconocerId, IDevolverString {
         }
         return sb.toString();
     }
-
-    /*public JSONObject toJSON() {
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("Nombre", nombre);
-            jsonObject.put("Edad", edad);
-            jsonObject.put("Genero", genero);
-            jsonObject.put("Id Personaje", idPersonaje);
-            jsonObject.put("Rol Personaje", rolPersonaje);
-            jsonObject.put("Rasgos", new JSONArray(rasgos));
-            jsonObject.put("Confesion", confesion);
-        } catch (JSONException e) {
-            System.out.println("Error al cargar el JSON: " + e.getMessage());
-        }
-        return jsonObject;
-    }
-
-    public static Personaje toObject(JSONObject jsonObject) {
-        Personaje personaje = new Personaje();
-        try {
-            personaje.setNombre(jsonObject.getString("Nombre"));
-            personaje.setEdad(jsonObject.getInt("Edad"));
-            personaje.setGenero(TipoGenero.valueOf(jsonObject.getString("Genero")));
-            personaje.setIdPersonaje(jsonObject.getInt("Id Personaje"));
-            personaje.setRolPersonaje(RolPersonaje.valueOf(jsonObject.getString("Rol Personaje")));
-            personaje.setConfesion(jsonObject.getString("Confesion"));
-            JSONArray array = new JSONArray();
-            ArrayList<String> aux = new ArrayList<>();
-            for (int i = 0; i < array.length(); i++) {
-                aux.add(array.getString(i));
-            }
-            personaje.setRasgos(aux);
-        } catch (JSONException e) {
-            System.out.println("Error al cargar el objeto: " + e.getMessage());
-        }
-        return personaje;
-    }*/
 }
