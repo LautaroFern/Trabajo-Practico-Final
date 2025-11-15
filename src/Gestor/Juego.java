@@ -39,9 +39,9 @@ public class Juego<T extends IReconocerId & IDevolverString> implements IGestora
     @Override
     public boolean agregarElemento(T elemento) throws ElementoNuloException, ElementoExistenteException {
         if (elemento == null) {
-            throw new ElementoNuloException("El jugador no puede ser nulo");
+            throw new ElementoNuloException("El elemento no puede ser nulo");
         } else if (elementos.contains(elemento)) {
-            throw new ElementoExistenteException("El jugador ya existe en el juego");
+            throw new ElementoExistenteException("El elemento ya existe en el juego");
         } else return elementos.add(elemento);
     }
 

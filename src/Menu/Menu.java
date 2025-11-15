@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class Menu {
     //---------- ATRIBUTOS ----------
-    private Scanner teclado;
+    private final Scanner teclado;
     private Juego<Personaje> personajes;
     private Juego<Habitacion> habitaciones;
     private Juego<Jugador> jugadores;
@@ -28,14 +28,25 @@ public class Menu {
     }
 
     public void iniciar() {
-        System.out.println("Introducción:\n");
+        cargarHabitaciones();
+        cargaPersonaje();
+        System.out.println(
+                        "\t███╗   ███╗ " + "██╗ " + "███████╗ " + "████████╗ " + "███████╗ " + "██████╗  " + "██╗   ██╗ " + "   ██╗ " + "███╗   ██╗ " + "   ████████╗ " + "██╗  ██╗ " + "███████╗ " + "   ███╗   ███╗ " + " █████╗  " + "███╗   ██╗ " + "███████╗ " + "██╗ " + " ██████╗  " + "███╗   ██╗ " + "\n" +
+                        "\t████╗ ████║ " + "██║ " + "██╔════╝ " + "╚══██╔══╝ " + "██╔════╝ " + "██╔══██╗ " + "╚██╗ ██╔╝ " + "   ██║ " + "████╗  ██║ " + "   ╚══██╔══╝ " + "██║  ██║ " + "██╔════╝ " + "   ████╗ ████║ " + "██╔══██╗ " + "████╗  ██║ " + "██╔════╝ " + "██║ " + "██╔═══██╗ " + "████╗  ██║ " + "\n" +
+                        "\t██╔████╔██║ " + "██║ " + "███████╗ " + "   ██║    " + "█████╗   " + "██████╔╝ " + " ╚████╔╝  " + "   ██║ " + "██╔██╗ ██║ " + "      ██║    " + "███████║ " + "█████╗   " + "   ██╔████╔██║ " + "███████║ " + "██╔██╗ ██║ " + "███████╗ " + "██║ " + "██║   ██║ " + "██╔██╗ ██║ " + "\n" +
+                        "\t██║╚██╔╝██║ " + "██║ " + "╚════██║ " + "   ██║    " + "██╔══╝   " + "██╔══██╗ " + "  ╚██╔╝   " + "   ██║ " + "██║╚██╗██║ " + "      ██║    " + "██╔══██║ " + "██╔══╝   " + "   ██║╚██╔╝██║ " + "██╔══██║ " + "██║╚██╗██║ " + "╚════██║ " + "██║ " + "██║   ██║ " + "██║╚██╗██║ " + "\n" +
+                        "\t██║ ╚═╝ ██║ " + "██║ " + "███████║ " + "   ██║    " + "███████╗ " + "██║  ██║ " + "   ██║    " + "   ██║ " + "██║ ╚████║ " + "      ██║    " + "██║  ██║ " + "███████╗ " + "   ██║ ╚═╝ ██║ " + "██║  ██║ " + "██║ ╚████║ " + "███████║ " + "██║ " + "╚██████╔╝ " + "██║ ╚████║ " + "\n" +
+                        "\t╚═╝     ╚═╝ " + "╚═╝ " + "╚══════╝ " + "   ╚═╝    " + "╚══════╝ " + "╚═╝  ╚═╝ " + "   ╚═╝    " + "   ╚═╝ " + "╚═╝  ╚═══╝ " + "      ╚═╝    " + "╚═╝  ╚═╝ " + "╚══════╝ " + "   ╚═╝     ╚═╝ " + "╚═╝  ╚═╝ " + "╚═╝  ╚═══╝ " + "╚══════╝ " + "╚═╝ " + " ╚═════╝  " + "╚═╝  ╚═══╝ " + "\n"
+
+        );
+
+        System.out.println("Introducción:");
         System.out.println("La familia Sanchez siempre fue conocida por su fortuna, construida gracias al esfuerzo del patriarca: El Dr Tobias Sanchez, un hombre estricto, pero generoso con quien lo merecía. \n" +
-                "Querido por pocos y odiado por muchos, no era un hombre el cual tuviera enemigos pero su mano dura con la gente y la manera de llevar sus negocios no le caía bien a todo el mundo.\n");
+                "Querido por pocos y odiado por muchos, no era un hombre el cual tuviera enemigos pero su mano dura con la gente y la manera de llevar sus negocios no le caía bien a todo el mundo.");
         System.out.println("Era una noche fría pero calma, la noche transcurría como cualquier otra, hasta que una llamada sacudió la calma de la familia y de la mansión. " + "\n" +
                 "El Dr Tobias Sanchez estaba sin vida en su dormitorio, la familia consternada y triste te está esperando para que comiences tu investigación");
 
-        cargarHabitaciones();
-        cargaPersonaje();
+        System.out.println(mostrarMenu());
         Jugador jugador = loginJugador();
 
         try {
@@ -43,8 +54,6 @@ public class Menu {
         } catch (ElementoNuloException | ElementoExistenteException e) {
             System.out.println(e.getMessage());
         }
-
-        mostrarMenu();
 
 
     }
@@ -76,7 +85,6 @@ public class Menu {
         } catch (ElementoExistenteException | ElementoNuloException e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     public void cargaPersonaje() {
