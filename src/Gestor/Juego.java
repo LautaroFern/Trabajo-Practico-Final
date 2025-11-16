@@ -20,20 +20,20 @@ public class Juego<T extends IReconocerId & IDevolverString> implements IGestora
     }
 
     //---------- GETTERS y SETTERS ----------
-    public HashSet<T> getJugadores() {
+    public HashSet<T> getElementos() {
         return elementos;
     }
 
-    public void setJugadores(HashSet<T> jugadores) {
-        this.elementos = jugadores;
+    public void setElementos(HashSet<T> elementos) {
+        this.elementos = elementos;
     }
 
     //---------- TOSTRING ----------
-    @Override
+    /*@Override
     public String toString() {
         return "Juego:\n" +
                 "Jugadores: " + this.elementos + "\n";
-    }
+    }*/
 
     //---------- MÉTODOS CON EXCEPCIONES PERSONALIZADAS ----------
     @Override
