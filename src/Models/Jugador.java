@@ -1,6 +1,7 @@
 package Models;
 
 import Exceptions.ContrasenaNoCoincideExeption;
+import Exceptions.ValidarLetrasException;
 import Interfaces.IDevolverString;
 import Interfaces.IReconocerId;
 import org.json.JSONException;
@@ -20,8 +21,12 @@ public class Jugador implements IReconocerId, IDevolverString {
 
     //---------- CONSTRUCTORES ----------
     public Jugador(String nombre, String usuario, String contrasena) {
-        this.nombre = nombre;
-        this.usuario = usuario;
+        try {
+            this.nombre = validarLetras(nombre);
+            this.usuario = validarLetras(usuario);
+        }catch (ValidarLetrasException e){
+            System.out.println(e.getMessage());
+        }
         this.contrasena = contrasena;
         this.progreso = 0;
         idIncremental++;
@@ -86,7 +91,7 @@ public class Jugador implements IReconocerId, IDevolverString {
 
     @Override
     public String devolverString() {
-        return this.nombre;
+        return this.usuario;
     }
 
     //---------- EQUALS, HASHCODE y TOSTRING ----------
@@ -115,15 +120,6 @@ public class Jugador implements IReconocerId, IDevolverString {
     }
 
     //---------- MÉTODOS CON EXCEPCIONES PERSONALIZADAS ----------
-    public boolean cambiarContrasena(String contrasenaActual, String nuevaContrasena) throws ContrasenaNoCoincideExeption {
-        if (nuevaContrasena == null || nuevaContrasena.trim().isEmpty()) {
-            throw new IllegalArgumentException("La nueva contraseña no puede estar vacía");
-        } else if (this.contrasena.equals(contrasenaActual)) {
-            this.contrasena = nuevaContrasena;
-            return true;
-        }else throw new ContrasenaNoCoincideExeption("La contraseña no coincide");
-    }
-
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
         try {
@@ -131,7 +127,10 @@ public class Jugador implements IReconocerId, IDevolverString {
             jsonObject.put("Usuario", usuario);
             jsonObject.put("Contraseña", contrasena);
             jsonObject.put("Progreso", progreso);
-            jsonObject.put("Inventario", inventario.toJson());
+            if (inventario == null) {
+                Inventario inventario1 = new Inventario();
+                jsonObject.put("Inventario", inventario1.toJson());
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -151,5 +150,13 @@ public class Jugador implements IReconocerId, IDevolverString {
             e.printStackTrace();
         }
         return jugador;
+    }
+
+    public String validarLetras(String texto) throws ValidarLetrasException {
+        if (!texto.matches("[a-zA-Z]+")) {
+            throw new ValidarLetrasException("Los datos ingresados no pueden contener numeros o simbolos");
+        } else {
+            return texto;
+        }
     }
 }

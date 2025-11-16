@@ -28,13 +28,6 @@ public class Juego<T extends IReconocerId & IDevolverString> implements IGestora
         this.elementos = elementos;
     }
 
-    //---------- TOSTRING ----------
-    /*@Override
-    public String toString() {
-        return "Juego:\n" +
-                "Jugadores: " + this.elementos + "\n";
-    }*/
-
     //---------- MÉTODOS CON EXCEPCIONES PERSONALIZADAS ----------
     @Override
     public boolean agregarElemento(T elemento) throws ElementoNuloException, ElementoExistenteException {
