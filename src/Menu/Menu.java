@@ -2,10 +2,7 @@ package Menu;
 
 import Enums.RolPersonaje;
 import Enums.TipoGenero;
-import Exceptions.ElementoExistenteException;
-import Exceptions.ElementoNoEncontradoException;
-import Exceptions.ElementoNuloException;
-import Exceptions.ListaVaciaException;
+import Exceptions.*;
 import Gestor.Juego;
 import Models.*;
 import org.json.JSONArray;
@@ -116,15 +113,42 @@ public class Menu {
     }
 
     public Jugador loginJugador() {
+        boolean n1 = true;
+        boolean n2 = true;
+        Jugador aux = new Jugador();
         teclado.nextLine();
         System.out.println("Ingrese su nombre completo (sin símbolos ni números):");
         String nombre = teclado.nextLine();
+        while (n1) {
+            try {
+                aux.setNombre(aux.validarLetras(nombre));
+                n1 = false;
+            } catch (ValidarLetrasException e) {
+                System.out.println(e.getMessage());
+                System.out.println("Ingrese su nombre completo (sin símbolos ni números):");
+                nombre = teclado.nextLine();
+
+            }
+        }
         System.out.println("Ingrese su nombre de usuario (sin símbolos ni números):");
         String usuario = teclado.nextLine();
+        while (n2) {
+            try {
+                aux.setUsuario(aux.validarLetras(usuario));
+                n2 = false;
+            } catch (ValidarLetrasException e) {
+                System.out.println(e.getMessage());
+                System.out.println("Ingrese su nombre de usuario (sin símbolos ni números):");
+                usuario = teclado.nextLine();
+
+            }
+        }
         System.out.println("Ingrese la contraseña nueva:");
         String contrasena = teclado.nextLine();
 
-        return new Jugador(nombre, usuario, contrasena);
+        aux.setContrasena(contrasena);
+
+        return aux;
     }
 
     public void cargarHabitacionesYPistas() {
@@ -283,7 +307,7 @@ public class Menu {
                             Víctima: Tobias Sanchez
                             Causa inicial de muerte: Ahorcamiento
                             Hora estimada: 03:15 AM
-                            Arma homicida: —
+                            Arma homicida: Desconocida
                             
                             Anotaciones:
                             La víctima fue encontrada sin vida colgando en su dormitorio; debajo de él se halló una 
@@ -293,6 +317,8 @@ public class Menu {
                             
                             ───────────────────────────────────────────────────────────────────────────────
                             """);
+
+
 
                     jugadorActivo.setProgreso(20);
                     System.out.println("Indique s si prefiere salir y guardar el progreso o n si desea continuar al siguiente nivel");
@@ -350,6 +376,7 @@ public class Menu {
                     break;
                 case 100:
                     System.out.println("Case 100");
+                    guardarPartida();
                     continuar = false;
                     break;
                 default:

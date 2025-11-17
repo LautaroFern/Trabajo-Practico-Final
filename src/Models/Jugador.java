@@ -24,8 +24,8 @@ public class Jugador implements IReconocerId, IDevolverString {
         try {
             this.nombre = validarLetras(nombre);
             this.usuario = validarLetras(usuario);
-        }catch (ValidarLetrasException e){
-            System.out.println(e.getMessage());
+        } catch (ValidarLetrasException e) {
+            e.printStackTrace();
         }
         this.contrasena = contrasena;
         this.progreso = 0;
@@ -153,10 +153,12 @@ public class Jugador implements IReconocerId, IDevolverString {
     }
 
     public String validarLetras(String texto) throws ValidarLetrasException {
+
         if (!texto.matches("[a-zA-Z]+")) {
             throw new ValidarLetrasException("Los datos ingresados no pueden contener numeros o simbolos");
         } else {
             return texto;
+
         }
     }
 }
