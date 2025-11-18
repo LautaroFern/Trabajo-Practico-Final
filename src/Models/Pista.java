@@ -3,27 +3,23 @@ package Models;
 import org.json.JSONObject;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public abstract class Pista {
     //---------- ATRIBUTOS ----------
     protected String nombre;
     protected String descripcion;
-    private static Integer idIncremental = 0;
-    protected Integer id;
+    protected String id = UUID.randomUUID().toString();
 
     //---------- CONSTRUCTORES ----------
     public Pista(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        idIncremental++;
-        this.id = idIncremental;
     }
 
     public Pista() {
         this.nombre = "";
         this.descripcion = "";
-        idIncremental++;
-        this.id = idIncremental;
     }
 
     //---------- GETTERS y SETTERS ----------
@@ -43,11 +39,11 @@ public abstract class Pista {
         this.descripcion = descripcion;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -56,12 +52,12 @@ public abstract class Pista {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Pista pista = (Pista) o;
-        return Objects.equals(nombre, pista.nombre) && Objects.equals(id, pista.id);
+        return Objects.equals(id, pista.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombre, id);
+        return Objects.hashCode(id);
     }
 
     //---------- METODOS ----------

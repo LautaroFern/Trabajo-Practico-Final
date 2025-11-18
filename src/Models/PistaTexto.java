@@ -27,7 +27,7 @@ public class PistaTexto extends Pista {
         try {
             pistaTexto.setNombre(jsonObject.getString("Nombre"));
             pistaTexto.setDescripcion(jsonObject.getString("Descripcion"));
-            pistaTexto.setId(jsonObject.getInt("Id"));
+            pistaTexto.setId(jsonObject.getString("Id"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
