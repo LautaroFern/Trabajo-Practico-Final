@@ -28,7 +28,7 @@ public class ObjetoCasa extends Pista {
         try {
             objetoCasa.setNombre(jsonObject.getString("Nombre"));
             objetoCasa.setDescripcion(jsonObject.getString("Descripcion"));
-            objetoCasa.setId(jsonObject.getInt("Id"));
+            objetoCasa.setId(jsonObject.getString("Id"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
