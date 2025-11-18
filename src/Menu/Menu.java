@@ -170,20 +170,19 @@ public class Menu {
 
 
         ObjetoCasa frascoMedicamentosVacio = new ObjetoCasa("Frasco de Medicamentos",
-                "Frasco de medicamentos con prescripcion medica para la presion arterial y " +
-                "\nproblemas del corazon");
+                "");
 
         ObjetoCasa llaveDeHabitaciones = new ObjetoCasa("Llaves de las Habitaciones",
-                "Juego de llaves de las diferentes habitaciones de la mansion");
+                "");
 
         ObjetoCasa frascoConVeneno = new ObjetoCasa("Frasco Extraño",
-                "Frasco pequeño de color negro que contiene un liquido transparente");
+                "");
 
         ObjetoCasa guantesMayordomo = new ObjetoCasa("Guantes de Mayordomo",
-                "Par de guantes de Alfred humedos, probablemente no deberian estar ahi");
+                "");
 
         ObjetoCasa valijaPreparada = new ObjetoCasa("Valija Preparada",
-                "Valija llena de pertenencias, parece cargada como para un viaje muy largo");
+                "");
 
         //----- CREANDO LAS HABITACIONES -----
         Habitacion habitacionRicardoYJuana = new Habitacion("Habitación de Ricardo y Juana.");
@@ -274,13 +273,10 @@ public class Menu {
     public void iniciarJuego(int progreso) {
         boolean continuar = true;
         char eleccion;
-        Inventario inventarioJugador = new Inventario();
-        cargarHabitacionesYPistas();
-        jugadorActivo.setInventario(inventarioJugador);
+
         while (continuar) {
             switch (progreso) {
                 case 0:
-
                     System.out.println("""
                             ────────────────────────────────────────────────────────────
                                                     INTRODUCCIÓN
@@ -321,30 +317,9 @@ public class Menu {
                             
                             ───────────────────────────────────────────────────────────────────────────────
                             """);
-                    System.out.println("Ingresas a la habitacion de la victima: ");
-                    System.out.println("""
-                            Te encuentras frente a una habitacion iluminada, la escena del crimen pertenece intacta esperando tu prescencia
-                            sobre la parte derecha de se encuentra una cama con sus mesitas de luz, debajo de la luz que alumbra la habitacion
-                            una silla caida descansa debajo de una soga colgada (De aqui descolgaron a la victima).
-                            El resto de la habitacion esta adornada por un espejo de pie, un escritorio y un ropero bien mantenido
-                            """);
 
-                    //Aca iria el switch de las opciones (En la mesita de luz esta el frasco de medicamentos, y en el escritorio el testamento)
-                    try{
-                        inventarioJugador.agregarElemento(habitaciones.buscarElemento("Habitación de Tobías Sanchez.")
-                                .buscarElemento("Frasco de Medicamentos"));
-                    }catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException | ElementoExistenteException e){
-                        System.out.println(e.getMessage());
-                    }
 
-                    try{
-                        inventarioJugador.agregarElemento(habitaciones.buscarElemento("Habitación de Tobías Sanchez.")
-                                .buscarElemento("Testamento Nuevo"));
-                    }catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException | ElementoExistenteException e){
-                        System.out.println(e.getMessage());
-                    }
 
-                    System.out.println("A continuacion te diriges a la habitacion del mayordomo...");
                     jugadorActivo.setProgreso(20);
                     System.out.println("Indique s si prefiere salir y guardar el progreso o n si desea continuar al siguiente nivel");
                     eleccion = teclado.nextLine().charAt(0);
@@ -356,22 +331,7 @@ public class Menu {
                     }
                     break;
                 case 20:
-                    System.out.println("Habitacion del mayordomo");
-                    System.out.println("""
-                            Te adentras en una habitacion pequeña pero acogedora, esta muy bien organizada y ordenada
-                            no posee cuadros ni pinturas, simplemente una cama y un pequeño mueble que funciona como vestidor y escritorio.
-                            En una esquina de la habitacion se encuentra un zapatero con mocasines listos para ser usados, 
-                            encima de este mismo una taquilla con una cerradura combinada guarda lo que parece ser un manojo de llaves
-                            """);
-
-                    try{
-                        inventarioJugador.agregarElemento(habitaciones.buscarElemento("Habitación de Alfred.")
-                                .buscarElemento("Llaves de las Habitaciones"));
-                    }catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException | ElementoExistenteException e){
-                        System.out.println(e.getMessage());
-                    }
-
-                    System.out.println("Continuas en la habitacion de matias...");
+                    System.out.println("Case 20");
                     jugadorActivo.setProgreso(40);
                     System.out.println("Indique s si prefiere salir y guardar el progreso o n si desea continuar al siguiente nivel");
                     eleccion = teclado.nextLine().charAt(0);
@@ -382,29 +342,7 @@ public class Menu {
                     }
                     break;
                 case 40:
-                    System.out.println("Habitacion de matias");
-                    System.out.println("""
-                            Al entrar un fuerte olor a encierro y alcohol te golpea el olfato, estas viendo lo que supondrias 
-                            que sucederia si tiraras una bomba en el lugar. Absolutamente todo en la habitacion esta tirado y desordenado
-                            arriba de la mesa hay botellas y frascos vacios, sobre la cama ropa y cosas tiradas, la ventana esta rota
-                            y el foco que cuelga sobre el panorama de vez en cuando falla haciendo que la habitacion caiga en una oscuridad momentanea 
-                            """);
-
-                    try{
-                        inventarioJugador.agregarElemento(habitaciones.buscarElemento("Habitación de Matias Sanchez.")
-                                .buscarElemento("Frasco Extraño"));
-                    }catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException | ElementoExistenteException e){
-                        System.out.println(e.getMessage());
-                    }
-
-                    try{
-                        inventarioJugador.agregarElemento(habitaciones.buscarElemento("Habitación de Matias Sanchez.")
-                                .buscarElemento("Guantes de Mayordomo"));
-                    }catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException | ElementoExistenteException e){
-                        System.out.println(e.getMessage());
-                    }
-
-                    System.out.println("Seguiras en la habitacion de mariana...");
+                    System.out.println("Case 40");
                     jugadorActivo.setProgreso(60);
                     System.out.println("Indique s si prefiere salir y guardar el progreso o n si desea continuar al siguiente nivel");
                     eleccion = teclado.nextLine().charAt(0);
@@ -415,26 +353,7 @@ public class Menu {
                     }
                     break;
                 case 60:
-                    System.out.println("Habitacion de mariana");
-                    System.out.println("""
-                            
-                            """);
-
-                    try{
-                        inventarioJugador.agregarElemento(habitaciones.buscarElemento("Habitación de Mariana Sanchez.")
-                                .buscarElemento("Boletos de Avion"));
-                    }catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException | ElementoExistenteException e){
-                        System.out.println(e.getMessage());
-                    }
-
-                    try{
-                        inventarioJugador.agregarElemento(habitaciones.buscarElemento("Habitación de Mariana Sanchez.")
-                                .buscarElemento("Valija Preparada"));
-                    }catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException | ElementoExistenteException e){
-                        System.out.println(e.getMessage());
-                    }
-
-                    System.out.println("Continuas en la habitacion de Ricardo y Juana...");
+                    System.out.println("Case 60");
                     jugadorActivo.setProgreso(80);
                     System.out.println("Indique s si prefiere salir y guardar el progreso o n si desea continuar al siguiente nivel");
                     eleccion = teclado.nextLine().charAt(0);
@@ -445,26 +364,7 @@ public class Menu {
                     }
                     break;
                 case 80:
-                    System.out.println("Habitacion de Ricardo y Juana");
-                    System.out.println("""
-                            
-                            """);
-                    try{
-                        inventarioJugador.agregarElemento(habitaciones.buscarElemento("Habitación de Ricardo y Juana.")
-                                .buscarElemento("Folletos de Geriatricos"));
-                    }catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException | ElementoExistenteException e){
-                        System.out.println(e.getMessage());
-                    }
-
-                    try{
-                        inventarioJugador.agregarElemento(habitaciones.buscarElemento("Habitación de Ricardo y Juana.")
-                                .buscarElemento("Documento de Internacion"));
-                    }catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException | ElementoExistenteException e){
-                        System.out.println(e.getMessage());
-                    }
-
-                    System.out.println("Te queda el veredicto final, es hora de elegir un culpable");
-
+                    System.out.println("Case 80");
                     jugadorActivo.setProgreso(100);
                     System.out.println("Indique s si prefiere salir y guardar el progreso o n si desea continuar al siguiente nivel");
                     eleccion = teclado.nextLine().charAt(0);
@@ -476,7 +376,6 @@ public class Menu {
                     break;
                 case 100:
                     System.out.println("Case 100");
-
                     guardarPartida();
                     continuar = false;
                     break;
