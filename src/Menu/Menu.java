@@ -9,7 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -62,16 +61,16 @@ public class Menu {
 
     }
 
-    public void iniciar() {
+    public void jugar() {
         cargarHabitacionesYPistas();
         cargaPersonaje();
-        for (Habitacion h : habitaciones.getElementos()){
+        for (Habitacion h : habitaciones.getElementos()) {
             System.out.println(h.toString());
         }
         int opcion = mostrarMenu();
         String usuario;
         boolean continuar = true;
-        while (continuar){
+        while (continuar) {
             switch (opcion) {
                 case 1:
                     jugadorActivo = loginJugador();
@@ -84,20 +83,17 @@ public class Menu {
                     continuar = false;
                     break;
                 case 2:
-                    System.out.println("Ingrese su nombre de usuario");
+                    System.out.println("\tIngrese su nombre de usuario");
                     teclado.nextLine();
-                    usuario = teclado.nextLine();
-                    cargarPartida(usuario);
-                    try {
-                        jugadorActivo = jugadores.buscarElemento(usuario);
-                    } catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException e){
-                        System.out.println(e.getMessage());
-                    }
+                    usuario = teclado.nextLine().trim();
+                    Jugador jugadorCargado = cargarPartida(usuario);
+                    jugadorActivo = jugadorCargado;
                     iniciarJuego(jugadorActivo.getProgreso());
-                    System.out.println(jugadorActivo.toString());
+                    System.out.println(jugadorCargado.toString());
+                    continuar = false;
                     break;
                 case 3:
-                    System.out.println("Ingrese su nombre de usuario");
+                    System.out.println("\tIngrese su nombre de usuario");
                     teclado.nextLine();
                     usuario = teclado.nextLine();
                     cargarPartida(usuario);
@@ -107,6 +103,8 @@ public class Menu {
                     continuar = false;
                     break;
                 default:
+                    System.out.println("\tOpción incorrecta, seleccione una opcion valida\n");
+                    mostrarMenu();
                     break;
             }
         }
@@ -174,7 +172,7 @@ public class Menu {
 
         ObjetoCasa frascoMedicamentosVacio = new ObjetoCasa("Frasco de Medicamentos",
                 "Frasco de medicamentos con prescripcion medica para la presion arterial y " +
-                "\nproblemas del corazon");
+                        "\nproblemas del corazon");
 
         ObjetoCasa llaveDeHabitaciones = new ObjetoCasa("Llaves de las Habitaciones",
                 "Juego de llaves de las diferentes habitaciones de la mansion");
@@ -260,15 +258,15 @@ public class Menu {
 
         );
         System.out.println(
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+------------------------------------+\n" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |  1  |  I N I C I A R  J U E G O          |\n" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+------------------------------------+\n" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |  2  |  C A R G A R  P A R T I D A        |\n" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+------------------------------------+\n" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |  3  |  V E R  P R O G R E S O            |\n" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+------------------------------------+\n" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |  4  |  S A L I R                         |\n" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+------------------------------------+\n"
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+------------------------------------+\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |  1  |  I N I C I A R  J U E G O          |\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+------------------------------------+\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |  2  |  C A R G A R  P A R T I D A        |\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+------------------------------------+\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |  3  |  V E R  P R O G R E S O            |\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+------------------------------------+\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |  4  |  S A L I R                         |\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+------------------------------------+\n"
 
         );
         return teclado.nextInt();
@@ -277,12 +275,22 @@ public class Menu {
     public void iniciarJuego(int progreso) {
         boolean continuar = true;
         char eleccion;
-        Inventario inventarioJugador = new Inventario();
-        jugadorActivo.setInventario(inventarioJugador);
-        ObjetoCasa aux1 = new ObjetoCasa();
-        ObjetoCasa aux2 = new ObjetoCasa();
-        PistaTexto aux3 = new PistaTexto();
-        PistaTexto aux4 = new PistaTexto();
+        Inventario inventarioJugador = jugadorActivo.getInventario();
+        if (inventarioJugador == null){
+            inventarioJugador = new Inventario();
+            jugadorActivo.setInventario(inventarioJugador);
+        }
+        ObjetoCasa oAux1 = new ObjetoCasa();
+        ObjetoCasa oAux2 = new ObjetoCasa();
+        ObjetoCasa oAux3 = new ObjetoCasa();
+        ObjetoCasa oAux4 = new ObjetoCasa();
+        ObjetoCasa oAux5 = new ObjetoCasa();
+
+        PistaTexto pAux1 = new PistaTexto();
+        PistaTexto pAux2 = new PistaTexto();
+        PistaTexto pAux3 = new PistaTexto();
+        PistaTexto pAux4 = new PistaTexto();
+
         while (continuar) {
             switch (progreso) {
                 case 0:
@@ -326,9 +334,8 @@ public class Menu {
                             
                             ───────────────────────────────────────────────────────────────────────────────
                             """);
+
                     System.out.println("Ingresas a la habitacion de la victima: ");
-
-
                     System.out.println("""
                             Te encuentras frente a una habitacion iluminada, la escena del crimen pertenece intacta esperando tu prescencia
                             sobre la parte derecha de se encuentra una cama con sus mesitas de luz, debajo de la luz que alumbra la habitacion
@@ -336,38 +343,55 @@ public class Menu {
                             El resto de la habitacion esta adornada por un espejo de pie, un escritorio y un ropero bien mantenido
                             """);
 
-                    //Aca iria el switch de las opciones (En la mesita de luz esta el frasco de medicamentos, y en el escritorio el testamento)
-
-                    while(!inventarioJugador.getListaElemento().contains(aux1) || !inventarioJugador.getListaElemento().contains(aux3)){
+                    while (!inventarioJugador.getListaElemento().contains(pAux1) || !inventarioJugador.getListaElemento().contains(oAux1)) {
                         int opcion;
                         System.out.println("1- Acercarse a observar la cama");
                         System.out.println("2- Tomar el testamento del escritorio");
                         System.out.println("3- Tomar el frasco de medicamentos de la mesita de luz");
+                        System.out.println("4- Escuchar la confesion de Salomon Guzman (El rival eterno de tobias y vecino de la familia)");
                         opcion = teclado.nextInt();
-                        switch (opcion){
+                        switch (opcion) {
                             case 1:
-                                System.out.println("");
+                                System.out.println("""
+                                        Al acercarte a la cama puedes notar como la alfombra esta movida y mal acomodada segun la sombra de polvo que la rodea,
+                                        cuando la mueves revela una marca de arrastre de un tamaño grande, al seguirla notas que va desde la cama hasta el lugar donde
+                                        la victima fue encontrada colgada
+                                        """);
                                 break;
                             case 2:
                                 try {
-                                    aux3 = (PistaTexto) habitaciones.buscarElemento("Habitación de Tobías Sanchez.").buscarElemento("Testamento Nuevo");
-                                    inventarioJugador.agregarElemento(aux3);
+                                    System.out.println("""
+                                            Sobre el escritorio puedes notar un documento el cual dice en letras grandes "TESTAMENTO FAMILIA SANCHEZ"
+                                            parece hecho hace relativamente poco
+                                            """);
+                                    pAux1 = (PistaTexto) habitaciones.buscarElemento("Habitación de Tobías Sanchez.").buscarElemento("Testamento Nuevo");
+                                    inventarioJugador.agregarElemento(pAux1);
                                     jugadorActivo.setInventario(inventarioJugador);
                                     guardarPartida();
-                                }catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException | ElementoExistenteException e){
+                                } catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException |
+                                         ElementoExistenteException e) {
                                     System.out.println(e.getMessage());
                                 }
                                 System.out.println("Recogiste el testamento");
                                 break;
                             case 3:
                                 try {
-                                    aux1 = (ObjetoCasa) habitaciones.buscarElemento("Habitación de Tobías Sanchez.").buscarElemento("Frasco de Medicamentos");
-                                    inventarioJugador.agregarElemento(aux1);
+                                    System.out.println("""
+                                            Un frasco de medicamentos reposa tranquilamente al lado de una lampara sobre la mesita de luz.
+                                            Posee el nombre: captopril (Recuerdas de un caso antiguo que son medicamentos para la presion arterial y el corazon)
+                                            """);
+                                    oAux1 = (ObjetoCasa) habitaciones.buscarElemento("Habitación de Tobías Sanchez.").buscarElemento("Frasco de Medicamentos");
+                                    inventarioJugador.agregarElemento(oAux1);
                                     jugadorActivo.setInventario(inventarioJugador);
                                     guardarPartida();
-                                }catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException  | ElementoExistenteException e){
+                                } catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException |
+                                         ElementoExistenteException e) {
                                     System.out.println(e.getMessage());
                                 }
+                                System.out.println("Recogiste el frasco");
+                                break;
+                            case 4:
+                                System.out.println(confesionSalomon);
                                 break;
                         }
                     }
@@ -391,39 +415,45 @@ public class Menu {
                             encima de este mismo una taquilla con una cerradura combinada guarda lo que parece ser un manojo de llaves
                             """);
 
-                    while(!inventarioJugador.getListaElemento().contains(aux2)){
+                    while (!inventarioJugador.getListaElemento().contains(oAux2)) {
                         int opcion;
                         System.out.println("1- Acercarse a observar la cama");
                         System.out.println("2- Tomar las llaves de las habitaciones");
+                        System.out.println("3- Escuchar la confesion del mayordomo");
                         opcion = teclado.nextInt();
-                        switch (opcion){
+                        switch (opcion) {
                             case 1:
-
+                                System.out.println("""
+                                        Una cama bien prolija y limpia descansa frente a ti esperando poder otorgar las respuestas que buscas pero que ella no las tiene
+                                        """);
                                 break;
                             case 2:
                                 System.out.println("""
-                                        Para obtener las llaves de las habitacines que se encuentran en una taquilla, la cual se accede mediante un numero de tres cifras.
-                                        No se sabe el codigo pero lo que se puede deducir es que los tres digitos se obtienen calculando el cociente que resulta de elevar al cuadrado la cuarta parte de 100, para luego dividir el resultado en 5 .
+                                        Para obtener las llaves de las habitaciones que se encuentran en una taquilla, la cual se accede ingresando un numero de tres cifras en la cerradura combinada.
+                                        El mayordomo no recuerda el codigo pero encima del zapatero ves un pequeño papel que dice: En el caso de olvidarse el codigo recordar que este mismo se obtiene
+                                        calculando el cociente que resulta de elevar al cuadrado la cuarta parte de 100, para luego dividir el resultado en 5.
                                         """);
                                 System.out.println("Ingrese el código");
                                 int respuesta = teclado.nextInt();
-                                while (respuesta != 125){
+                                while (respuesta != 125) {
                                     System.out.println("Acceso denegado, codigo incorrecto");
                                     System.out.println("Ingrese el código");
                                     respuesta = teclado.nextInt();
                                 }
-                                System.out.println("Acceso concedido");
+                                System.out.println("Se escucha un TAC de parte del candado");
                                 try {
-                                    aux2 = (ObjetoCasa) habitaciones.buscarElemento("Habitación de Alfred.").buscarElemento("Llaves de las Habitaciones");
-                                    inventarioJugador.agregarElemento(aux2);
+                                    oAux2 = (ObjetoCasa) habitaciones.buscarElemento("Habitación de Alfred.").buscarElemento("Llaves de las Habitaciones");
+                                    inventarioJugador.agregarElemento(oAux2);
                                     jugadorActivo.setInventario(inventarioJugador);
                                     guardarPartida();
-                                }catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException | ElementoExistenteException e){
+                                } catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException |
+                                         ElementoExistenteException e) {
                                     System.out.println(e.getMessage());
                                 }
+                                System.out.println("Llaves de las habitaciones recogidas");
                                 break;
                             case 3:
-
+                                System.out.println(confesionAlfred);
                                 break;
                         }
                     }
@@ -447,35 +477,33 @@ public class Menu {
                             arriba de la mesa hay botellas y frascos vacios, sobre la cama ropa y cosas tiradas, la ventana esta rota
                             y el foco que cuelga sobre el panorama de vez en cuando falla haciendo que la habitacion caiga en una oscuridad momentanea 
                             """);
-                    try {
-                        inventarioJugador.eliminarElemento(aux1);
-                        inventarioJugador.eliminarElemento(aux2);
-                    }catch (ListaVaciaException | ElementoNuloException | ElementoNoEncontradoException e){
-                        System.out.println(e.getMessage());
-                    }
-                    while(!inventarioJugador.getListaElemento().contains(aux1) || !inventarioJugador.getListaElemento().contains(aux2)){
+
+                    while (!inventarioJugador.getListaElemento().contains(oAux3) || !inventarioJugador.getListaElemento().contains(oAux4)) {
                         int opcion;
-                        System.out.println("1- Tomar guantes del mayordomo");
+                        System.out.println("1- Revisar la cama");
                         System.out.println("2- Recoger frasco extraño");
+                        System.out.println("3- ");
                         opcion = teclado.nextInt();
-                        switch (opcion){
+                        switch (opcion) {
                             case 1:
                                 try {
-                                    aux2 = (ObjetoCasa) habitaciones.buscarElemento("Habitación de Matias Sanchez.").buscarElemento("Guantes de Mayordomo");
-                                    inventarioJugador.agregarElemento(aux2);
+                                    oAux3 = (ObjetoCasa) habitaciones.buscarElemento("Habitación de Matias Sanchez.").buscarElemento("Guantes de Mayordomo");
+                                    inventarioJugador.agregarElemento(oAux3);
                                     jugadorActivo.setInventario(inventarioJugador);
                                     guardarPartida();
-                                }catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException | ElementoExistenteException e){
+                                } catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException |
+                                         ElementoExistenteException e) {
                                     System.out.println(e.getMessage());
                                 }
                                 break;
                             case 2:
                                 try {
-                                    aux1 = (ObjetoCasa) habitaciones.buscarElemento("Habitación de Matias Sanchez.").buscarElemento("Frasco Extraño");
-                                    inventarioJugador.agregarElemento(aux1);
+                                    oAux4 = (ObjetoCasa) habitaciones.buscarElemento("Habitación de Matias Sanchez.").buscarElemento("Frasco Extraño");
+                                    inventarioJugador.agregarElemento(oAux4);
                                     jugadorActivo.setInventario(inventarioJugador);
                                     guardarPartida();
-                                }catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException | ElementoExistenteException e){
+                                } catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException |
+                                         ElementoExistenteException e) {
                                     System.out.println(e.getMessage());
                                 }
                                 break;
@@ -503,35 +531,32 @@ public class Menu {
                             Lo unico que pareciera desentonar en el orden del lugar es una valija abierta encima de la cama, casi lista para partir. 
                             Arriba de la mesita de luz, a un costado de los perfumes importados, se pueden observan dos boletos de avión 
                             """);
-                    try {
-                        inventarioJugador.eliminarElemento(aux1);
-                        inventarioJugador.eliminarElemento(aux3);
-                    }catch (ListaVaciaException | ElementoNuloException | ElementoNoEncontradoException e){
-                        System.out.println(e.getMessage());
-                    }
-                    while(!inventarioJugador.getListaElemento().contains(aux1) || !inventarioJugador.getListaElemento().contains(aux3)){
+
+                    while (!inventarioJugador.getListaElemento().contains(pAux2) || !inventarioJugador.getListaElemento().contains(oAux5)) {
                         int opcion;
                         System.out.println("1- Tomar boletos de avion");
                         System.out.println("2- Recoger la valija de Mariana");
                         opcion = teclado.nextInt();
-                        switch (opcion){
+                        switch (opcion) {
                             case 1:
                                 try {
-                                    aux3 = (PistaTexto) habitaciones.buscarElemento("Habitación de Mariana Sanchez.").buscarElemento("Boletos de Avion");
-                                    inventarioJugador.agregarElemento(aux3);
+                                    pAux2 = (PistaTexto) habitaciones.buscarElemento("Habitación de Mariana Sanchez.").buscarElemento("Boletos de Avion");
+                                    inventarioJugador.agregarElemento(pAux2);
                                     jugadorActivo.setInventario(inventarioJugador);
                                     guardarPartida();
-                                }catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException | ElementoExistenteException e){
+                                } catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException |
+                                         ElementoExistenteException e) {
                                     System.out.println(e.getMessage());
                                 }
                                 break;
                             case 2:
                                 try {
-                                    aux1 = (ObjetoCasa) habitaciones.buscarElemento("Habitación de Mariana Sanchez.").buscarElemento("Valija Preparada");
-                                    inventarioJugador.agregarElemento(aux1);
+                                    oAux5 = (ObjetoCasa) habitaciones.buscarElemento("Habitación de Mariana Sanchez.").buscarElemento("Valija Preparada");
+                                    inventarioJugador.agregarElemento(oAux5);
                                     jugadorActivo.setInventario(inventarioJugador);
                                     guardarPartida();
-                                }catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException | ElementoExistenteException e){
+                                } catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException |
+                                         ElementoExistenteException e) {
                                     System.out.println(e.getMessage());
                                 }
                                 break;
@@ -554,44 +579,112 @@ public class Menu {
                 case 80:
                     System.out.println("Habitacion de Ricardo y Juana");
                     System.out.println("""
-                            
+                            Por último, nos encontramos con la habitación matrimonial de Ricardo y Juana. Lo primero que se puede notar es una cama de dos plazas a medio hacer, 
+                            lo que pareciera indicar que Juana pasa gran parte del día allí. En la mesita de luz de su lado, junto a una taza vacía y un vaso de agua, hay una pila de libros y revistas. 
+                            Por otra parte, te llaman la atencion unos papeles en una silla junto al armario, 
                             """);
-                    try {
-                        inventarioJugador.eliminarElemento(aux3);
-                    }catch (ListaVaciaException | ElementoNuloException | ElementoNoEncontradoException e){
-                        System.out.println(e.getMessage());
-                    }
-                    while(!inventarioJugador.getListaElemento().contains(aux3) || !inventarioJugador.getListaElemento().contains(aux4)){
+
+                    while (!inventarioJugador.getListaElemento().contains(pAux3) || !inventarioJugador.getListaElemento().contains(pAux4)) {
                         int opcion;
-                        System.out.println("1- Tomar documento de internación");
-                        System.out.println("2- Tomar folletos de geriatricos");
+                        System.out.println("1- Mirar la pila de libros");
+                        System.out.println("2- Tomar los papeles de la silla");
+                        System.out.println("3- Observar la cama");
+                        System.out.println("4- Escuchar las confesiones de Ricardo y Juana");
                         opcion = teclado.nextInt();
-                        switch (opcion){
+                        switch (opcion) {
                             case 1:
                                 try {
-                                    aux3 = (PistaTexto) habitaciones.buscarElemento("Habitación de Ricardo y Juana.").buscarElemento("Documento de Internacion");
-                                    inventarioJugador.agregarElemento(aux3);
+                                    System.out.println("Al revisar los libros, encuentras un papel doblado y metido entre las páginas de una novela de misterio: " +
+                                            "\nEs un Documento de Internación con fecha próxima a nombre de Tobías Sanchez en el geriatrico local “El Retoño”");
+                                    pAux3 = (PistaTexto) habitaciones.buscarElemento("Habitación de Ricardo y Juana.").buscarElemento("Documento de Internacion");
+                                    inventarioJugador.agregarElemento(pAux3);
                                     jugadorActivo.setInventario(inventarioJugador);
                                     guardarPartida();
-                                }catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException | ElementoExistenteException e){
+                                } catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException |
+                                         ElementoExistenteException e) {
                                     System.out.println(e.getMessage());
                                 }
                                 break;
                             case 2:
                                 try {
-                                    aux4 = (PistaTexto) habitaciones.buscarElemento("Habitación de Ricardo y Juana.").buscarElemento("Folletos de Geriatricos");
-                                    inventarioJugador.agregarElemento(aux4);
+                                    System.out.println("Al acercarte a la silla observas varios folletos de geriatricos de la zona, con diferentes nombres y direcciones." +
+                                            "\nAlgunos estan marcados con diferentes mensajes como: Muy caro - Poco personal - Llamar para reservar visita");
+                                    pAux4 = (PistaTexto) habitaciones.buscarElemento("Habitación de Ricardo y Juana.").buscarElemento("Folletos de Geriatricos");
+                                    inventarioJugador.agregarElemento(pAux4);
                                     jugadorActivo.setInventario(inventarioJugador);
                                     guardarPartida();
-                                }catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException | ElementoExistenteException e){
+                                } catch (ListaVaciaException | ElementoNoEncontradoException | ElementoNuloException |
+                                         ElementoExistenteException e) {
                                     System.out.println(e.getMessage());
                                 }
                                 break;
                             case 3:
+                                System.out.println("");
+                                break;
+                            case 4:
+                                System.out.println("Confesion de Ricardo: " + "\n" + confesionRicardo);
+                                System.out.println("Confesion de Juana: " + "\n" + confesionJuana);
                                 break;
                         }
                     }
                     System.out.println("Te queda el veredicto final, es hora de elegir un culpable");
+                    int seleccion;
+                    System.out.println("1- Culpar a Alfred (El Mayordomo)");
+                    System.out.println("2- Culpar a Ricardo (El Hijo de Tobias)");
+                    System.out.println("3- Culpar a Mariana (La Nieta de Tobias)");
+                    System.out.println("4- Culpar a Matias (El Nieto de Tobias)");
+                    System.out.println("5- Culpar a Juana (La Cuñada de Tobias)");
+                    System.out.println("6- Culpar a Salomon (El vecino de la Familia)");
+                    seleccion = teclado.nextInt();
+                    switch (seleccion){
+                        case 1:
+                            System.out.println("""
+                                    -Tu veredicto fue incorrecto-
+                                    Alfred fue absuelto del asesinato, pero condenado por obstrucción a la justicia al encubrir al verdadero asesino. 
+                                    Perdió su empleo y su hogar, muriendo solo meses después. Matías Sánchez quedó impune, heredó parte de la fortuna y vive con el tormento de su crimen. 
+                                    El asesino real camina libre gracias a tu error.
+                                    """);
+                            break;
+                        case 2:
+                            System.out.println("""
+                                    -Tu veredicto fue incorrecto-
+                                    Ricardo Sánchez fue exonerado del asesinato, pero el escándalo de su detención y el plan de internar a su padre lo destruyó. 
+                                    La junta directiva lo destituyó de la presidencia, y su esposa lo abandonó. Quedó como un accionista menor, arruinado y sin el poder que tanto deseaba. 
+                                    El asesino real, Matías, se salió con la suya.
+                                    """);
+                            break;
+                        case 3:
+                            System.out.println("""
+                                    -Tu veredicto fue incorrecto-
+                                    Mariana Guzman fue declarada inocente. No obstante, su prometido la abandonó por el escándalo, y la familia la vio como una traidora. 
+                                    Se quedó en la mansión, sola, sin amor y sin herencia completa. La favorita del abuelo pagó el precio de la sospecha, mientras el verdadero culpable sonreía.
+                                    """);
+                            break;
+                        case 4:
+                            System.out.println("""
+                                    -Tu veredicto fue el correcto-
+                                    Matias Rodriguez fue hallado culpable de homicidio en primer grado. Sentenciado a 25 años de prisión, Matías perdió la herencia. 
+                                    Cumple su condena en una prisión estatal, sin visitas y atormentado por el fantasma de su abuelo. 
+                                    Usted ha resuelto el Caso Nº 26062011.
+                                    """);
+                            break;
+                        case 5:
+                            System.out.println("""
+                                    -Tu veredicto fue incorrecto-
+                                    Juana Rodriguez fue absuelta. El juicio hizo pública su ambición y el desprecio de Tobias. 
+                                    Fue repudiada socialmente, obligándola a vivir en un aislamiento total. Su matrimonio se volvió frío.
+                                     Obtuvo la riqueza, pero perdió el estatus y la felicidad. El verdadero asesino no fue juzgado.
+                                    """);
+                            break;
+                        case 6:
+                            System.out.println("""
+                                    -Tu veredicto fue incorrecto-
+                                    Salomon Guzman fue declarado inocente por el asesinato. Sin embargo, el juicio expuso su infidelidad y el allanamiento. 
+                                    Su esposa solicitó el divorcio y su empresa sufrió un colapso financiero por el escándalo. 
+                                    Quedó arruinado y profesionalmente marginado. El asesinato de su rival nunca fue castigado.
+                                    """);
+                            break;
+                    }
                     jugadorActivo.setProgreso(100);
                     guardarPartida();
                     System.out.println("Indique s si prefiere salir y guardar el progreso o n si desea continuar al siguiente nivel");
@@ -619,17 +712,17 @@ public class Menu {
         for (Jugador j : jugadores.getElementos()) {
             jsonArray.put(j.toJson());
         }
-        String archivo = jugadorActivo.getNombre() +".json";
+        String archivo = jugadorActivo.getUsuario() + ".json";
         JsonUtiles.grabarUnJson(jsonArray, archivo);
     }
 
-    public void cargarPartida(String usuario) {
+    public Jugador cargarPartida(String usuario) {
         try {
-            JSONObject jsonObject = new JSONObject();
+
             HashSet<Jugador> jugadorAux = new HashSet<>();
-            JSONArray array = new JSONArray(JsonUtiles.leerUnJson("Jugador.json"));
+            JSONArray array = new JSONArray(JsonUtiles.leerUnJson(usuario + ".json"));
             for (int i = 0; i < array.length(); i++) {
-                jsonObject = array.getJSONObject(i);
+                JSONObject jsonObject = array.getJSONObject(i);
                 jugadorAux.add(Jugador.toObject(jsonObject));
             }
             jugadores.setElementos(jugadorAux);
@@ -639,8 +732,10 @@ public class Menu {
 
         for (Jugador j : jugadores.getElementos()) {
             if (j.getUsuario().equalsIgnoreCase(usuario)) {
-                jugadorActivo = j;
+                return j;
             }
+            System.out.println("Chau");
         }
+        return null;
     }
 }
