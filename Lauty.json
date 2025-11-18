@@ -1,0 +1,20 @@
+[{
+    "Nombre": "Lauty",
+    "Usuario": "lala",
+    "Progreso": 0,
+    "Contraseña": "232323",
+    "Inventario": {"Inventario": [
+        {
+            "Nombre": "Testamento Nuevo",
+            "Tipo": "Pista Texto",
+            "Descripcion": "Documento en el cual se detalla la exclusion de Matias del testamento\ny deja como unica beneficiaria a su nieta Mariana",
+            "Id": 1
+        },
+        {
+            "Nombre": "Frasco de Medicamentos",
+            "Tipo": "Objeto",
+            "Descripcion": "Frasco de medicamentos con prescripcion medica para la presion arterial y \nproblemas del corazon",
+            "Id": 5
+        }
+    ]}
+}]
