@@ -130,6 +130,8 @@ public class Jugador implements IReconocerId, IDevolverString {
             if (inventario == null) {
                 Inventario inventario1 = new Inventario();
                 jsonObject.put("Inventario", inventario1.toJson());
+            }else {
+                jsonObject.put("Inventario", inventario.toJson());
             }
         } catch (JSONException e) {
             e.printStackTrace();
