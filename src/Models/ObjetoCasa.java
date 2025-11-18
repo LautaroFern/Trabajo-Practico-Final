@@ -17,7 +17,6 @@ public class ObjetoCasa extends Pista {
     @Override
     public String toString() {
         return "Datos del Objeto:\n" +
-                "  ID: " + this.id + "\n" +
                 "  Nombre: " + this.nombre + "\n" +
                 "  Descripción: " + this.descripcion + "\n";
     }

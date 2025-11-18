@@ -16,7 +16,6 @@ public class PistaTexto extends Pista {
     @Override
     public String toString() {
         return "Datos de Pista Texto:\n" +
-                "  ID: " + this.id + "\n" +
                 "  Nombre: " + this.nombre + "\n" +
                 "  Descripción: " + this.descripcion + "\n";
     }
