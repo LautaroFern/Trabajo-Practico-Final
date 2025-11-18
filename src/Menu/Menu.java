@@ -553,7 +553,9 @@ public class Menu {
                     System.out.println("Habitacion de Ricardo y Juana");
                     System.out.println("""
                             Por último, nos encontramos con la habitación matrimonial de Ricardo y Juana. Lo primero que se puede notar es una cama de dos plazas a medio hacer, 
-                            lo que pareciera indicar que Juana pasa gran parte del día allí.  En la mesita de luz de su lado, junto a una taza vacía y un vaso de agua, hay una pila de libros y revistas. Al revisarlos, encuentras un papel doblado y metido entre las páginas de una novela de misterio: es un Documento de Internación de un programada con fecha próxima a nombre de Tobías Sanchez en el geriatrico local “El Retoño”. El documento está sin firmar.
+                            lo que pareciera indicar que Juana pasa gran parte del día allí.  
+                            En la mesita de luz de su lado, junto a una taza vacía y un vaso de agua, hay una pila de libros y revistas. 
+                            Al revisarlos, encuentras un papel doblado y metido entre las páginas de una novela de misterio: es un Documento de Internación de un programada con fecha próxima a nombre de Tobías Sanchez en el geriatrico local “El Retoño”. El documento está sin firmar.
                             Por otra parte, junto al armario, hay una silla con una pequeña manta doblada. Sobre ella se encuentran varios Folletos de Geriátricos de la zona, con diferentes nombres y direcciones. Algunos están marcados con un círculo en tinta roja y tienen notas al margen escritas a mano por Ricardo que dicen cosas como: "Muy caro”, "Poco personal," o "Llamar para visita."
                             """);
 
@@ -565,6 +567,7 @@ public class Menu {
                         switch (opcion) {
                             case 1:
                                 try {
+                                    System.out.println("Al revisarlos, encuentras un papel doblado y metido entre las páginas de una novela de misterio: es un Documento de Internación de un programada con fecha próxima a nombre de Tobías Sanchez en el geriatrico local “El Retoño”");
                                     pAux3 = (PistaTexto) habitaciones.buscarElemento("Habitación de Ricardo y Juana.").buscarElemento("Documento de Internacion");
                                     inventarioJugador.agregarElemento(pAux3);
                                     jugadorActivo.setInventario(inventarioJugador);
@@ -636,7 +639,6 @@ public class Menu {
         }
 
         for (Jugador j : jugadores.getElementos()) {
-            System.out.println("Hola");
             if (j.getUsuario().equalsIgnoreCase(usuario)) {
                 return j;
             }
