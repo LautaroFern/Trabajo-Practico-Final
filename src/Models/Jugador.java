@@ -37,7 +37,7 @@ public class Jugador implements IReconocerId, IDevolverString {
         this.nombre = "";
         this.usuario = "";
         this.contrasena = "";
-        this.inventario = null;
+        this.inventario = new Inventario();
         this.progreso = 0;
         idIncremental++;
         this.idJugador = idIncremental;
