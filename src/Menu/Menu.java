@@ -346,10 +346,10 @@ public class Menu {
 
                     System.out.println("A continuacion te diriges a la habitacion del mayordomo...");
                     jugadorActivo.setProgreso(20);
+                    guardarPartida();
                     System.out.println("Indique s si prefiere salir y guardar el progreso o n si desea continuar al siguiente nivel");
                     eleccion = teclado.nextLine().charAt(0);
                     if (eleccion == 's' || eleccion == 'S') {
-                        guardarPartida();
                         continuar = false;
                     } else {
                         progreso = 20;
@@ -373,10 +373,11 @@ public class Menu {
 
                     System.out.println("Continuas en la habitacion de matias...");
                     jugadorActivo.setProgreso(40);
+                    guardarPartida();
                     System.out.println("Indique s si prefiere salir y guardar el progreso o n si desea continuar al siguiente nivel");
                     eleccion = teclado.nextLine().charAt(0);
                     if (eleccion == 's' || eleccion == 'S') {
-                        guardarPartida();
+                        continuar = false;
                     } else {
                         progreso = 40;
                     }
@@ -404,20 +405,24 @@ public class Menu {
                         System.out.println(e.getMessage());
                     }
 
-                    System.out.println("Seguiras en la habitacion de mariana...");
+                    System.out.println("Seguiras en la habitacion de Mariana...");
                     jugadorActivo.setProgreso(60);
+                    guardarPartida();
                     System.out.println("Indique s si prefiere salir y guardar el progreso o n si desea continuar al siguiente nivel");
                     eleccion = teclado.nextLine().charAt(0);
                     if (eleccion == 's' || eleccion == 'S') {
-                        guardarPartida();
+                        continuar = false;
                     } else {
                         progreso = 60;
                     }
                     break;
                 case 60:
-                    System.out.println("Habitacion de mariana");
+                    System.out.println("Habitacion de Mariana");
                     System.out.println("""
-                            
+                            Te encuentras fentre a una habitación notablemente mas grande que la de su hermano. Al ingresar, se puede ver que todo esta 
+                            organizado, el ambiente huele a esencia de vainilla, las paredes son de color rosa pastel como si de una princesa se tratara.
+                            Lo unico que pareciera desentonar en el orden del lugar es una valija abierta encima de la cama, casi lista para partir. 
+                            Arriba de la mesita de luz, a un costado de los perfumes importados, se pueden observan dos boletos de avión 
                             """);
 
                     try{
@@ -436,10 +441,11 @@ public class Menu {
 
                     System.out.println("Continuas en la habitacion de Ricardo y Juana...");
                     jugadorActivo.setProgreso(80);
+                    guardarPartida();
                     System.out.println("Indique s si prefiere salir y guardar el progreso o n si desea continuar al siguiente nivel");
                     eleccion = teclado.nextLine().charAt(0);
                     if (eleccion == 's' || eleccion == 'S') {
-                        guardarPartida();
+                        continuar = false;
                     } else {
                         progreso = 80;
                     }
@@ -466,17 +472,17 @@ public class Menu {
                     System.out.println("Te queda el veredicto final, es hora de elegir un culpable");
 
                     jugadorActivo.setProgreso(100);
+                    guardarPartida();
                     System.out.println("Indique s si prefiere salir y guardar el progreso o n si desea continuar al siguiente nivel");
                     eleccion = teclado.nextLine().charAt(0);
                     if (eleccion == 's' || eleccion == 'S') {
-                        guardarPartida();
+                        continuar = false;
                     } else {
                         progreso = 100;
                     }
                     break;
                 case 100:
                     System.out.println("Case 100");
-
                     guardarPartida();
                     continuar = false;
                     break;
