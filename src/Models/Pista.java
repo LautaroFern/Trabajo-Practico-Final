@@ -56,12 +56,12 @@ public abstract class Pista {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Pista pista = (Pista) o;
-        return Objects.equals(id, pista.id);
+        return Objects.equals(nombre, pista.nombre) && Objects.equals(id, pista.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hash(nombre, id);
     }
 
     //---------- METODOS ----------
