@@ -274,8 +274,11 @@ public class Menu {
     public void iniciarJuego(int progreso) {
         boolean continuar = true;
         char eleccion;
-        Inventario inventarioJugador = new Inventario();
-        jugadorActivo.setInventario(inventarioJugador);
+        Inventario inventarioJugador = jugadorActivo.getInventario();
+        if (inventarioJugador == null){
+            inventarioJugador = new Inventario();
+            jugadorActivo.setInventario(inventarioJugador);
+        }
         ObjetoCasa oAux1 = new ObjetoCasa();
         ObjetoCasa oAux2 = new ObjetoCasa();
         ObjetoCasa oAux3 = new ObjetoCasa();
@@ -344,13 +347,22 @@ public class Menu {
                         System.out.println("1- Acercarse a observar la cama");
                         System.out.println("2- Tomar el testamento del escritorio");
                         System.out.println("3- Tomar el frasco de medicamentos de la mesita de luz");
+                        System.out.println("4- Escuchar la confesion de Salomon Guzman (El rival eterno de tobias y vecino de la familia)");
                         opcion = teclado.nextInt();
                         switch (opcion) {
                             case 1:
-                                System.out.println("");
+                                System.out.println("""
+                                        Al acercarte a la cama puedes notar como la alfombra esta movida y mal acomodada segun la sombra de polvo que la rodea,
+                                        cuando la mueves revela una marca de arrastre de un tamaño grande, al seguirla notas que va desde la cama hasta el lugar donde
+                                        la victima fue encontrada colgada
+                                        """);
                                 break;
                             case 2:
                                 try {
+                                    System.out.println("""
+                                            Sobre el escritorio puedes notar un documento el cual dice en letras grandes "TESTAMENTO FAMILIA SANCHEZ"
+                                            parece hecho hace relativamente poco
+                                            """);
                                     pAux1 = (PistaTexto) habitaciones.buscarElemento("Habitación de Tobías Sanchez.").buscarElemento("Testamento Nuevo");
                                     inventarioJugador.agregarElemento(pAux1);
                                     jugadorActivo.setInventario(inventarioJugador);
@@ -363,6 +375,10 @@ public class Menu {
                                 break;
                             case 3:
                                 try {
+                                    System.out.println("""
+                                            Un frasco de medicamentos reposa tranquilamente al lado de una lampara sobre la mesita de luz.
+                                            Posee el nombre: captopril (Recuerdas de un caso antiguo que son medicamentos para la presion arterial y el corazon)
+                                            """);
                                     oAux1 = (ObjetoCasa) habitaciones.buscarElemento("Habitación de Tobías Sanchez.").buscarElemento("Frasco de Medicamentos");
                                     inventarioJugador.agregarElemento(oAux1);
                                     jugadorActivo.setInventario(inventarioJugador);
@@ -371,6 +387,10 @@ public class Menu {
                                          ElementoExistenteException e) {
                                     System.out.println(e.getMessage());
                                 }
+                                System.out.println("Recogiste el frasco");
+                                break;
+                            case 4:
+                                System.out.println(confesionSalomon);
                                 break;
                         }
                     }
@@ -398,15 +418,19 @@ public class Menu {
                         int opcion;
                         System.out.println("1- Acercarse a observar la cama");
                         System.out.println("2- Tomar las llaves de las habitaciones");
+                        System.out.println("3- Escuchar la confesion del mayordomo");
                         opcion = teclado.nextInt();
                         switch (opcion) {
                             case 1:
-
+                                System.out.println("""
+                                        Una cama bien prolija y limpia descansa frente a ti esperando poder otorgar las respuestas que buscas pero que ella no las tiene
+                                        """);
                                 break;
                             case 2:
                                 System.out.println("""
-                                        Para obtener las llaves de las habitacines que se encuentran en una taquilla, la cual se accede mediante un numero de tres cifras.
-                                        No se sabe el codigo pero lo que se puede deducir es que los tres digitos se obtienen calculando el cociente que resulta de elevar al cuadrado la cuarta parte de 100, para luego dividir el resultado en 5 .
+                                        Para obtener las llaves de las habitaciones que se encuentran en una taquilla, la cual se accede ingresando un numero de tres cifras en la cerradura combinada.
+                                        El mayordomo no recuerda el codigo pero encima del zapatero ves un pequeño papel que dice: En el caso de olvidarse el codigo recordar que este mismo se obtiene
+                                        calculando el cociente que resulta de elevar al cuadrado la cuarta parte de 100, para luego dividir el resultado en 5.
                                         """);
                                 System.out.println("Ingrese el código");
                                 int respuesta = teclado.nextInt();
@@ -415,7 +439,7 @@ public class Menu {
                                     System.out.println("Ingrese el código");
                                     respuesta = teclado.nextInt();
                                 }
-                                System.out.println("Acceso concedido");
+                                System.out.println("Se escucha un TAC de parte del candado");
                                 try {
                                     oAux2 = (ObjetoCasa) habitaciones.buscarElemento("Habitación de Alfred.").buscarElemento("Llaves de las Habitaciones");
                                     inventarioJugador.agregarElemento(oAux2);
@@ -425,9 +449,10 @@ public class Menu {
                                          ElementoExistenteException e) {
                                     System.out.println(e.getMessage());
                                 }
+                                System.out.println("Llaves de las habitaciones recogidas");
                                 break;
                             case 3:
-
+                                System.out.println(confesionAlfred);
                                 break;
                         }
                     }
@@ -454,8 +479,9 @@ public class Menu {
 
                     while (!inventarioJugador.getListaElemento().contains(oAux3) || !inventarioJugador.getListaElemento().contains(oAux4)) {
                         int opcion;
-                        System.out.println("1- Tomar guantes del mayordomo");
+                        System.out.println("1- Revisar la cama");
                         System.out.println("2- Recoger frasco extraño");
+                        System.out.println("3- ");
                         opcion = teclado.nextInt();
                         switch (opcion) {
                             case 1:
@@ -553,21 +579,22 @@ public class Menu {
                     System.out.println("Habitacion de Ricardo y Juana");
                     System.out.println("""
                             Por último, nos encontramos con la habitación matrimonial de Ricardo y Juana. Lo primero que se puede notar es una cama de dos plazas a medio hacer, 
-                            lo que pareciera indicar que Juana pasa gran parte del día allí.  
-                            En la mesita de luz de su lado, junto a una taza vacía y un vaso de agua, hay una pila de libros y revistas. 
-                            Al revisarlos, encuentras un papel doblado y metido entre las páginas de una novela de misterio: es un Documento de Internación de un programada con fecha próxima a nombre de Tobías Sanchez en el geriatrico local “El Retoño”. El documento está sin firmar.
-                            Por otra parte, junto al armario, hay una silla con una pequeña manta doblada. Sobre ella se encuentran varios Folletos de Geriátricos de la zona, con diferentes nombres y direcciones. Algunos están marcados con un círculo en tinta roja y tienen notas al margen escritas a mano por Ricardo que dicen cosas como: "Muy caro”, "Poco personal," o "Llamar para visita."
+                            lo que pareciera indicar que Juana pasa gran parte del día allí. En la mesita de luz de su lado, junto a una taza vacía y un vaso de agua, hay una pila de libros y revistas. 
+                            Por otra parte, te llaman la atencion unos papeles en una silla junto al armario, 
                             """);
 
                     while (!inventarioJugador.getListaElemento().contains(pAux3) || !inventarioJugador.getListaElemento().contains(pAux4)) {
                         int opcion;
-                        System.out.println("1- Tomar documento de internación");
-                        System.out.println("2- Tomar folletos de geriatricos");
+                        System.out.println("1- Mirar la pila de libros");
+                        System.out.println("2- Tomar los papeles de la silla");
+                        System.out.println("3- Observar la cama");
+                        System.out.println("4- Escuchar las confesiones de Ricardo y Juana");
                         opcion = teclado.nextInt();
                         switch (opcion) {
                             case 1:
                                 try {
-                                    System.out.println("Al revisarlos, encuentras un papel doblado y metido entre las páginas de una novela de misterio: es un Documento de Internación de un programada con fecha próxima a nombre de Tobías Sanchez en el geriatrico local “El Retoño”");
+                                    System.out.println("Al revisar los libros, encuentras un papel doblado y metido entre las páginas de una novela de misterio: " +
+                                            "\nEs un Documento de Internación con fecha próxima a nombre de Tobías Sanchez en el geriatrico local “El Retoño”");
                                     pAux3 = (PistaTexto) habitaciones.buscarElemento("Habitación de Ricardo y Juana.").buscarElemento("Documento de Internacion");
                                     inventarioJugador.agregarElemento(pAux3);
                                     jugadorActivo.setInventario(inventarioJugador);
@@ -579,6 +606,8 @@ public class Menu {
                                 break;
                             case 2:
                                 try {
+                                    System.out.println("Al acercarte a la silla observas varios folletos de geriatricos de la zona, con diferentes nombres y direcciones." +
+                                            "\nAlgunos estan marcados con diferentes mensajes como: Muy caro - Poco personal - Llamar para reservar visita");
                                     pAux4 = (PistaTexto) habitaciones.buscarElemento("Habitación de Ricardo y Juana.").buscarElemento("Folletos de Geriatricos");
                                     inventarioJugador.agregarElemento(pAux4);
                                     jugadorActivo.setInventario(inventarioJugador);
@@ -589,10 +618,72 @@ public class Menu {
                                 }
                                 break;
                             case 3:
+                                System.out.println("");
+                                break;
+                            case 4:
+                                System.out.println("Confesion de Ricardo: " + "\n" + confesionRicardo);
+                                System.out.println("Confesion de Juana: " + "\n" + confesionJuana);
                                 break;
                         }
                     }
                     System.out.println("Te queda el veredicto final, es hora de elegir un culpable");
+                    int seleccion;
+                    System.out.println("1- Culpar a Alfred (El Mayordomo)");
+                    System.out.println("2- Culpar a Ricardo (El Hijo de Tobias)");
+                    System.out.println("3- Culpar a Mariana (La Nieta de Tobias)");
+                    System.out.println("4- Culpar a Matias (El Nieto de Tobias)");
+                    System.out.println("5- Culpar a Juana (La Cuñada de Tobias)");
+                    System.out.println("6- Culpar a Salomon (El vecino de la Familia)");
+                    seleccion = teclado.nextInt();
+                    switch (seleccion){
+                        case 1:
+                            System.out.println("""
+                                    -Tu veredicto fue incorrecto-
+                                    Alfred fue absuelto del asesinato, pero condenado por obstrucción a la justicia al encubrir al verdadero asesino. 
+                                    Perdió su empleo y su hogar, muriendo solo meses después. Matías Sánchez quedó impune, heredó parte de la fortuna y vive con el tormento de su crimen. 
+                                    El asesino real camina libre gracias a tu error.
+                                    """);
+                            break;
+                        case 2:
+                            System.out.println("""
+                                    -Tu veredicto fue incorrecto-
+                                    Ricardo Sánchez fue exonerado del asesinato, pero el escándalo de su detención y el plan de internar a su padre lo destruyó. 
+                                    La junta directiva lo destituyó de la presidencia, y su esposa lo abandonó. Quedó como un accionista menor, arruinado y sin el poder que tanto deseaba. 
+                                    El asesino real, Matías, se salió con la suya.
+                                    """);
+                            break;
+                        case 3:
+                            System.out.println("""
+                                    -Tu veredicto fue incorrecto-
+                                    Mariana Guzman fue declarada inocente. No obstante, su prometido la abandonó por el escándalo, y la familia la vio como una traidora. 
+                                    Se quedó en la mansión, sola, sin amor y sin herencia completa. La favorita del abuelo pagó el precio de la sospecha, mientras el verdadero culpable sonreía.
+                                    """);
+                            break;
+                        case 4:
+                            System.out.println("""
+                                    -Tu veredicto fue el correcto-
+                                    Matias Rodriguez fue hallado culpable de homicidio en primer grado. Sentenciado a 25 años de prisión, Matías perdió la herencia. 
+                                    Cumple su condena en una prisión estatal, sin visitas y atormentado por el fantasma de su abuelo. 
+                                    Usted ha resuelto el Caso Nº 26062011.
+                                    """);
+                            break;
+                        case 5:
+                            System.out.println("""
+                                    -Tu veredicto fue incorrecto-
+                                    Juana Rodriguez fue absuelta. El juicio hizo pública su ambición y el desprecio de Tobias. 
+                                    Fue repudiada socialmente, obligándola a vivir en un aislamiento total. Su matrimonio se volvió frío.
+                                     Obtuvo la riqueza, pero perdió el estatus y la felicidad. El verdadero asesino no fue juzgado.
+                                    """);
+                            break;
+                        case 6:
+                            System.out.println("""
+                                    -Tu veredicto fue incorrecto-
+                                    Salomon Guzman fue declarado inocente por el asesinato. Sin embargo, el juicio expuso su infidelidad y el allanamiento. 
+                                    Su esposa solicitó el divorcio y su empresa sufrió un colapso financiero por el escándalo. 
+                                    Quedó arruinado y profesionalmente marginado. El asesinato de su rival nunca fue castigado.
+                                    """);
+                            break;
+                    }
                     jugadorActivo.setProgreso(100);
                     guardarPartida();
                     System.out.println("Indique s si prefiere salir y guardar el progreso o n si desea continuar al siguiente nivel");
