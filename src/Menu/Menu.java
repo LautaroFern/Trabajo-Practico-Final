@@ -104,13 +104,11 @@ public class Menu {
                     break;
                 default:
                     System.out.println("\tOpción incorrecta, seleccione una opcion valida\n");
-                    mostrarMenu();
+                    opcion = mostrarMenu();
                     break;
             }
         }
-
         teclado.close();
-
     }
 
     public Jugador loginJugador() {
