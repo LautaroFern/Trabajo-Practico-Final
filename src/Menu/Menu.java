@@ -294,7 +294,7 @@ public class Menu {
 
     public int mostrarMenu() {
         System.out.println(
-                "\t███╗   ███╗ " + "██╗ " + "███████╗ " + "████████╗ " + "███████╗ " + "██████╗  " + "██╗   ██╗ " + "   ██╗ " + "███╗   ██╗ " + "   ████████╗ " + "██╗  ██╗ " + "███████╗ " + "   ███╗   ███╗ " + " █████╗  " + "███╗   ██╗ " + "███████╗ " + "██╗ " + " ██████╗  " + "███╗   ██╗ " + "\n" +
+                        "\t███╗   ███╗ " + "██╗ " + "███████╗ " + "████████╗ " + "███████╗ " + "██████╗  " + "██╗   ██╗ " + "   ██╗ " + "███╗   ██╗ " + "   ████████╗ " + "██╗  ██╗ " + "███████╗ " + "   ███╗   ███╗ " + " █████╗  " + "███╗   ██╗ " + "███████╗ " + "██╗ " + " ██████╗  " + "███╗   ██╗ " + "\n" +
                         "\t████╗ ████║ " + "██║ " + "██╔════╝ " + "╚══██╔══╝ " + "██╔════╝ " + "██╔══██╗ " + "╚██╗ ██╔╝ " + "   ██║ " + "████╗  ██║ " + "   ╚══██╔══╝ " + "██║  ██║ " + "██╔════╝ " + "   ████╗ ████║ " + "██╔══██╗ " + "████╗  ██║ " + "██╔════╝ " + "██║ " + "██╔═══██╗ " + "████╗  ██║ " + "\n" +
                         "\t██╔████╔██║ " + "██║ " + "███████╗ " + "   ██║    " + "█████╗   " + "██████╔╝ " + " ╚████╔╝  " + "   ██║ " + "██╔██╗ ██║ " + "      ██║    " + "███████║ " + "█████╗   " + "   ██╔████╔██║ " + "███████║ " + "██╔██╗ ██║ " + "███████╗ " + "██║ " + "██║   ██║ " + "██╔██╗ ██║ " + "\n" +
                         "\t██║╚██╔╝██║ " + "██║ " + "╚════██║ " + "   ██║    " + "██╔══╝   " + "██╔══██╗ " + "  ╚██╔╝   " + "   ██║ " + "██║╚██╗██║ " + "      ██║    " + "██╔══██║ " + "██╔══╝   " + "   ██║╚██╔╝██║ " + "██╔══██║ " + "██║╚██╗██║ " + "╚════██║ " + "██║ " + "██║   ██║ " + "██║╚██╗██║ " + "\n" +
@@ -303,7 +303,7 @@ public class Menu {
 
         );
         System.out.println(
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+---------------------------------------------+\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+---------------------------------------------+\n" +
                         "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |  1  |  I N I C I A R  J U E G O                   |\n" +
                         "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+---------------------------------------------+\n" +
                         "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |  2  |  C A R G A R  P A R T I D A                 |\n" +
@@ -400,6 +400,10 @@ public class Menu {
                         System.out.println("4- Escuchar la confesion de Salomon Guzman (El rival eterno de tobias y vecino de la familia)");
                         System.out.println("5- Mostrar Inventario");
                         opcion = teclado.nextInt();
+                        while (opcion > 5 || opcion <= 0) {
+                            System.out.println("Opción incorrecta, seleccione una opción válida:\n");
+                            opcion = teclado.nextInt();
+                        }
                         switch (opcion) {
                             case 1:
                                 System.out.println("""
@@ -481,6 +485,10 @@ public class Menu {
                         System.out.println("3- Escuchar la confesion del mayordomo");
                         System.out.println("4- Mostrar Inventario");
                         opcion = teclado.nextInt();
+                        while (opcion > 4 || opcion <= 0) {
+                            System.out.println("Opción incorrecta, seleccione una opción válida:\n");
+                            opcion = teclado.nextInt();
+                        }
                         switch (opcion) {
                             case 1:
                                 System.out.println("""
@@ -553,6 +561,10 @@ public class Menu {
                         System.out.println("3- Escuchar la confesion de matias");
                         System.out.println("4- Mostrar Inventario");
                         opcion = teclado.nextInt();
+                        while (opcion > 4 || opcion <= 0) {
+                            System.out.println("Opción incorrecta, seleccione una opción válida:\n");
+                            opcion = teclado.nextInt();
+                        }
                         switch (opcion) {
                             case 1:
                                 System.out.println("""
@@ -631,6 +643,10 @@ public class Menu {
                         System.out.println("4- Escuchar la confesion de Mariana");
                         System.out.println("5- Mostrar Inventario");
                         opcion = teclado.nextInt();
+                        while (opcion > 5 || opcion <= 0) {
+                            System.out.println("Opción incorrecta, seleccione una opción válida:\n");
+                            opcion = teclado.nextInt();
+                        }
                         switch (opcion) {
                             case 1:
                                 System.out.println("""
@@ -712,6 +728,10 @@ public class Menu {
                         System.out.println("4- Escuchar las confesiones de Ricardo y Juana");
                         System.out.println("5- Mostrar Inventario");
                         opcion = teclado.nextInt();
+                        while (opcion > 5 || opcion <= 0) {
+                            System.out.println("Opción incorrecta, seleccione una opción válida:\n");
+                            opcion = teclado.nextInt();
+                        }
                         switch (opcion) {
                             case 1:
                                 try {
