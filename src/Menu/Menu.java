@@ -24,22 +24,26 @@ public class Menu {
     //---------- CONFESIONES ----------
     String confesionRicardo = """
             Fue despertado por un grito de terror por parte del mayordomo, él fue la persona que alertó a la policía.
-            La relación con su padre era estable, ni amistosa ni fría. Confesó temer que su padre cambiara el testamento y que, cuando llegara el momento, no fuera el responsable de la empresa familiar.
+            La relación con su padre era estable, ni amistosa ni fría. Confesó temer que su padre cambiara el testamento y que, 
+            cuando llegara el momento, no fuera el responsable de la empresa familiar.
             """;
 
     String confesionJuana = """
-            No tenía una buena relación con su suegro, simplemente se toleraban, pero él no la consideraba una buena pareja para su hijo debido a que la veía como una interesada,
+            No tenía una buena relación con su suegro, simplemente se toleraban, pero él no la consideraba una buena pareja
+             para su hijo debido a que la veía como una interesada,
             que solo lo quería para estar a su lado al momento de que heredara la empresa.
             """;
 
     String confesionMariana = """
             Tuvo una discusión con su abuelo el día anterior a su muerte, confesó que la pelea fue por su compromiso.
-            Tobías le dejó en claro que, si se casaba, vendería la parte de la herencia que le correspondía para evitar que su futuro esposo se quedara con dinero fácil.
+            Tobías le dejó en claro que, si se casaba, vendería la parte de la herencia que le correspondía 
+            para evitar que su futuro esposo se quedara con dinero fácil.
             Confiesa que estaba lista para huir con su prometido y una suma de dinero que había ahorrado.
             """;
 
     String confesionMatias = """
-            Un joven con problemas de apuestas y drogas, estuvo enredado en discusiones con su abuelo al enterarse que lo dejaría fuera del testamento por su comportamiento errático.
+            Un joven con problemas de apuestas y drogas, estuvo enredado en discusiones con su abuelo al enterarse 
+            que lo dejaría fuera del testamento por su comportamiento errático.
             La víctima no soportaría seguir manteniendo a un vago inoperante, que era como lo llamaba Tobías.
             """;
 
@@ -49,8 +53,10 @@ public class Menu {
             """;
 
     String confesionSalomon = """
-            Confiesa que entro a la casa en la tarde cuando la victima no se encontraba y fue a su estudio a buscar un documento que supuestamente le habia hurtado.
-            Tambien confeso que a esa hora el no estaba en su casa porque estaba terminando unos (asuntos) con su secretaria, llego a su casa a las 03:20 AM
+            Confiesa que entro a la casa en la tarde cuando la victima no se encontraba y fue a su estudio 
+            a buscar un documento que supuestamente le habia hurtado.
+            Tambien confeso que a esa hora el no estaba en su casa porque estaba terminando unos (asuntos) 
+            con su secretaria, llego a su casa a las 03:20 AM
             """;
 
     //---------- CONSTRUCTOR ----------
@@ -65,9 +71,9 @@ public class Menu {
     public void jugar() {
         cargarHabitacionesYPistas();
         cargaPersonaje();
-        for (Habitacion h : habitaciones.getElementos()) {
-            System.out.println(h.toString());
-        }
+//        for (Habitacion h : habitaciones.getElementos()) {
+//            System.out.println(h.toString());
+//        }
         int opcion = mostrarMenu();
         String usuario;
         boolean continuar = true;
@@ -350,8 +356,8 @@ public class Menu {
                     while (!inventarioJugador.getListaElemento().contains(pAux1) || !inventarioJugador.getListaElemento().contains(oAux1)) {
                         int opcion;
                         System.out.println("1- Acercarse a observar la cama");
-                        System.out.println("2- Tomar el testamento del escritorio");
-                        System.out.println("3- Tomar el frasco de medicamentos de la mesita de luz");
+                        System.out.println("2- Tomar el testamento del escritorio (Necesario para avanzar)");
+                        System.out.println("3- Tomar el frasco de medicamentos de la mesita de luz (Necesario para avanzar)");
                         System.out.println("4- Escuchar la confesion de Salomon Guzman (El rival eterno de tobias y vecino de la familia)");
                         System.out.println("5- Mostrar Inventario");
                         opcion = teclado.nextInt();
@@ -396,7 +402,12 @@ public class Menu {
                                 System.out.println("Recogiste el frasco");
                                 break;
                             case 4:
-                                System.out.println(confesionSalomon);
+                                System.out.println("------------------------------------------------------------------------------------------------------------------");
+                                System.out.println("Confesion de Salomon: " + confesionSalomon);
+                                System.out.println("""
+                                        Anotaciones de la policia: Intenta desvincular su presencia de la muerte. 
+                                        Su mayor temor es que se descubra su infidelidad, no el crimen.""");
+                                System.out.println("------------------------------------------------------------------------------------------------------------------");
                                 break;
                             case 5:
                                 System.out.println(jugadorActivo.getInventario().toString());
@@ -427,7 +438,7 @@ public class Menu {
                     while (!inventarioJugador.getListaElemento().contains(oAux2)) {
                         int opcion;
                         System.out.println("1- Acercarse a observar la cama");
-                        System.out.println("2- Tomar las llaves de las habitaciones");
+                        System.out.println("2- Tomar las llaves de las habitaciones (Necesario para avanzar)");
                         System.out.println("3- Escuchar la confesion del mayordomo");
                         System.out.println("4- Mostrar Inventario");
                         opcion = teclado.nextInt();
@@ -463,7 +474,12 @@ public class Menu {
                                 System.out.println("Llaves de las habitaciones recogidas");
                                 break;
                             case 3:
-                                System.out.println(confesionAlfred);
+                                System.out.println("------------------------------------------------------------------------------------------------------------------");
+                                System.out.println("Confesion de Alfred: " + confesionAlfred);
+                                System.out.println("""
+                                        Anotaciones de la policia: Era quien le suministraba los medicamentos a Tobías. Se le nota extremadamente nervioso, 
+                                        especialmente al ser preguntado sobre la botella de whisky y el pasillo""");
+                                System.out.println("------------------------------------------------------------------------------------------------------------------");
                                 break;
                             case 4:
                                 System.out.println(jugadorActivo.getInventario().toString());
@@ -493,8 +509,8 @@ public class Menu {
 
                     while (!inventarioJugador.getListaElemento().contains(oAux3) || !inventarioJugador.getListaElemento().contains(oAux4)) {
                         int opcion;
-                        System.out.println("1- Revisar la cama");
-                        System.out.println("2- Recoger frasco extraño");
+                        System.out.println("1- Revisar la cama (Necesario para avanzar)");
+                        System.out.println("2- Recoger frasco extraño (Necesario para avanzar)");
                         System.out.println("3- Escuchar la confesion de matias");
                         System.out.println("4- Mostrar Inventario");
                         opcion = teclado.nextInt();
@@ -535,7 +551,12 @@ public class Menu {
                                 System.out.println("Frasco Recogido");
                                 break;
                             case 3:
-                                System.out.println(confesionMatias);
+                                System.out.println("------------------------------------------------------------------------------------------------------------------");
+                                System.out.println("Confesion de Matias: " + confesionMatias);
+                                System.out.println("""
+                                        Anotaciones de la policia: No respondio claramente las preguntas que se le realizaron, su mirada perdida
+                                        denotaba una noche movida presa del alcohol y las drogas""");
+                                System.out.println("------------------------------------------------------------------------------------------------------------------");
                                 break;
                             case 4:
                                 System.out.println(jugadorActivo.getInventario().toString());
@@ -565,9 +586,9 @@ public class Menu {
 
                     while (!inventarioJugador.getListaElemento().contains(pAux2) || !inventarioJugador.getListaElemento().contains(oAux5)) {
                         int opcion;
-                        System.out.println("1- Tomar boletos de avion");
-                        System.out.println("2- Revisar el escritorio");
-                        System.out.println("3- Inspeccionar la valija de Mariana");
+                        System.out.println("1- Tomar boletos de avion (Necesario para avanzar)");
+                        System.out.println("2- Inspeccionar la valija de Mariana (Necesario para avanzar)");
+                        System.out.println("3- Revisar el escritorio");
                         System.out.println("4- Escuchar la confesion de Mariana");
                         System.out.println("5- Mostrar Inventario");
                         opcion = teclado.nextInt();
@@ -575,7 +596,7 @@ public class Menu {
                             case 1:
                                 System.out.println("""
                                         Notas que al costado de unos perfumes hay dos boletos de avion, a nombre de Mariana Sanchez y Pedro Ramirez (Posiblemente su marido)
-                                        
+                                        El vuelo saldra en dos dias con animos de no retornar y el destino es Madrid - España
                                         """);
                                 try {
                                     pAux2 = (PistaTexto) habitaciones.buscarElemento("Habitación de Mariana Sanchez.").buscarElemento("Boletos de Avion");
@@ -586,10 +607,12 @@ public class Menu {
                                          ElementoExistenteException e) {
                                     System.out.println(e.getMessage());
                                 }
+                                System.out.println("Boletos de Avion recogidos");
                                 break;
                             case 2:
                                 System.out.println("""
-                                        
+                                        Te encuentras una valija la cual contiene una vida entera dentro suyo, las cosas importantes e indispensables
+                                        se encuentran en su interior en la espera de un nuevo destino en el cual acomodarse y hacerle compañia a su dueña
                                         """);
                                 try {
                                     oAux5 = (ObjetoCasa) habitaciones.buscarElemento("Habitación de Mariana Sanchez.").buscarElemento("Valija Preparada");
@@ -600,17 +623,25 @@ public class Menu {
                                          ElementoExistenteException e) {
                                     System.out.println(e.getMessage());
                                 }
+                                System.out.println("Valija Recogida");
                                 break;
                             case 3:
                                 System.out.println("""
-                                        
+                                        En el escritorio se encuentra un diario, habla de sentimientos profundos y discusiones pasadas.
+                                        Si bien ella amaba a su abuelo el ultimo tiempo estuvieron muy distantes entre si, ya que la aparacion
+                                        de Pedro en su vida puso otros horizontes con mayor prioridad en su camino
                                         """);
                                 break;
                             case 4:
-
+                                System.out.println("------------------------------------------------------------------------------------------------------------------");
+                                System.out.println("Confesion de Mariana: " + confesionMariana);
+                                System.out.println("""
+                                        Anotaciones de la policia: La valija preparada y los boletos confirman su intención de escapar antes de la muerte, 
+                                        lo que le da una coartada. Niega tener conocimiento de cualquier veneno.""");
+                                System.out.println("------------------------------------------------------------------------------------------------------------------");
                                 break;
                             case 5:
-
+                                System.out.println(jugadorActivo.getInventario());
                                 break;
                         }
                     }
@@ -636,8 +667,8 @@ public class Menu {
 
                     while (!inventarioJugador.getListaElemento().contains(pAux3) || !inventarioJugador.getListaElemento().contains(pAux4)) {
                         int opcion;
-                        System.out.println("1- Mirar la pila de libros");
-                        System.out.println("2- Tomar los papeles de la silla");
+                        System.out.println("1- Mirar la pila de libros (Necesario para avanzar)");
+                        System.out.println("2- Tomar los papeles de la silla (Necesario para avanzar)");
                         System.out.println("3- Observar la cama");
                         System.out.println("4- Escuchar las confesiones de Ricardo y Juana");
                         System.out.println("5- Mostrar Inventario");
@@ -645,8 +676,10 @@ public class Menu {
                         switch (opcion) {
                             case 1:
                                 try {
-                                    System.out.println("Al revisar los libros, encuentras un papel doblado y metido entre las páginas de una novela de misterio: " +
-                                            "\nEs un Documento de Internación con fecha próxima a nombre de Tobías Sanchez en el geriatrico local “El Retoño”");
+                                    System.out.println("""
+                                            Al revisar los libros, encuentras un papel doblado y metido entre las páginas de una novela de misterio:
+                                            Es un Documento de Internación con fecha próxima a nombre de Tobías Sanchez en el geriatrico local “El Retoño”
+                                            """);
                                     pAux3 = (PistaTexto) habitaciones.buscarElemento("Habitación de Ricardo y Juana.").buscarElemento("Documento de Internacion");
                                     inventarioJugador.agregarElemento(pAux3);
                                     jugadorActivo.setInventario(inventarioJugador);
@@ -658,8 +691,10 @@ public class Menu {
                                 break;
                             case 2:
                                 try {
-                                    System.out.println("Al acercarte a la silla observas varios folletos de geriatricos de la zona, con diferentes nombres y direcciones." +
-                                            "\nAlgunos estan marcados con diferentes mensajes como: Muy caro - Poco personal - Llamar para reservar visita");
+                                    System.out.println("""
+                                            Al acercarte a la silla observas varios folletos de geriatricos de la zona, con diferentes nombres y direcciones.
+                                            Algunos estan marcados con diferentes mensajes como: Muy caro - Poco personal - Llamar para reservar visita
+                                            """);
                                     pAux4 = (PistaTexto) habitaciones.buscarElemento("Habitación de Ricardo y Juana.").buscarElemento("Folletos de Geriatricos");
                                     inventarioJugador.agregarElemento(pAux4);
                                     jugadorActivo.setInventario(inventarioJugador);
@@ -671,15 +706,26 @@ public class Menu {
                                 break;
                             case 3:
                                 System.out.println("""
-                                        
+                                        Lo unico que notas es un colchon agotado por soportar el peso de la misma silueta durante la mayor parte del dia
+                                        Si los colchones tuvieran salario el deberia cobrar por hacer horas extra
                                         """);
                                 break;
                             case 4:
+                                System.out.println("------------------------------------------------------------------------------------------------------------------");
                                 System.out.println("Confesion de Ricardo: " + "\n" + confesionRicardo);
+                                System.out.println("""
+                                        Anotaciones de la policia: Estaba consternado por la muerte de su padre aunque ansioso por saber que sucederia 
+                                        con el testamento y su parte de la empresa""");
+                                System.out.println("------------------------------------------------------------------------------------------------------------------");
+                                System.out.println("------------------------------------------------------------------------------------------------------------------");
                                 System.out.println("Confesion de Juana: " + "\n" + confesionJuana);
+                                System.out.println("""
+                                        Anotaciones de la policia: Se la notaba incluso ligeramente contenta, nunca se llevó bien con el doctor 
+                                        ahora podría vivir tranquila ya que nadie le estaría con el ojo encima""");
+                                System.out.println("------------------------------------------------------------------------------------------------------------------");
                                 break;
                             case 5:
-
+                                System.out.println(jugadorActivo.getInventario());
                                 break;
                         }
                     }
@@ -753,6 +799,9 @@ public class Menu {
                                     """);
                             break;
                     }
+                    System.out.println("""
+                            ¡¡Muchas Gracias por tomarse el tiempo de jugar, hemos disfrutado y sufrido realizando este proyecto!!
+                            """);
                     guardarPartida();
                     continuar = false;
                     break;
