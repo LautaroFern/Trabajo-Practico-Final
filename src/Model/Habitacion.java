@@ -1,12 +1,12 @@
-package Models;
+package Model;
 
-import Exceptions.ElementoExistenteException;
-import Exceptions.ElementoNoEncontradoException;
-import Exceptions.ElementoNuloException;
-import Exceptions.ListaVaciaException;
-import Interfaces.IDevolverString;
-import Interfaces.IGestora;
-import Interfaces.IReconocerId;
+import Exception.ElementoExistenteException;
+import Exception.ElementoNoEncontradoException;
+import Exception.ElementoNuloException;
+import Exception.ListaVaciaException;
+import Interface.IDevolverString;
+import Interface.IGestora;
+import Interface.IReconocerId;
 
 import java.util.ArrayList;
 import java.util.Objects;

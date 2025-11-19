@@ -1,6 +1,6 @@
-package Interfaces;
+package Interface;
 
-import Exceptions.*;
+import Exception.*;
 
 public interface IGestora <T>{
     boolean agregarElemento(T t) throws ElementoNuloException, ElementoExistenteException;

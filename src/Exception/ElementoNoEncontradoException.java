@@ -1,4 +1,4 @@
-package Exceptions;
+package Exception;
 
 public class ElementoNoEncontradoException extends Exception {
     public ElementoNoEncontradoException(String message) {

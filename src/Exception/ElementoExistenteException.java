@@ -1,4 +1,4 @@
-package Exceptions;
+package Exception;
 
 public class ElementoExistenteException extends Exception {
     public ElementoExistenteException(String message) {

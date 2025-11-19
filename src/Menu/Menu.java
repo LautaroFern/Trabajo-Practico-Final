@@ -1,16 +1,14 @@
 package Menu;
 
-import Enums.RolPersonaje;
-import Enums.TipoGenero;
-import Exceptions.*;
+import Enum.RolPersonaje;
+import Enum.TipoGenero;
+import Exception.*;
 import Gestor.Juego;
-import Models.*;
+import Model.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 

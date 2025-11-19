@@ -1,9 +1,8 @@
-package Models;
+package Model;
 
-import Exceptions.ContrasenaNoCoincideExeption;
-import Exceptions.ValidarLetrasException;
-import Interfaces.IDevolverString;
-import Interfaces.IReconocerId;
+import Exception.ValidarLetrasException;
+import Interface.IDevolverString;
+import Interface.IReconocerId;
 import org.json.JSONException;
 import org.json.JSONObject;
 

@@ -1,4 +1,4 @@
-package Exceptions;
+package Exception;
 
 public class ElementoNuloException extends Exception {
     public ElementoNuloException(String message) {

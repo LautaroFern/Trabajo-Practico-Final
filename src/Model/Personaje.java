@@ -1,9 +1,9 @@
-package Models;
+package Model;
 
-import Enums.RolPersonaje;
-import Enums.TipoGenero;
-import Interfaces.IDevolverString;
-import Interfaces.IReconocerId;
+import Enum.RolPersonaje;
+import Enum.TipoGenero;
+import Interface.IDevolverString;
+import Interface.IReconocerId;
 
 import java.util.Objects;
 

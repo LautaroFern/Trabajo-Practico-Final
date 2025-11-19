@@ -1,7 +1,7 @@
-package Models;
+package Model;
 
-import Exceptions.*;
-import Interfaces.IGestora;
+import Exception.*;
+import Interface.IGestora;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
