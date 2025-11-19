@@ -827,14 +827,14 @@ public class Menu {
                         case 3:
                             System.out.println("""
                                     -Tu veredicto fue incorrecto-
-                                    Mariana Guzman fue declarada inocente. No obstante, su prometido la abandonó por el escándalo, y la familia la vio como una traidora. 
+                                    Mariana Sanchez fue declarada inocente. No obstante, su prometido la abandonó por el escándalo, y la familia la vio como una traidora. 
                                     Se quedó en la mansión, sola, sin amor y sin herencia completa. La favorita del abuelo pagó el precio de la sospecha, mientras el verdadero culpable sonreía.
                                     """);
                             break;
                         case 4:
                             System.out.println("""
                                     -Tu veredicto fue el correcto-
-                                    Matias Rodriguez fue hallado culpable de homicidio en primer grado. Sentenciado a 25 años de prisión, Matías perdió la herencia. 
+                                    Matias Sanchez fue hallado culpable de homicidio en primer grado. Sentenciado a 25 años de prisión, Matías perdió la herencia. 
                                     Cumple su condena en una prisión estatal, sin visitas y atormentado por el fantasma de su abuelo. 
                                     Usted ha resuelto el Caso Nº 26062011.
                                     """);

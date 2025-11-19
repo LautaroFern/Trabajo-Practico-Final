@@ -1,0 +1,62 @@
+[{
+    "Nombre": "OverNicolas",
+    "Usuario": "OverPro",
+    "Progreso": 100,
+    "Contraseña": "overnicolas",
+    "Inventario": {"Inventario": [
+        {
+            "Nombre": "Testamento Nuevo",
+            "Tipo": "Pista Texto",
+            "Descripcion": "Documento en el cual se detalla la exclusion de Matias del testamento\ny deja como unica beneficiaria a su nieta Mariana",
+            "Id": 1
+        },
+        {
+            "Nombre": "Boletos de Avion",
+            "Tipo": "Pista Texto",
+            "Descripcion": "Pasajes previstos para dentro de dos dias,\nDestino: Madrid - España",
+            "Id": 2
+        },
+        {
+            "Nombre": "Folletos de Geriatricos",
+            "Tipo": "Pista Texto",
+            "Descripcion": "Volantes y folletos de diferentes geriatricos de la ciudad",
+            "Id": 3
+        },
+        {
+            "Nombre": "Documento de Internacion",
+            "Tipo": "Pista Texto",
+            "Descripcion": "Papeles que indican la internacion pronta de la Victima.\nEl documento esta firmado por Ricardo y su esposa, falta la firma de la Victima",
+            "Id": 4
+        },
+        {
+            "Nombre": "Frasco de Medicamentos",
+            "Tipo": "Objeto",
+            "Descripcion": "Frasco de medicamentos con prescripcion medica para la presion arterial y \nproblemas del corazon",
+            "Id": 5
+        },
+        {
+            "Nombre": "Llaves de las Habitaciones",
+            "Tipo": "Objeto",
+            "Descripcion": "Juego de llaves de las diferentes habitaciones de la mansion",
+            "Id": 6
+        },
+        {
+            "Nombre": "Frasco Extraño",
+            "Tipo": "Objeto",
+            "Descripcion": "Frasco pequeño de color negro que contiene un liquido transparente",
+            "Id": 7
+        },
+        {
+            "Nombre": "Guantes de Mayordomo",
+            "Tipo": "Objeto",
+            "Descripcion": "Par de guantes de Alfred humedos, probablemente no deberian estar ahi",
+            "Id": 8
+        },
+        {
+            "Nombre": "Valija Preparada",
+            "Tipo": "Objeto",
+            "Descripcion": "Valija llena de pertenencias, parece cargada como para un viaje muy largo",
+            "Id": 9
+        }
+    ]}
+}]
