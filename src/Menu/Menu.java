@@ -8,6 +8,7 @@ import Models.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -71,13 +72,15 @@ public class Menu {
     public void jugar() {
         cargarHabitacionesYPistas();
         cargaPersonaje();
-//        for (Habitacion h : habitaciones.getElementos()) {
-//            System.out.println(h.toString());
-//        }
-        int opcion = mostrarMenu();
         String usuario;
+
         boolean continuar = true;
         while (continuar) {
+            int opcion = mostrarMenu();
+            while (opcion > 4 || opcion <= 0) {
+                System.out.println("Opción incorrecta, seleccione una opción válida:\n");
+                opcion = teclado.nextInt();
+            }
             switch (opcion) {
                 case 1:
                     jugadorActivo = loginJugador();
@@ -90,32 +93,69 @@ public class Menu {
                     continuar = false;
                     break;
                 case 2:
-                    System.out.println("Ingrese su nombre de usuario");
-                    teclado.nextLine();
-                    usuario = teclado.nextLine().trim();
-                    Jugador jugadorCargado = cargarPartida(usuario);
-                    jugadorActivo = jugadorCargado;
+                    System.out.println("Ingrese su usuario:");
+                    usuario = teclado.nextLine();
+                    jugadorActivo = cargarPartida(usuario);
+                    while (jugadorActivo == null) {
+                        usuario = teclado.nextLine();
+                        jugadorActivo = cargarPartida(usuario);
+                        if (jugadorActivo == null) {
+                            System.out.println("❌ Usuario no encontrado. Intente nuevamente:");
+                        }
+                    }
+                    System.out.println("✔ Usuario encontrado: " + jugadorActivo.getUsuario());
                     iniciarJuego(jugadorActivo.getProgreso());
-                    System.out.println(jugadorCargado.toString());
-                    continuar = false;
                     break;
                 case 3:
                     System.out.println("Ingrese su nombre de usuario");
-                    teclado.nextLine();
                     usuario = teclado.nextLine();
-                    cargarPartida(usuario);
-                    System.out.println(jugadorActivo.getProgreso());
+                    jugadorActivo = cargarPartida(usuario);
+                    while (jugadorActivo == null) {
+                        usuario = teclado.nextLine();
+                        jugadorActivo = cargarPartida(usuario);
+                        if (jugadorActivo == null) {
+                            System.out.println("❌ Usuario no encontrado. Intente nuevamente:");
+                        }
+                    }
+                    String informe = """
+                            ----------------------------------------------------------------------
+                                                ████  C O N F I D E N T I A L  ████
+                                        *****  A R C H I V O   C L A S I F I C A D O  *****
+                            ----------------------------------------------------------------------
+                            
+                            Agente autorizado: %s
+                            Nivel de acceso: CLASE ROJA — RESTRICTED
+                            
+                            ----------------------------------------------------------------------
+                            ► SUJETO:        %s
+                            ► USUARIO:       %s
+                            ► N° LEGAJO:     %d
+                            ► PROGRESO:      %d%%
+                            ► INVENTARIO:
+                               %s
+                            ----------------------------------------------------------------------
+                            
+                            ADVERTENCIA:
+                            Este documento contiene información altamente sensible.
+                            Su difusión, copia o divulgación NO autorizada está penada
+                            por los protocolos internos de la Agencia.
+                            
+                            Sello digital: █████  V A L I D O  █████
+                            ----------------------------------------------------------------------
+                            """.formatted(jugadorActivo.getNombre(),
+                            jugadorActivo.getNombre(),
+                            jugadorActivo.getUsuario(),
+                            jugadorActivo.getId(),
+                            jugadorActivo.getProgreso(),
+                            jugadorActivo.getInventario().toString());
+                    System.out.println(informe);
                     break;
                 case 4:
                     continuar = false;
                     break;
-                default:
-                    break;
             }
         }
-
         teclado.close();
-
     }
 
     public Jugador loginJugador() {
@@ -263,16 +303,15 @@ public class Menu {
 
         );
         System.out.println(
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+------------------------------------+\n" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |  1  |  I N I C I A R  J U E G O          |\n" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+------------------------------------+\n" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |  2  |  C A R G A R  P A R T I D A        |\n" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+------------------------------------+\n" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |  3  |  V E R  P R O G R E S O            |\n" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+------------------------------------+\n" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |  4  |  S A L I R                         |\n" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+------------------------------------+\n"
-
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+---------------------------------------------+\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |  1  |  I N I C I A R  J U E G O                   |\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+---------------------------------------------+\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |  2  |  C A R G A R  P A R T I D A                 |\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+---------------------------------------------+\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |  3  |  V E R  D A T O S  D E L  D E T E C T I V E |\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+---------------------------------------------+\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  |  4  |  S A L I R                                  |\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  +-----+---------------------------------------------+\n"
         );
         return teclado.nextInt();
     }
@@ -281,7 +320,7 @@ public class Menu {
         boolean continuar = true;
         char eleccion;
         Inventario inventarioJugador = jugadorActivo.getInventario();
-        if (inventarioJugador == null){
+        if (inventarioJugador == null) {
             inventarioJugador = new Inventario();
             jugadorActivo.setInventario(inventarioJugador);
         }
@@ -750,7 +789,7 @@ public class Menu {
                     System.out.println("5- Culpar a Juana (La Cuñada de Tobias)");
                     System.out.println("6- Culpar a Salomon (El vecino de la Familia)");
                     seleccion = teclado.nextInt();
-                    switch (seleccion){
+                    switch (seleccion) {
                         case 1:
                             System.out.println("""
                                     -Tu veredicto fue incorrecto-
@@ -822,11 +861,14 @@ public class Menu {
 
     public Jugador cargarPartida(String usuario) {
         try {
-            JSONObject jsonObject = new JSONObject();
+            org.json.JSONTokener jsonTokener = JsonUtiles.leerUnJson(usuario + ".json");
+            if (jsonTokener == null) {
+                return null;
+            }
             HashSet<Jugador> jugadorAux = new HashSet<>();
-            JSONArray array = new JSONArray(JsonUtiles.leerUnJson(usuario + ".json"));
+            JSONArray array = new JSONArray(jsonTokener);
             for (int i = 0; i < array.length(); i++) {
-                jsonObject = array.getJSONObject(i);
+                JSONObject jsonObject = array.getJSONObject(i);
                 jugadorAux.add(Jugador.toObject(jsonObject));
             }
             jugadores.setElementos(jugadorAux);
@@ -838,7 +880,6 @@ public class Menu {
             if (j.getUsuario().equalsIgnoreCase(usuario)) {
                 return j;
             }
-            System.out.println("Chau");
         }
         return null;
     }

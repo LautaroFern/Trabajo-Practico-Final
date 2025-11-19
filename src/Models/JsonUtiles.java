@@ -28,7 +28,7 @@ public class JsonUtiles {
             tokener = new JSONTokener(new FileReader(archivo));
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            return null;
         }
 
         return tokener;

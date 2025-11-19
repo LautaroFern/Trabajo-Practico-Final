@@ -31,7 +31,6 @@ public class Inventario implements IGestora<Pista> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Inventario:\n");
         if (listaElementos != null && !listaElementos.isEmpty()) {
             for (Pista elemento : listaElementos) {
                 sb.append(" - ").append(elemento).append("\n");
